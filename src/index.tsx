@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./assets/scss/style.scss";
 import {
   Routes,
   Route,
@@ -8,6 +9,8 @@ import {
 import { createBrowserHistory } from "history";
 import { Provider } from "react-redux";
 import { store } from "./redux/configStore";
+import HomeTemplate from "./templates/HomeTemplate";
+import Home from "./page/Home/Home";
 export const history: any = createBrowserHistory();
 
 const root = ReactDOM.createRoot(
@@ -17,8 +20,9 @@ root.render(
   <Provider store={store}>
     <HistoryRouter history={history}>
       <Routes>
-        <Route>
-          <div></div>
+        <Route path="" element={<HomeTemplate />}>
+          <Route index element={<Home />}></Route>
+          <Route path="/home" element={<Home />}></Route>
         </Route>
       </Routes>
     </HistoryRouter>

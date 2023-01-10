@@ -1,0 +1,164 @@
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transition: all 0.5s;
+    z-index: 1000;
+
+    .header-wrapper {
+
+        .header_container {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .header-left {
+                display: flex;
+                align-items: center;
+
+                .nav__logo {
+                    font-size: 30px;
+                    padding-right: 15px;
+                    font-weight: 700;
+                    color: #fff;
+
+                    i {
+                        font-size: 10px;
+                    }
+                }
+
+                .header__search {
+                    display: none;
+
+                    .btn__search {
+                        background-color: $color1;
+                        color: #fff;
+
+                        &:hover {
+                            background-color: #19a463;
+                        }
+                    }
+                }
+
+                .nav__overplay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    display: none;
+                    background-color: rgba(0, 0, 0, 0.3);
+                    animation: fadeIn linear 0.2s;
+                }
+
+                .nav__mobile {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    background-color: #fff;
+                    width: 320px;
+                    max-width: 100%;
+                    opacity: 0;
+                    transform: translateY(-100%);
+                    transition: all linear 0.2s;
+                }
+
+                .navbar__btn {
+                    display: none;
+                    margin-right: 15px;
+                    font-size: 20px;
+                }
+            }
+
+            .header-right {
+                display: flex;
+
+                .header__narbar {
+                    display: flex;
+
+                    .header_navbar-list {
+                        display: flex;
+                        align-items: center;
+
+
+                        .li_1 {
+                            color: #fff;
+                            cursor: pointer;
+                            margin: 0 10px;
+                            font-weight: 600;
+
+                            i {
+                                margin-right: 5px;
+                            }
+
+                            a {
+                                color: #fff;
+                            }
+
+                        }
+
+                        .join {
+                            border: 1px solid $color1;
+                            border-radius: 4px;
+                            padding: 5px 15px;
+                            margin: 0 10px;
+                            transition: all 0.2s;
+
+                            &:hover {
+                                background-color: $color1;
+
+                                a {
+                                    color: #fff;
+                                }
+                            }
+
+                            a {
+                                color: $color1;
+                                font-weight: 600;
+
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+    }
+
+    &.sticky {
+        .header-wrapper {
+            .header_container {
+                .header-left {
+                    .nav__logo {
+                        color: #000;
+                    }
+
+                    .header__search {
+                        display: block;
+                    }
+                }
+
+                .header__right {
+                    .header__navbar {
+                        .header__narbar-list {
+                            .li_1 {
+                                color: #74767e;
+
+                                &.li_fiverr {
+                                    color: #1e1692;
+                                }
+
+                                a {
+                                    color: #74767e;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
