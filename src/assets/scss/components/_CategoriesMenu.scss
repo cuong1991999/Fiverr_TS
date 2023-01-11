@@ -6,6 +6,12 @@
     left: 0;
     right: 0;
     display: none;
+    background-color: #fff;
+
+    &.nosticky {
+        position: relative;
+        display: block;
+    }
 
     &.sticky {
         display: block;
@@ -66,11 +72,12 @@
                         text-align: left;
                         z-index: 990;
                         display: none;
-                        padding: 20px 30px;
+                        padding: 20px 10px;
                         transition: all 0.5s;
 
                         .category__jobdetail_p {
                             margin: 0;
+                            font-weight: 700;
                         }
 
                         .category__jobdetail_a {
@@ -91,6 +98,22 @@
                     }
                 }
             }
+        }
+    }
+}
+
+@include tablet() {
+    .category {
+        &.sticky {
+            display: none;
+        }
+    }
+}
+
+@include mobile() {
+    .category {
+        &.sticky {
+            display: none;
         }
     }
 }

@@ -1,0 +1,106 @@
+.carousel {
+    .carousel-background {
+        position: relative;
+
+        .carousel-slider-tablet-mobile {
+            display: none;
+        }
+
+        .carousel__search {
+            position: absolute;
+            left: 105px;
+            top: 250px;
+
+            .carousel__search-title {
+                font-weight: 700;
+                color: #fff;
+                margin-bottom: 15px;
+            }
+
+            .carousel_btn {
+                background-color: $color1;
+                color: #fff;
+            }
+        }
+
+
+        .slider__img {
+            width: 100%;
+            min-height: 700px;
+
+            object-fit: cover;
+
+        }
+    }
+}
+
+
+@include tablet() {
+    .carousel {
+        .carousel-background {
+            .carousel-slider {
+                display: none;
+            }
+
+            .carousel-slider-tablet-mobile {
+                display: block;
+                width: 100%;
+                min-height: 500px;
+                background-color: #023a15;
+            }
+
+            .carousel__search {
+                width: 60%;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+
+}
+
+@include mobile() {
+    .carousel {
+        .carousel-background {
+            .carousel-slider {
+                display: none;
+            }
+
+            .carousel-slider-tablet-mobile {
+                display: block;
+                width: 100%;
+                min-height: 300px;
+                background-color: #023a15;
+            }
+
+            .carousel__search {
+                border: none;
+
+                .carousel__search-title {
+                    font-size: 20px;
+
+                }
+
+                .form-control-mobile {
+                    display: block;
+                    width: 100%;
+                    border-radius: 4px !important;
+                }
+
+                .carousel_btn {
+                    display: block;
+                    width: 100%;
+                    border-radius: 4px !important;
+                    margin-top: 15px;
+                }
+
+                width: 75%;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+
+}

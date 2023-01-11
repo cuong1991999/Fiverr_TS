@@ -20,7 +20,7 @@ const CategoriesMenu = (props: Props) => {
               </NavLink>
               <div className="category__jobdetail">
                 <div className="container-fluid d-flex flex-column">
-                  <p className="category__jobdetail_p">HTML/CSS</p>
+                  <p className="category__jobdetail_p">Marketing Design</p>
                   <NavLink to={"#"} className="category__jobdetail_a">
                     Social Media Marketing
                   </NavLink>
@@ -39,9 +39,6 @@ const CategoriesMenu = (props: Props) => {
                   <NavLink to={"#"} className="category__jobdetail_a">
                     Social Media Marketing
                   </NavLink>
-                </div>
-                <div className=" container-fluid d-flex flex-column">
-                  <p className="category__jobdetail_p">Design New 02/11</p>
                 </div>
               </div>
             </div>
@@ -71,24 +68,6 @@ const CategoriesMenu = (props: Props) => {
                   </NavLink>
                   <NavLink to={"#"} className="category__jobdetail_a">
                     Search Engine Marketing (SEM)
-                  </NavLink>
-                </div>
-                <div className=" container-fluid d-flex flex-column">
-                  <p className="category__jobdetail_p">45</p>
-                  <NavLink to={"#"} className="category__jobdetail_a">
-                    Social Media Advertising
-                  </NavLink>
-                  <NavLink to={"#"} className="category__jobdetail_a">
-                    Social Media Marketing
-                  </NavLink>
-                  <NavLink to={"#"} className="category__jobdetail_a">
-                    Brand Voice & Tone
-                  </NavLink>
-                  <NavLink to={"#"} className="category__jobdetail_a">
-                    Business Names & Slogans
-                  </NavLink>
-                  <NavLink to={"#"} className="category__jobdetail_a">
-                    Articles & Blog Posts
                   </NavLink>
                 </div>
               </div>
