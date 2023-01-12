@@ -102,7 +102,7 @@
     }
 }
 
-@include tablet() {
+@include tablet {
     .category {
         &.sticky {
             display: none;
@@ -110,7 +110,7 @@
     }
 }
 
-@include mobile() {
+@include mobile {
     .category {
         &.sticky {
             display: none;

@@ -1,4 +1,4 @@
-@mixin mobile() {
+@mixin mobile {
 
     @media(max-width:($medium - 1px)) {
         @content;
@@ -7,12 +7,18 @@
 
 
 
-@mixin tablet() {
+@mixin tablet {
     @media (min-width:$medium) and (max-width:($large - 1px)) {
         @content;
     }
 
 
+}
+
+@mixin mobiletablet {
+    @media (max-width:($large - 1px)) {
+        @content;
+    }
 }
 
 @keyframes fadeIn {

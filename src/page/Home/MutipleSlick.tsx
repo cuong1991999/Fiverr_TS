@@ -1,3 +1,4 @@
+import Item from "antd/es/list/Item";
 import React from "react";
 import Slider from "react-slick";
 function SampleNextArrow(props: any) {
@@ -76,15 +77,20 @@ const MutipleSlick = (props: Props) => {
     },
   ];
   let widths = 260;
-  if (window.innerWidth < 1024) {
-    widths = 250;
+  let numberSlidesToShow = 5;
+  if (window.innerWidth < 1100) {
+    numberSlidesToShow = 4;
   }
-  if (window.innerWidth < 768) {
-    widths = 260;
+  if (window.innerWidth < 950) {
+    numberSlidesToShow = 3;
   }
-  if (window.innerWidth < 480) {
-    widths = 350;
+  if (window.innerWidth < 700) {
+    numberSlidesToShow = 2;
   }
+  if (window.innerWidth < 500) {
+    numberSlidesToShow = 1;
+  }
+
   const settings = {
     className: " variable-width",
     nextArrow: <SampleNextArrow />,
@@ -94,34 +100,12 @@ const MutipleSlick = (props: Props) => {
     autoplaySpeed: 5000,
     autoplay: true,
     row: 1,
+    adaptiveHeight: true,
     infinite: true,
     speed: 1000,
-    slidesToShow: 5,
-    slidesToScroll: 5,
+    slidesToShow: numberSlidesToShow,
+    slidesToScroll: numberSlidesToShow,
     dot: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
   };
   return (
     <section className="mutipleslick container">
@@ -129,7 +113,11 @@ const MutipleSlick = (props: Props) => {
       <Slider {...settings}>
         {arrMultipleSlick.map((item, index) => {
           return (
-            <div className="card-slick" key={index} style={{ width: widths }}>
+            <div
+              className="card-slick"
+              key={index}
+              style={{ width: widths, height: 345 }}
+            >
               <img src={item.img} alt="..." />
               <div className="card_title">
                 <h4>
