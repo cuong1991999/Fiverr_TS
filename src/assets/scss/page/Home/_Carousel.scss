@@ -1,4 +1,6 @@
 .carousel {
+
+
     .carousel-background {
         position: relative;
 
@@ -21,6 +23,44 @@
                 background-color: $color1;
                 color: #fff;
             }
+
+            .popular {
+                display: flex;
+                margin-top: 20px;
+                align-items: center;
+
+                span {
+                    color: #fff;
+                }
+
+                .popular_list {
+                    display: flex;
+                    justify-content: space-between;
+                    padding-left: 15px;
+
+                    .popular_item {
+
+                        margin-right: 12px;
+
+                        &:hover {
+
+                            a {
+                                color: #000;
+                                background-color: #fff;
+                            }
+                        }
+
+                        a {
+                            transition: all 0.5s;
+                            color: #fff;
+                            padding: 1px 12px;
+                            border: 1px solid #fff;
+                            border-radius: 40px;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
         }
 
 
@@ -30,6 +70,36 @@
 
             object-fit: cover;
 
+        }
+    }
+
+    .carousel__partner {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+
+        .carousel-trust {
+            padding-right: 20px;
+            color: #b5b6ba;
+            font-weight: 700;
+        }
+
+        .partner_list {
+            padding-left: 15px;
+
+            .partner_item {
+                padding-right: 50px;
+
+                img {
+                    height: 60px;
+                    width: 100%;
+                }
+            }
+
+
+            align-items: center;
+
+            display: flex;
         }
     }
 }
@@ -54,7 +124,29 @@
                 left: 50%;
                 top: 50%;
                 transform: translate(-50%, -50%);
+
+                .popular {
+                    display: none;
+                }
             }
+        }
+
+        .carousel__partner {
+            .carousel-trust {
+                display: none;
+            }
+
+            .partner_list {
+                .partner_item {
+                    padding-right: 25px;
+
+                    img {
+                        height: 50px;
+                    }
+                }
+            }
+
+
         }
     }
 
@@ -76,6 +168,10 @@
 
             .carousel__search {
                 border: none;
+
+                .popular {
+                    display: none;
+                }
 
                 .carousel__search-title {
                     font-size: 20px;
@@ -99,6 +195,22 @@
                 left: 50%;
                 top: 50%;
                 transform: translate(-50%, -50%);
+            }
+        }
+
+        .carousel__partner {
+            .carousel-trust {
+                display: none;
+            }
+
+            .partner_list {
+                .partner_item {
+                    padding-right: 10px;
+
+                    img {
+                        height: 40px;
+                    }
+                }
             }
         }
     }
