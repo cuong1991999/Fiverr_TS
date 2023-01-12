@@ -38,7 +38,7 @@ const Carousel = (props: Props) => {
           {arrBackGroundImg.map((item, index) => {
             return (
               <div key={index}>
-                <img src={`${item.img}`} alt="" className="slider__img" />
+                <img src={`${item.img}`} alt="..." className="slider__img" />
               </div>
             );
           })}
@@ -59,9 +59,47 @@ const Carousel = (props: Props) => {
             />
             <button className="btn carousel_btn">Search</button>
           </form>
+          <div className="popular">
+            <span>Popular: </span>
+            <ul className="popular_list">
+              <li className="popular_item">
+                <a href="#">Website Design</a>
+              </li>
+              <li className="popular_item">
+                <a href="#">WordPress</a>
+              </li>
+              <li className="popular_item">
+                <a href="#">Logo Design</a>
+              </li>
+              <li className="popular_item">
+                <a href="#">Video Editing</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-      <section className="carousel__partner"></section>
+      <section className="carousel__partner container">
+        <div className="carousel-trust">
+          <span>Trusted by:</span>
+        </div>
+        <ul className="partner_list">
+          <li className="partner_item">
+            <img src="./img/Carousel/CarouselPartner/facebook.png" alt="..." />
+          </li>
+          <li className="partner_item">
+            <img src="./img/Carousel/CarouselPartner/google.png" alt="..." />
+          </li>
+          <li className="partner_item">
+            <img src="./img/Carousel/CarouselPartner/netflix.png" alt="..." />
+          </li>
+          <li className="partner_item">
+            <img src="/img/Carousel/CarouselPartner/paypal.png" alt="..." />
+          </li>
+          <li className="partner_item">
+            <img src="/img/Carousel/CarouselPartner/pg.png" alt="..." />
+          </li>
+        </ul>
+      </section>
     </section>
   );
 };

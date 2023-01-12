@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import Header from "../../components/Header/Header";
 import CategoriesMenu from "../../components/Category/CategoriesMenu";
 import Carousel from "./Carousel";
+import MutipleSlick from "./MutipleSlick";
+import Advertisement from "./Advertisement";
 type Props = {};
 
 const Home = (props: Props) => {
@@ -23,6 +25,8 @@ const Home = (props: Props) => {
       <Header />
       <CategoriesMenu />
       <Carousel />
+      <MutipleSlick />
+      <Advertisement />
     </section>
   );
 };
