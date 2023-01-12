@@ -1,3 +1,96 @@
 .advertisement {
     background-color: #F1FDF7;
+    margin-bottom: 50px;
+
+    .advertisement-wrapper {
+        padding: 50px 0;
+        align-items: center;
+
+
+        .advertisement-content {
+            h2 {
+                padding-left: 32px;
+                padding-bottom: 24px;
+                margin: 0;
+                color: #404145;
+                font-weight: 700;
+            }
+
+            padding-right: 50px;
+
+            .advertisement-list {
+                .advertisement-item {
+                    h6 {
+                        display: flex;
+                        align-items: center;
+                        font-size: 18px;
+                        font-weight: 600;
+
+                        i {
+                            color: #62646a;
+                            margin-right: 5px;
+                            font-size: 24px;
+                        }
+                    }
+
+                    p {
+                        color: #62646a;
+                        font-size: 18px;
+                        font-weight: 400;
+                    }
+                }
+            }
+
+
+        }
+
+        .advertisement-img {
+            position: relative;
+            cursor: pointer;
+
+
+
+            &::after {
+                content: "";
+                background-image: url(https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/desktop-play-button.c1196d6.png);
+                position: absolute;
+                z-index: 2;
+                width: 80px;
+                background-size: 80px;
+                height: 80px;
+                display: inline-block;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+
+            }
+        }
+    }
+}
+
+
+
+@include mobiletablet {
+    .advertisement {
+        margin-bottom: 30px;
+
+        .advertisement-wrapper {
+            padding: 20px 0;
+
+            .advertisement-content {
+                padding-right: 12px;
+
+                h2 {
+                    padding-left: 0;
+                }
+
+
+                .advertisement-list {
+                    padding-left: 0;
+                }
+            }
+
+
+        }
+    }
 }

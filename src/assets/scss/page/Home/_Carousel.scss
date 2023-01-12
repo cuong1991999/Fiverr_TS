@@ -105,7 +105,7 @@
 }
 
 
-@include tablet() {
+@include tablet {
     .carousel {
         .carousel-background {
             .carousel-slider {
@@ -152,7 +152,7 @@
 
 }
 
-@include mobile() {
+@include mobile {
     .carousel {
         .carousel-background {
             .carousel-slider {

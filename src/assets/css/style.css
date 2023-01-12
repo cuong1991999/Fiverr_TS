@@ -1,3 +1,19 @@
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 * {
   padding: 0;
   margin: 0;
@@ -14,21 +30,43 @@ ul {
   margin: 0;
 }
 
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.video {
+  z-index: 999999;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.video .video-overplay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.video.show {
+  display: flex;
+}
+.video video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: auto;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+@media (min-width: 740px) and (max-width: 1023px) {
+  .video video {
+    width: 400px;
   }
-  to {
-    opacity: 1;
+}
+@media (max-width: 739px) {
+  .video video {
+    width: 250px;
   }
 }
 .header {
@@ -604,4 +642,70 @@ ul {
 }
 .advertisement {
   background-color: #F1FDF7;
+  margin-bottom: 50px;
+}
+.advertisement .advertisement-wrapper {
+  padding: 50px 0;
+  align-items: center;
+}
+.advertisement .advertisement-wrapper .advertisement-content {
+  padding-right: 50px;
+}
+.advertisement .advertisement-wrapper .advertisement-content h2 {
+  padding-left: 32px;
+  padding-bottom: 24px;
+  margin: 0;
+  color: #404145;
+  font-weight: 700;
+}
+.advertisement .advertisement-wrapper .advertisement-content .advertisement-list .advertisement-item h6 {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+.advertisement .advertisement-wrapper .advertisement-content .advertisement-list .advertisement-item h6 i {
+  color: #62646a;
+  margin-right: 5px;
+  font-size: 24px;
+}
+.advertisement .advertisement-wrapper .advertisement-content .advertisement-list .advertisement-item p {
+  color: #62646a;
+  font-size: 18px;
+  font-weight: 400;
+}
+.advertisement .advertisement-wrapper .advertisement-img {
+  position: relative;
+  cursor: pointer;
+}
+.advertisement .advertisement-wrapper .advertisement-img::after {
+  content: "";
+  background-image: url(https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/desktop-play-button.c1196d6.png);
+  position: absolute;
+  z-index: 2;
+  width: 80px;
+  background-size: 80px;
+  height: 80px;
+  display: inline-block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 1023px) {
+  .advertisement {
+    margin-bottom: 30px;
+  }
+  .advertisement .advertisement-wrapper {
+    padding: 20px 0;
+  }
+  .advertisement .advertisement-wrapper .advertisement-content {
+    padding-right: 12px;
+  }
+  .advertisement .advertisement-wrapper .advertisement-content h2 {
+    padding-left: 0;
+  }
+  .advertisement .advertisement-wrapper .advertisement-content .advertisement-list {
+    padding-left: 0;
+  }
 }/*# sourceMappingURL=style.css.map */
