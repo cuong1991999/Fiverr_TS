@@ -23,12 +23,13 @@ const Carousel = (props: Props) => {
   ];
   const settings = {
     infinite: true,
+    adaptiveHeight: true,
     autoplaySpeed: 5000,
     autoplay: true,
     speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
-    pauseOnHover: false,
+    pauseOnHover: true,
     arrows: false,
   };
   return (

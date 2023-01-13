@@ -1,0 +1,112 @@
+.testimonial {
+    .testimonial-img {
+        position: relative;
+        cursor: pointer;
+
+        &::after {
+            content: "";
+            background-image: url(https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/desktop-play-button.c1196d6.png);
+            position: absolute;
+            z-index: 2;
+            width: 80px;
+            background-size: 80px;
+            height: 80px;
+            display: inline-block;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+    }
+
+    .slick-prev,
+    .slick-next {
+        z-index: 10 !important;
+
+    }
+
+    .slick-prev::before {
+        color: #b5b6ba !important;
+        font-size: 2rem !important;
+        border-radius: 50%;
+        position: absolute;
+        left: -20px;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0.8;
+    }
+
+    .slick-next::before {
+        color: #b5b6ba !important;
+        font-size: 2rem !important;
+        border-radius: 50%;
+        opacity: 0.8;
+        position: absolute;
+        right: -20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .testimonial-content {
+        padding-left: 10px;
+
+        .testimonial-content-top {
+            display: flex;
+            align-items: center;
+            padding-bottom: 16px;
+
+            h5 {
+                color: #74767e;
+                margin: 0;
+            }
+
+            span {
+                display: inline-block;
+                height: 36px;
+                border-left: 1px solid #c5c6c9;
+                margin-left: 15px;
+
+                img {
+                    height: 36px;
+                }
+            }
+        }
+
+        .testimonial-content-bot {
+            color: #003912;
+            font-size: 25px;
+            font-weight: 500;
+        }
+    }
+}
+
+@media(min-width:1024px)and(max-width:1100px) {
+    .testimonial {
+
+        .slick-next::before,
+        .slick-prev::before,
+        .slick-prev,
+        .slick-next {
+            display: none !important;
+        }
+    }
+}
+
+@include mobiletablet {
+    .testimonial {
+        .testimonial-content {
+            display: none;
+        }
+
+
+
+        .slick-next::before,
+        .slick-prev::before,
+        .slick-prev,
+        .slick-next {
+            display: none !important;
+        }
+
+
+    }
+}

@@ -75,6 +75,11 @@
 @include tablet {
     .mutipleslick {
         margin: 40px auto;
+
+        .slick-prev,
+        .slick-next {
+            display: none !important;
+        }
     }
 }
 

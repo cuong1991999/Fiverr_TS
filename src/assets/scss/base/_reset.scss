@@ -14,7 +14,8 @@ ul {
     margin: 0;
 }
 
-.video {
+.video,
+.video2 {
 
     z-index: 999999;
     display: none;
@@ -26,7 +27,8 @@ ul {
     right: 0;
     bottom: 0;
 
-    .video-overplay {
+    .video-overplay,
+    .video-overplay2 {
         position: absolute;
 
         top: 0;
@@ -52,7 +54,9 @@ ul {
 }
 
 @include tablet {
-    .video {
+
+    .video,
+    .video2 {
         video {
             width: 400px;
         }
@@ -60,7 +64,9 @@ ul {
 }
 
 @include mobile {
-    .video {
+
+    .video,
+    .video2 {
         video {
             width: 250px;
         }

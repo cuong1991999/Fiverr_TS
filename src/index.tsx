@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./assets/scss/style.scss";
 import {
+  Navigate,
   Routes,
   Route,
   unstable_HistoryRouter as HistoryRouter,
@@ -25,6 +26,7 @@ root.render(
         <Route path="" element={<HomeTemplate />}>
           <Route index element={<Home />}></Route>
           <Route path="/home" element={<Home />}></Route>
+          <Route path="*" element={<Navigate to="/home" />} />
         </Route>
       </Routes>
     </HistoryRouter>

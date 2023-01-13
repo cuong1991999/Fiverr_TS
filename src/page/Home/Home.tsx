@@ -4,6 +4,7 @@ import CategoriesMenu from "../../components/Category/CategoriesMenu";
 import Carousel from "./Carousel";
 import MutipleSlick from "./MutipleSlick";
 import Advertisement from "./Advertisement";
+import Testimonial from "./Testimonial";
 type Props = {};
 
 const Home = (props: Props) => {
@@ -27,6 +28,7 @@ const Home = (props: Props) => {
       <Carousel />
       <MutipleSlick />
       <Advertisement />
+      <Testimonial />
     </section>
   );
 };

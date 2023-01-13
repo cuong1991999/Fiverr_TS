@@ -6,7 +6,7 @@ function SampleNextArrow(props: any) {
   return (
     <div
       className={`${className} slick-next`}
-      style={{ ...style, display: "block" }}
+      style={{ ...style }}
       onClick={onClick}
     />
   );
@@ -16,7 +16,7 @@ function SamplePrevArrow(props: any) {
   return (
     <div
       className={`${className} slick-prev`}
-      style={{ ...style, display: "block" }}
+      style={{ ...style }}
       onClick={onClick}
     />
   );
@@ -99,13 +99,12 @@ const MutipleSlick = (props: Props) => {
     variableWidth: true,
     autoplaySpeed: 5000,
     autoplay: true,
-    row: 1,
     adaptiveHeight: true,
     infinite: true,
     speed: 1000,
     slidesToShow: numberSlidesToShow,
     slidesToScroll: numberSlidesToShow,
-    dot: false,
+    arrows: false,
   };
   return (
     <section className="mutipleslick container">
