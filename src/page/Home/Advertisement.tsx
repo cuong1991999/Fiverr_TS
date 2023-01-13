@@ -5,10 +5,15 @@ type Props = {};
 const Advertisement = (props: Props) => {
   const handldeShow = () => {
     let show = window.document.querySelector(".video");
+    let load = window.document.querySelector("video");
     show?.classList.toggle("show");
+    load?.play();
   };
   const handleReShow = () => {
     let reshow = window.document.querySelector(".video");
+    let load = window.document.querySelector("video");
+    load?.pause();
+
     reshow?.classList.toggle("show");
   };
   return (
