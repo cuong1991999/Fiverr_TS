@@ -1,0 +1,202 @@
+.footer {
+    border-top: 1px solid #e4e5e7;
+
+    .footer-wrapper {
+        padding: 64px 0 24px;
+
+        .footer-top {
+            display: flex;
+            flex-wrap: wrap;
+
+            .footer-top-item {
+                width: 20%;
+
+                h6 {
+                    margin: 0;
+                    padding-bottom: 24px;
+
+                    i {
+                        display: none;
+                    }
+                }
+
+                ul {
+                    padding: 0;
+
+                    li {
+                        padding-bottom: 16px;
+
+                        a {
+                            color: #62646a;
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer-bottom {
+            padding: 10px 0;
+            border-top: 1px solid #e4e5e7;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            .footer-bottom-left {
+                display: flex;
+                align-items: center;
+
+                span {
+                    color: #b5b6ba;
+                    font-size: 14px;
+                    margin-left: 24px;
+                }
+
+            }
+
+            .footer-bottom-right {
+                display: flex;
+                align-items: center;
+
+                .social {
+                    padding-left: 0;
+                    display: flex;
+                    align-items: center;
+                    padding-right: 24px;
+
+                    li {
+                        padding: 10px;
+
+                        a {
+                            color: #74767e
+                        }
+                    }
+                }
+
+                .setting {
+
+                    display: flex;
+                    align-items: center;
+
+
+
+                    a {
+                        padding: 8px 12px;
+                        color: #74767e
+                    }
+
+
+                }
+
+
+
+
+            }
+        }
+    }
+}
+
+@include tablet {
+    .footer {
+        .footer-wrapper {
+            .footer-top {
+                .footer-top-item {
+                    width: 33.33333%;
+                    padding-bottom: 20px;
+                }
+
+            }
+        }
+
+        .footer-bottom {
+            .footer-bottom-left {
+                width: 100%;
+                padding-bottom: 20px;
+            }
+
+            .footer-bottom-right {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@include mobile {
+    .footer {
+
+        .footer-wrapper {
+            padding: 30px 0 20px;
+
+            .footer-top {
+                .footer-top-item {
+                    width: 100%;
+                    padding-bottom: 20px;
+                    cursor: pointer;
+
+                    h6 {
+
+                        transition: all 0.25s;
+
+                        i {
+                            display: inline-block;
+                            margin-left: 5px;
+
+
+                        }
+
+                        padding-bottom: 0;
+
+
+                    }
+
+                    ul {
+                        transition: all 0.25s;
+                        display: none;
+                        animation: fadeIn linear 0.25s;
+
+
+                    }
+
+                    &.showfooter {
+                        ul {
+                            display: block;
+                        }
+
+                        h6 {
+                            padding-bottom: 20px;
+
+                            i {
+                                transform: rotate(180deg);
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            .footer-bottom {
+                .footer-bottom-left {
+                    width: 100%;
+                    padding-bottom: 20px;
+                    flex-wrap: wrap;
+                    flex-direction: column;
+
+
+                    span {
+
+                        margin-left: 0;
+                    }
+                }
+
+                .footer-bottom-right {
+                    width: 100%;
+                    flex-wrap: wrap;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+
+    }
+}

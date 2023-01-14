@@ -7,7 +7,7 @@ function SampleNextArrow(props: any) {
   return (
     <div
       className={`${className} slick-next`}
-      style={{ ...style, display: "none" }}
+      style={{ ...style }}
       onClick={onClick}
     />
   );
@@ -17,7 +17,7 @@ function SamplePrevArrow(props: any) {
   return (
     <div
       className={`${className} slick-prev`}
-      style={{ ...style, display: "none" }}
+      style={{ ...style }}
       onClick={onClick}
     />
   );
@@ -34,7 +34,6 @@ const Testimonial = (props: Props) => {
     autoplay: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    arrows: false,
   };
   const arrTestimonial = [
     {
@@ -88,7 +87,7 @@ const Testimonial = (props: Props) => {
   };
   return (
     <section className="testimonial container">
-      <Slider>
+      <Slider {...settings}>
         {arrTestimonial.map((item, index) => {
           return (
             <div
