@@ -5,6 +5,8 @@ import Carousel from "./Carousel";
 import MutipleSlick from "./MutipleSlick";
 import Advertisement from "./Advertisement";
 import Testimonial from "./Testimonial";
+import Marketplace from "./Marketplace";
+import Footer from "../../components/Footer/Footer";
 type Props = {};
 
 const Home = (props: Props) => {
@@ -29,6 +31,8 @@ const Home = (props: Props) => {
       <MutipleSlick />
       <Advertisement />
       <Testimonial />
+      <Marketplace />
+      <Footer />
     </section>
   );
 };

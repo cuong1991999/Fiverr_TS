@@ -75,7 +75,7 @@ const Header = (props: Props) => {
                         Project Management
                       </NavLink>
                       <NavLink to="" className={"category-item"}>
-                        CI/CD
+                        Trending
                       </NavLink>
                     </div>
                   </div>

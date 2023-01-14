@@ -1,4 +1,3 @@
-import Item from "antd/es/list/Item";
 import React from "react";
 import Slider from "react-slick";
 function SampleNextArrow(props: any) {
@@ -104,7 +103,6 @@ const MutipleSlick = (props: Props) => {
     speed: 1000,
     slidesToShow: numberSlidesToShow,
     slidesToScroll: numberSlidesToShow,
-    arrows: false,
   };
   return (
     <section className="mutipleslick container">

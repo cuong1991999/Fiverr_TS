@@ -200,12 +200,13 @@
                     .header_navbar-list {
                         display: flex;
                         align-items: center;
+                        padding-left: 20px;
 
 
                         .li_1 {
                             color: #fff;
                             cursor: pointer;
-                            margin: 0 10px;
+                            padding: 0 5px;
                             font-weight: 600;
 
                             i {
@@ -213,7 +214,9 @@
                             }
 
                             a {
+                                display: block;
                                 color: #fff;
+
                             }
 
                         }
@@ -276,8 +279,16 @@
                                 color: #74767e;
                                 transition: all 0.5s;
 
+                                a {
+                                    transition: all 0.5s;
+                                }
+
                                 &:hover {
                                     color: $color1;
+
+                                    a {
+                                        color: $color1;
+                                    }
                                 }
 
                                 &.li_fiverr {

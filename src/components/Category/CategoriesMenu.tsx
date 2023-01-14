@@ -200,7 +200,7 @@ const CategoriesMenu = (props: Props) => {
                 }
                 to={"/"}
               >
-                CI/CD
+                Trending
               </NavLink>
             </div>
           </div>
