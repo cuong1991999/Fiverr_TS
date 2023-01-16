@@ -14,6 +14,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/configStore";
 import HomeTemplate from "./templates/HomeTemplate";
 import Home from "./page/Home/Home";
+import JobSearch from "./page/JobSearch/JobSearch";
 export const history: any = createBrowserHistory();
 
 const root = ReactDOM.createRoot(
@@ -26,6 +27,7 @@ root.render(
         <Route path="" element={<HomeTemplate />}>
           <Route index element={<Home />}></Route>
           <Route path="/home" element={<Home />}></Route>
+          <Route path="/search" element={<JobSearch />}></Route>
           <Route path="*" element={<Navigate to="/home" />} />
         </Route>
       </Routes>

@@ -8,13 +8,15 @@
     display: none;
     background-color: #fff;
 
-    &.nosticky {
-        position: relative;
-        display: block;
-    }
+
 
     &.sticky {
         display: block;
+
+        &.nosticky {
+            position: relative;
+            top: 0;
+        }
     }
 
     .category_wrapper {

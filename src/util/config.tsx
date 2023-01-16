@@ -73,7 +73,7 @@ http.interceptors.request.use(
     config.headers = {
       ...config.headers,
       ["Authorization"]: `Bearer ${token}`,
-      ["TokenCybersoft"]: TOKEN_CYBERSOFT,
+      ["tokenCybersoft"]: TOKEN_CYBERSOFT,
     };
     // config.headers['Content-Type'] = 'application/json';
     return config;

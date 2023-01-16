@@ -1,0 +1,92 @@
+.card-job {
+
+    .card-body {
+        .seller-info {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+
+            .seller-avatar img {
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+            }
+
+            .seller-name {
+                margin-left: 10px;
+
+                h6 {
+                    color: #222325;
+                }
+
+                p {
+                    color: #74767e;
+                }
+
+                h6,
+                p {
+                    margin: 0;
+
+                    font-weight: 600;
+                }
+            }
+        }
+
+        .content-info {
+            &:hover {
+                a {
+                    color: $color1;
+                }
+            }
+
+            a {
+                color: #222325;
+                transition: all 0.25s;
+
+
+            }
+        }
+
+        .rating-star {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+
+            .star,
+            .star-rate {
+                margin-right: 5px;
+                color: #ffbe5b;
+            }
+
+            .rating {
+                color: #74767e;
+            }
+        }
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .heart-icon {
+            cursor: pointer;
+        }
+
+        .price {
+            small {
+                color: #74767e;
+                font-size: 10px;
+                font-weight: 700;
+                margin-right: 5px;
+                text-transform: uppercase;
+            }
+
+            span {
+                color: #404145;
+                font-size: 18px;
+                font-weight: 600;
+            }
+        }
+    }
+}
