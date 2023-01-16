@@ -5,12 +5,6 @@
     transition: all 0.5s;
     z-index: 1000;
 
-
-    &.nosticky {
-        position: relative;
-
-    }
-
     .header-wrapper {
 
         .header_container {
@@ -250,8 +244,11 @@
 
     }
 
-    &.sticky,
-    .nosticky {
+    &.sticky {
+        &.nosticky {
+            position: relative;
+        }
+
         background-color: #fff;
 
         .header-wrapper {
@@ -310,6 +307,7 @@
             }
         }
     }
+
 }
 
 @include tablet {
