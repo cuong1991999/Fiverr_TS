@@ -27,7 +27,8 @@ root.render(
         <Route path="" element={<HomeTemplate />}>
           <Route index element={<Home />}></Route>
           <Route path="/home" element={<Home />}></Route>
-          <Route path="/search" element={<JobSearch />}></Route>
+
+          <Route path="/search/:id" element={<JobSearch />}></Route>
           <Route path="*" element={<Navigate to="/home" />} />
         </Route>
       </Routes>

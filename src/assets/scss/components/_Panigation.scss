@@ -1,0 +1,29 @@
+.pagination {
+    display: flex;
+    align-items: center;
+
+    button {
+        i {
+            color: $color1;
+        }
+
+        &:hover {
+            i {
+                color: white;
+            }
+        }
+
+        &.activeButton,
+        &:hover {
+            background-color: $color1;
+            color: white;
+
+        }
+
+
+        &:focus {
+            box-shadow: none;
+        }
+
+    }
+}
