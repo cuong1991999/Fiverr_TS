@@ -1,9 +1,24 @@
 import React from "react";
 import Slider from "react-slick";
+import { useFormik } from "formik";
+import { KeySearch } from "../../components/Header/Header";
+import { history } from "../..";
 
 type Props = {};
 
 const Carousel = (props: Props) => {
+  const frmSearchCarousel = useFormik<KeySearch>({
+    initialValues: {
+      keyword: "",
+    },
+    onSubmit: (values: KeySearch) => {
+      if (values.keyword === "") {
+        history.push("/home");
+      } else {
+        history.push(`/search/${values.keyword}`);
+      }
+    },
+  });
   const arrBackGroundImg = [
     {
       img: "/img/Carousel/CarouselBackground/CarouselBG-1.png",
@@ -52,13 +67,20 @@ const Carousel = (props: Props) => {
             <br />
             services for your business
           </h1>
-          <form className="input-group">
+          <form
+            className="input-group"
+            onSubmit={frmSearchCarousel.handleSubmit}
+          >
             <input
               type="text"
+              name="keyword"
               placeholder="Try 'building mobile app'"
               className="form-control form-control-mobile"
+              onChange={frmSearchCarousel.handleChange}
             />
-            <button className="btn carousel_btn">Search</button>
+            <button type="submit" className="btn carousel_btn">
+              Search
+            </button>
           </form>
           <div className="popular">
             <span>Popular: </span>

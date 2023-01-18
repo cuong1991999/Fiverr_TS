@@ -1,4 +1,9 @@
 .card-job {
+    .card-img {
+        height: 200px;
+        object-fit: cover;
+        object-position: center;
+    }
 
     .card-body {
         .seller-info {
@@ -17,6 +22,7 @@
 
                 h6 {
                     color: #222325;
+                    text-transform: capitalize;
                 }
 
                 p {
@@ -42,7 +48,7 @@
             a {
                 color: #222325;
                 transition: all 0.25s;
-
+                display: block;
 
             }
         }
@@ -85,8 +91,16 @@
             span {
                 color: #404145;
                 font-size: 18px;
-                font-weight: 600;
+                font-weight: 500;
             }
+        }
+    }
+}
+
+@include mobiletablet {
+    .card-job {
+        .card-img {
+            height: 180px;
         }
     }
 }

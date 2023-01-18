@@ -1,9 +1,27 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+import { useFormik } from "formik";
+
+import { history } from "../..";
+export type KeySearch = {
+  keyword: string;
+};
 type Props = {};
 
 const Header = (props: Props) => {
+  const frmSearch = useFormik<KeySearch>({
+    initialValues: {
+      keyword: "",
+    },
+    onSubmit: (values: KeySearch) => {
+      if (values.keyword === "") {
+        history.push("/home");
+      } else {
+        history.push(`/search/${values.keyword}`);
+      }
+    },
+  });
   const handleDropdown = () => {
     let show = window.document.querySelector(".sidebar-categories");
     show?.classList.toggle("show");
@@ -47,8 +65,8 @@ const Header = (props: Props) => {
                   <NavLink to={"/home"} className={"sidebar-item sidebar-home"}>
                     Home
                   </NavLink>
-                  <div className="sidebar-categories" onClick={handleDropdown}>
-                    <div className="category-collapse">
+                  <div className="sidebar-categories">
+                    <div className="category-collapse" onClick={handleDropdown}>
                       Categories
                       <i className="fas fa-chevron-down"></i>
                     </div>
@@ -86,13 +104,17 @@ const Header = (props: Props) => {
               fiverr<i className="fas fa-circle text-success"></i>
             </NavLink>
             <div className="header__search">
-              <form className="input-group">
+              <form className="input-group" onSubmit={frmSearch.handleSubmit}>
                 <input
+                  name="keyword"
                   type="text"
                   className="form-control"
                   placeholder="Find Services"
+                  onChange={frmSearch.handleChange}
                 />
-                <button className="btn  btn__search">Search</button>
+                <button type="submit" className="btn  btn__search">
+                  Search
+                </button>
               </form>
             </div>
           </div>

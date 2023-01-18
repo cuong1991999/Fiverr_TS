@@ -1,26 +1,34 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { JobList } from "../../redux/reducer/JobManagementReducer";
 
-type Props = {};
+type Props = {
+  Job: JobList;
+};
 
 const CardJob = (props: Props) => {
+  const { Job } = props;
   return (
-    <section className="card-job card">
+    <section className="card-job card ">
       <NavLink to="">
-        <img src="https://i.pravatar.cc/150" alt="..." className="card-img" />
+        <img src={Job.congViec.hinhAnh} alt="..." className="card-img" />
       </NavLink>
       <div className="card-body">
         <div className="seller-info">
           <div className="seller-avatar">
-            <img src="https://i.pravatar.cc" alt="avatar" />
+            <img src={Job.avatar} alt="avatar" />
           </div>
           <div className="seller-name">
-            <h6>Admin</h6>
+            <h6>{Job.tenNguoiTao}</h6>
             <p>Level 1</p>
           </div>
         </div>
         <div className="content-info">
-          <NavLink to="">I will design an outstanding logo</NavLink>
+          <NavLink to="/">
+            {Job.congViec.tenCongViec.length > 20
+              ? Job.congViec.tenCongViec.slice(0, 26) + `...`
+              : Job.congViec.tenCongViec}
+          </NavLink>
         </div>
         <div className="rating-star">
           <span className="star">
@@ -36,8 +44,8 @@ const CardJob = (props: Props) => {
               ></path>
             </svg>
           </span>
-          <span className="star-rate">1</span>
-          <span className="rating">(100)</span>
+          <span className="star-rate">{Job.congViec.saoCongViec}</span>
+          <span className="rating">({Job.congViec.danhGia})</span>
         </div>
       </div>
       <div className="card-footer">
@@ -57,7 +65,7 @@ const CardJob = (props: Props) => {
         <div className="price">
           <NavLink to={"/"}>
             <small>Starting at</small>
-            <span>US$5</span>
+            <span>US${Job.congViec.giaTien}</span>
           </NavLink>
         </div>
       </div>

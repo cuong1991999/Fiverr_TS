@@ -16,13 +16,17 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-wrap: wrap;
 
         .result-topbar-dropdown {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+            padding-bottom: 15px;
 
             .dropdown {
                 margin-right: 5px;
+                margin-bottom: 5px;
 
                 .btn-dropdown {
                     border: 1px solid #dadbdd;
@@ -66,6 +70,7 @@
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
+            padding-bottom: 15px;
 
             .toggle {
                 display: flex;
