@@ -8,7 +8,7 @@ import Footer from "../../components/Footer/Footer";
 import HeaderNoSticky from "../../components/Header/HearderNoSticky";
 import Pagination from "../../components/Pagination/Pagination";
 import { DispatchType, RootState } from "../../redux/configStore";
-import { getSearchApi } from "../../redux/reducer/JobManagementReducer";
+import { getCategoriesApi } from "../../redux/reducer/JobManagementReducer";
 import { history } from "../..";
 
 export type KeyWord = {
@@ -16,22 +16,18 @@ export type KeyWord = {
 };
 type Props = {};
 
-const JobSearch = (props: Props) => {
+const JobCategories = (props: Props) => {
   const params: any = useParams();
-  const { arrSearch, arrPagination } = useSelector(
+  const { arrCategories, arrPagination } = useSelector(
     (state: RootState) => state.JobManagementReducer
   );
   const dispacth: DispatchType = useDispatch();
-  //call api
   const getJobApi = () => {
-    dispacth(getSearchApi(params.id));
+    dispacth(getCategoriesApi(params.id));
   };
   useEffect(() => {
     getJobApi();
   }, [params.id]);
-  //
-
-  // search job
   const frm = useFormik<KeyWord>({
     initialValues: {
       keyword: "",
@@ -40,8 +36,6 @@ const JobSearch = (props: Props) => {
       history.push(`/search/${values.keyword}`);
     },
   });
-  //
-  // render job qua pagination va api
   const renderJob = () => {
     if (arrPagination.length > 0) {
       return arrPagination.map((item, index) => {
@@ -55,7 +49,7 @@ const JobSearch = (props: Props) => {
         );
       });
     }
-    return arrSearch.slice(0, 8).map((item, index) => {
+    return arrCategories.map((item, index) => {
       return (
         <div className="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 " key={item.id}>
           <CardJob Job={item} />
@@ -63,7 +57,6 @@ const JobSearch = (props: Props) => {
       );
     });
   };
-  //
   return (
     <section className="jobsearch">
       <HeaderNoSticky />
@@ -85,7 +78,7 @@ const JobSearch = (props: Props) => {
             </form>
           </div>
           <div className="result-title">
-            <span>Results for "{params.id}"</span>
+            <span>{arrCategories[0]?.tenChiTietLoai}</span>
           </div>
           <div className="result-topbar">
             <div className="result-topbar-dropdown">
@@ -276,7 +269,7 @@ const JobSearch = (props: Props) => {
           </div>
           <div className="result-sort">
             <div className="sort-number">
-              <span>{arrSearch.length} services available</span>
+              <span>{arrCategories.length} services available</span>
             </div>
             <div className="sort-by">
               <span>Sort by</span>
@@ -290,7 +283,7 @@ const JobSearch = (props: Props) => {
           <div className="result-service">
             <div className="row">{renderJob()}</div>
             <div className="d-flex justify-content-center mt-4">
-              <Pagination length={arrSearch.length} arr={arrSearch} />
+              <Pagination length={arrCategories.length} arr={arrCategories} />
             </div>
           </div>
         </div>
@@ -300,4 +293,4 @@ const JobSearch = (props: Props) => {
   );
 };
 
-export default memo(JobSearch);
+export default memo(JobCategories);

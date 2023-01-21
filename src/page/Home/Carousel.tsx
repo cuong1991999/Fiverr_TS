@@ -7,6 +7,7 @@ import { history } from "../..";
 type Props = {};
 
 const Carousel = (props: Props) => {
+  // search
   const frmSearchCarousel = useFormik<KeySearch>({
     initialValues: {
       keyword: "",
@@ -19,6 +20,7 @@ const Carousel = (props: Props) => {
       }
     },
   });
+  // silder
   const arrBackGroundImg = [
     {
       img: "/img/Carousel/CarouselBackground/CarouselBG-1.png",

@@ -2,6 +2,7 @@ import React, { useState, memo } from "react";
 import Slider from "react-slick";
 
 type Props = {};
+// thiet lap cho silder
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
   return (
@@ -23,6 +24,7 @@ function SamplePrevArrow(props: any) {
   );
 }
 const Testimonial = (props: Props) => {
+  //thiet lap video
   const [video, setVideo] = useState("");
   const settings = {
     infinite: true,
@@ -127,7 +129,7 @@ const Testimonial = (props: Props) => {
       </Slider>
       <div className="video2">
         <div className="video-overplay2" onClick={handleReShow2}></div>
-        <video id="videos" src={video} controls></video>
+        <video id="videos" src={video} autoPlay controls></video>
       </div>
     </section>
   );

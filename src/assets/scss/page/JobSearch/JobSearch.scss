@@ -1,6 +1,19 @@
 .search-result {
     padding-top: 32px;
 
+    .header__jobsearch {
+        display: none;
+
+        .btn__jobsearch {
+            background-color: $color1;
+            color: #fff;
+
+            &:hover {
+                background-color: #19a463;
+            }
+        }
+    }
+
     .result-title {
         padding-bottom: 12px;
 
@@ -158,4 +171,19 @@
         }
     }
 
+}
+
+@include mobile {
+    .search-result {
+        .header__jobsearch {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .result-title {
+            span {
+                font-size: 20px;
+            }
+        }
+    }
 }

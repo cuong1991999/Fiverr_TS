@@ -10,6 +10,7 @@ import Footer from "../../components/Footer/Footer";
 type Props = {};
 
 const Home = (props: Props) => {
+  // khi scroll xuong se hien header va categories
   useEffect(() => {
     const handleScroll = () => {
       let headers = window.document.querySelector(".header");

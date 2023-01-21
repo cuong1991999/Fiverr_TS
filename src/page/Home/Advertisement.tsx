@@ -3,12 +3,14 @@ import { memo } from "react";
 type Props = {};
 
 const Advertisement = (props: Props) => {
+  // show video va play video
   const handldeShow = () => {
     let show = window.document.querySelector(".video");
     let load = window.document.querySelector("video");
     show?.classList.toggle("show");
     load?.play();
   };
+  // tat video va pause
   const handleReShow = () => {
     let reshow = window.document.querySelector(".video");
     let load = window.document.querySelector("video");

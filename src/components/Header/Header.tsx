@@ -1,15 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
 import { useFormik } from "formik";
-
+import { RootState } from "../../redux/configStore";
 import { history } from "../..";
+import { useSelector } from "react-redux";
 export type KeySearch = {
   keyword: string;
 };
 type Props = {};
 
 const Header = (props: Props) => {
+  // chi dung cho trang home
+  // search
   const frmSearch = useFormik<KeySearch>({
     initialValues: {
       keyword: "",
@@ -22,10 +24,15 @@ const Header = (props: Props) => {
       }
     },
   });
+  // dropdown mobile
   const handleDropdown = () => {
     let show = window.document.querySelector(".sidebar-categories");
     show?.classList.toggle("show");
   };
+  // render mobile
+  const { arrMenu } = useSelector(
+    (state: RootState) => state.JobManagementReducer
+  );
   return (
     <header className="header">
       <div className="header-wrapper">
@@ -65,36 +72,41 @@ const Header = (props: Props) => {
                   <NavLink to={"/home"} className={"sidebar-item sidebar-home"}>
                     Home
                   </NavLink>
+                  <div className={"sidebar-item"}>
+                    <form
+                      className="input-group"
+                      onSubmit={frmSearch.handleSubmit}
+                    >
+                      <input
+                        name="keyword"
+                        type="text"
+                        className="form-control"
+                        placeholder="Find Services"
+                        onChange={frmSearch.handleChange}
+                      />
+                      <button type="submit" className="btn  btn__sidebar">
+                        Search
+                      </button>
+                    </form>
+                  </div>
+
                   <div className="sidebar-categories">
                     <div className="category-collapse" onClick={handleDropdown}>
                       Categories
                       <i className="fas fa-chevron-down"></i>
                     </div>
                     <div className="categories__menu">
-                      <NavLink to="" className={"category-item"}>
-                        Graphics & Design
-                      </NavLink>
-                      <NavLink to="" className={"category-item"}>
-                        Digital Marketing
-                      </NavLink>
-                      <NavLink to="" className={"category-item"}>
-                        Writing & Translation
-                      </NavLink>
-                      <NavLink to="" className={"category-item"}>
-                        Video & Animation
-                      </NavLink>
-                      <NavLink to="" className={"category-item"}>
-                        Music & Audio
-                      </NavLink>
-                      <NavLink to="" className={"category-item"}>
-                        Life Style
-                      </NavLink>
-                      <NavLink to="" className={"category-item"}>
-                        Project Management
-                      </NavLink>
-                      <NavLink to="" className={"category-item"}>
-                        Trending
-                      </NavLink>
+                      {arrMenu.slice(0, 8).map((item) => {
+                        return (
+                          <NavLink
+                            to={`/jobtype/${item.id}`}
+                            className={"category-item"}
+                            key={item.id}
+                          >
+                            {item.tenLoaiCongViec}
+                          </NavLink>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
