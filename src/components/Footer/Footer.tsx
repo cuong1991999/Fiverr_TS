@@ -1,9 +1,9 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 type Props = {};
 
 const Footer = (props: Props) => {
+  // dropdow khi chuyen sang mobile
   const handleShowFooter = (b: number) => {
     let showfooter = window.document.querySelectorAll(".footer-top-item");
     for (let i = 0; i < showfooter.length; i++) {

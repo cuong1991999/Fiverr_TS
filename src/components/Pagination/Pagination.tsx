@@ -10,20 +10,28 @@ type Props = {
 const Pagination = (props: Props) => {
   const { length, arr } = props;
   const dispacth: DispatchType = useDispatch();
-
+  // so trang
   const [page, setPage] = useState<number>(1);
+  // so item
   const [posts, setPosts] = useState<number>(8);
+  // so trang toi thieu hien thi
   const [pageNumberLimit, setpageNumberLimit] = useState<number>(5);
+  //so trang lon nhat
   const [maxPageNumberLimit, setmaxPageNumberLimit] = useState<number>(5);
-  const [minPageNumberLimit, setminPageNumberLimit] = useState<number>(0);
-  const lastPostIndex = page * posts;
-  const firstPostIndex = lastPostIndex - posts;
-  const currentPosts = arr.slice(firstPostIndex, lastPostIndex);
+  // so trang nho nhat
 
+  const [minPageNumberLimit, setminPageNumberLimit] = useState<number>(0);
+  // vi tri cuoi
+  const lastPostIndex = page * posts;
+  // vi tri dau
+  const firstPostIndex = lastPostIndex - posts;
+  // trang hien tai
+  const currentPosts = arr.slice(firstPostIndex, lastPostIndex);
+  // dispatch thay doi theo so trang
   useEffect(() => {
     dispacth(PaginationAction(currentPosts));
   }, [page]);
-
+  // render nut button
   const pages: number[] = [];
   for (let i = 1; i <= Math.ceil(length / posts); i++) {
     pages.push(i);
@@ -44,7 +52,7 @@ const Pagination = (props: Props) => {
     }
     return null;
   });
-
+  // thiep lap nut next and prev
   const nextPage = () => {
     setPage((prev) => prev + 1);
     if (page + 1 > maxPageNumberLimit) {

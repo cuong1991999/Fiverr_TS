@@ -1,14 +1,20 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
 import { useFormik } from "formik";
-
 import { KeySearch } from "./Header";
 import { history } from "../..";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/configStore";
 
 type Props = {};
 
 const HeaderNoSticky = (props: Props) => {
+  // dung duoc cac trang khac ngoai trang home
+  //render menu
+  const { arrMenu } = useSelector(
+    (state: RootState) => state.JobManagementReducer
+  );
+  // dung cho search
   const frmSearch = useFormik<KeySearch>({
     initialValues: {
       keyword: "",
@@ -21,6 +27,7 @@ const HeaderNoSticky = (props: Props) => {
       }
     },
   });
+  // dropdown mobile
   const handleDropdown = () => {
     let show = window.document.querySelector(".sidebar-categories");
     show?.classList.toggle("show");
@@ -70,30 +77,17 @@ const HeaderNoSticky = (props: Props) => {
                       <i className="fas fa-chevron-down"></i>
                     </div>
                     <div className="categories__menu">
-                      <NavLink to="" className={"category-item"}>
-                        Graphics & Design
-                      </NavLink>
-                      <NavLink to="" className={"category-item"}>
-                        Digital Marketing
-                      </NavLink>
-                      <NavLink to="" className={"category-item"}>
-                        Writing & Translation
-                      </NavLink>
-                      <NavLink to="" className={"category-item"}>
-                        Video & Animation
-                      </NavLink>
-                      <NavLink to="" className={"category-item"}>
-                        Music & Audio
-                      </NavLink>
-                      <NavLink to="" className={"category-item"}>
-                        Life Style
-                      </NavLink>
-                      <NavLink to="" className={"category-item"}>
-                        Project Management
-                      </NavLink>
-                      <NavLink to="" className={"category-item"}>
-                        Trending
-                      </NavLink>
+                      {arrMenu.slice(0, 8).map((item) => {
+                        return (
+                          <NavLink
+                            to={`/jobtype/${item.id}`}
+                            className={"category-item"}
+                            key={item.id}
+                          >
+                            {item.tenLoaiCongViec}
+                          </NavLink>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>

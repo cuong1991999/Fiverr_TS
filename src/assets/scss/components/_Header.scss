@@ -112,6 +112,15 @@
                             padding: 4px 0;
                             cursor: pointer;
 
+                            .btn__sidebar {
+                                background-color: $color1;
+                                color: #fff;
+
+                                &:hover {
+                                    background-color: #19a463;
+                                }
+                            }
+
                             &.sidebar-btn {
                                 padding: 8px 16px;
                                 background-color: $color1;
@@ -310,7 +319,28 @@
 
 }
 
+@media(min-width:1024px) and (max-width:1200px) {
+    .header {
+        .header-wrapper {
+            .header_container {
+                .header-left {
+                    .navbar__btn {
+                        display: block;
+                    }
+                }
+
+                .header-right {
+                    display: none;
+                }
+            }
+
+
+        }
+    }
+}
+
 @include tablet {
+
     .header {
         .header-wrapper {
             .header_container {
@@ -330,7 +360,9 @@
 
 @include mobile {
     .header {
-        &.sticky {
+
+        &.sticky,
+        &.nosticky {
             .header-wrapper {
 
                 .header_container {

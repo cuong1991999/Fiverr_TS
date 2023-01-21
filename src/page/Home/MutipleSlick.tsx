@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
+// thiet lap button next and prev cho silder
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
   return (
@@ -23,6 +24,7 @@ function SamplePrevArrow(props: any) {
 type Props = {};
 
 const MutipleSlick = (props: Props) => {
+  // thiet lap silder
   const arrMultipleSlick = [
     {
       title: "Build your brand",

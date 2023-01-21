@@ -104,6 +104,14 @@
     }
 }
 
+@media(min-width:1024px) and (max-width:1200px) {
+    .category {
+        &.sticky {
+            display: none;
+        }
+    }
+}
+
 @include tablet {
     .category {
         &.sticky {

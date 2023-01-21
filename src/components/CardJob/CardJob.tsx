@@ -20,7 +20,7 @@ const CardJob = (props: Props) => {
           </div>
           <div className="seller-name">
             <h6>{Job.tenNguoiTao}</h6>
-            <p>Level 1</p>
+            <p>Level {Job.congViec.saoCongViec} Seller</p>
           </div>
         </div>
         <div className="content-info">

@@ -140,6 +140,8 @@
                         transition: all 0.25s;
 
                         i {
+                            transform: rotate(0deg);
+                            transition: all 0.25s;
                             display: inline-block;
                             margin-left: 5px;
 
