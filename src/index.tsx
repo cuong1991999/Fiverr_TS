@@ -17,6 +17,7 @@ import Home from "./page/Home/Home";
 import JobSearch from "./page/JobSearch/JobSearch";
 import JobTypes from "./page/JobType/JobTypes";
 import JobCategories from "./page/JobSearch/JobCategories";
+import JobDetail from "./page/JobDetail/JobDetail";
 
 export const history: any = createBrowserHistory();
 
@@ -27,12 +28,14 @@ root.render(
   <Provider store={store}>
     <HistoryRouter history={history}>
       <Routes>
-        <Route path="" element={<HomeTemplate />}>
+        <Route element={<HomeTemplate />}>
           <Route index element={<Home />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/search/:id" element={<JobSearch />}></Route>
           <Route path="/categories/:id" element={<JobCategories />}></Route>
           <Route path="/jobtype/:id" element={<JobTypes />}></Route>
+          <Route path="/jobdetail" element={<JobDetail />}></Route>
+
           <Route path="*" element={<Navigate to="/home" />} />
         </Route>
       </Routes>

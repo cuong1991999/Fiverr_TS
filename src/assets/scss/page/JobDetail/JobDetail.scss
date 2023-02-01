@@ -1,0 +1,813 @@
+.jobdetail {
+    padding: 30px 0;
+
+    .jobdetail-left {
+
+        .jobdetail-link {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+
+            span {
+                display: inline-block;
+                margin-right: 5px;
+            }
+
+
+        }
+
+        .jobdeital-info {
+            h2 {
+                margin: 0;
+                padding-bottom: 16px;
+                font-size: 28px;
+                font-weight: 600;
+            }
+
+            .jobdetail-seller {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                flex-wrap: wrap;
+
+                .seller-avatar {
+                    img {
+                        border-radius: 50%;
+                        width: 30px;
+                        height: 30px;
+                    }
+                }
+
+                .seller-name {
+                    font-size: 14px;
+                    color: #404145;
+                    font-weight: 600;
+                }
+
+                .seller-level {
+                    font-size: 14px;
+                    color: #62646a;
+                }
+
+                .seller-rate {
+                    display: flex;
+                    align-items: center;
+                    font-size: 14px;
+
+                    &::before {
+                        content: "|";
+                        color: #c5c6c9;
+                        margin-right: 5px;
+                    }
+
+                    .star {
+                        span {
+                            margin-right: 5px;
+                            vertical-align: middle;
+                        }
+                    }
+
+                    .score {
+                        color: #ffbe5b;
+                    }
+
+                    .rating {
+                        color: #62646a;
+                        margin-left: 5px;
+                    }
+
+                }
+
+                .seller-order {
+                    color: #62646a;
+                    font-size: 14px;
+                }
+            }
+
+            .jobdetail-img {
+                margin: 20px 0;
+                overflow: hidden;
+
+                &:hover {
+                    img {
+                        transform: scale(1.05);
+                    }
+                }
+
+                img {
+                    transition: all 0.25s;
+                    max-width: 100%;
+                    height: auto;
+                }
+            }
+
+            .jobdetail-description {
+                border-bottom: 1px solid #c5c6c9;
+
+                h2 {
+                    font-size: 20px;
+                    color: #333;
+                    padding-bottom: 20px;
+                }
+
+                .descriptions {
+                    margin: 0;
+                    padding-bottom: 20px;
+                }
+            }
+
+            .about-seller {
+                margin-top: 30px;
+
+                h2 {
+                    font-size: 20px;
+                    color: #333;
+                    padding-bottom: 20px;
+                }
+
+                .about-profile {
+                    display: flex;
+                    gap: 1rem;
+
+                    .about-avatar {
+                        img {
+                            width: 100px;
+                            height: 100px;
+                            border-radius: 50%;
+                        }
+                    }
+
+                    .about-info {
+                        h3 {
+                            font-size: 18px;
+                            color: #74767e;
+                            font-weight: 600;
+                            margin-bottom: 5px;
+                        }
+
+                        p {
+                            color: #62646a;
+                            margin-bottom: 5px;
+                        }
+
+                        .about-rate {
+                            display: flex;
+                            align-items: center;
+                            font-size: 14px;
+
+                            .star {
+                                span {
+                                    margin-right: 5px;
+                                    vertical-align: middle;
+                                }
+                            }
+
+                            .score {
+                                color: #ffbe5b;
+                            }
+
+                            .rating {
+                                color: #62646a;
+                                margin-left: 5px;
+                            }
+                        }
+
+                        .about-btn {
+                            border: 1px solid #74767e;
+                            font-size: 14px;
+                            font-weight: 600;
+                            color: #74767e;
+                            margin-top: 20px;
+                            transition: all 0.25s;
+
+                            &:hover {
+                                background-color: #74767e;
+                                color: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .faq {
+                margin-top: 30px;
+
+                h2 {
+                    font-size: 20px;
+                    color: #333;
+                    padding-bottom: 20px;
+                }
+
+                .faq-list {
+                    padding: 0;
+
+                    .faq-item {
+                        position: relative;
+                        overflow: hidden;
+
+
+                        input {
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            width: 100%;
+                            height: 100%;
+
+                        }
+
+                        &:first-child {
+                            border-bottom: 1px solid #c5c6c9;
+                        }
+
+                        .faq-dropdown {
+                            color: #74767e;
+                            font-weight: 600;
+                            padding: 10px 0;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+
+                            i {
+                                transition: all 0.25s;
+                                color: #74767e;
+                            }
+
+
+                        }
+
+                        p {
+                            transform: translateY(-20px);
+                            height: 0;
+                            visibility: hidden;
+                            margin-bottom: 10px;
+
+                            transition: all 0.2s;
+
+                        }
+
+                        input:checked~.faq-dropdown {
+                            i {
+                                transform: rotate(180deg);
+                            }
+                        }
+
+                        input:checked~p {
+                            visibility: unset;
+                            transform: translateY(0);
+                            height: auto;
+                        }
+                    }
+
+
+                }
+            }
+
+            .rating-review {
+                margin-top: 30px;
+                border-bottom: 1px solid #c5c6c9;
+                padding-bottom: 15px;
+
+                .review,
+                .count {
+                    justify-content: space-between;
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                }
+
+                .review {
+                    .sort {
+                        select {
+                            outline: none;
+                            border: none;
+                        }
+
+                        span {
+                            color: #74767e;
+                            font-weight: 500;
+                            padding-right: 10px;
+                        }
+                    }
+
+                    .count {
+                        span {
+                            padding-right: 5px;
+
+                            i {
+                                color: #ffbe5b;
+                            }
+
+                            &:first-child {
+                                color: #404145;
+                                font-weight: 600;
+                            }
+
+                            &:nth-child(3) {
+                                color: #ffbe5b;
+                            }
+                        }
+                    }
+                }
+
+                .review-rating {
+                    margin-top: 20px;
+
+                    .star-counter {
+
+
+
+
+
+                        .star-btn {
+                            width: 25%;
+
+                            button {
+                                margin-bottom: 5px;
+                                border: none;
+                                font-weight: 600;
+                                padding: 3px 5px;
+                                color: #446ee7;
+                                background-color: #fff;
+                                transition: all 0.25s;
+                                border-radius: 0.25rem;
+                            }
+
+                            &:hover {
+                                button {
+                                    background-color: #446ee7;
+                                    color: #fff;
+                                }
+                            }
+
+                        }
+
+                        .process-bar-container {
+                            padding: 5px;
+
+                            width: 65%;
+
+                            .process-bar {
+                                height: 8px;
+                                border-radius: 999px;
+                                width: 100%;
+                                background-color: #e4e5e7;
+                                position: relative;
+
+                                &.first {
+                                    &::after {
+                                        position: absolute;
+                                        content: "";
+                                        background-color: #ffbe5b;
+                                        height: 8px;
+                                        position: absolute;
+                                        border-radius: 999px;
+                                        width: 100%;
+                                    }
+                                }
+                            }
+                        }
+
+                        .star-num {
+                            width: 10%;
+                            padding-bottom: 5px;
+                            color: #446ee7;
+                            font-weight: 600;
+                        }
+                    }
+
+                    .ranking {
+                        h6 {
+                            margin: 5px 0 15px;
+                        }
+
+                        .ranking-list {
+                            padding: 0;
+
+                            .ranking-item {
+                                padding-bottom: 8px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+
+                                span {
+                                    i {
+                                        color: #ffbe5b;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .review-comment {
+                width: 100%;
+
+                .review-comment-list {
+                    padding: 0;
+
+                    .review-comment-item {
+                        display: flex;
+                        flex-wrap: wrap;
+                        padding: 25px 0;
+                        border-bottom: 1px solid #c5c6c9;
+
+
+
+                        .comment-info {
+                            display: flex;
+                            gap: 1rem;
+                        }
+
+                        .review-comment-avatar {
+                            width: 48px;
+                            height: 48px;
+                            border-radius: 50%;
+                        }
+
+                        .comment-name {
+                            display: flex;
+                            flex-wrap: wrap;
+
+                            .comment-name-top {
+                                width: 100%;
+
+
+                                span:last-child {
+                                    color: #ffbe5b;
+                                }
+
+                                i {
+                                    color: #ffbe5b;
+                                    margin: 0 5px;
+                                }
+                            }
+
+                            .comment-name-bot {
+                                width: 100%;
+
+                                img {
+                                    width: 20px;
+                                    height: 20px;
+
+                                }
+
+                                span {
+                                    font-size: 14px;
+                                    margin-left: 5px;
+                                }
+                            }
+                        }
+
+                        .comment-description {
+                            margin: 20px 0 0 64px;
+
+                            .thums {
+                                display: flex;
+                                align-items: center;
+                                gap: 1rem;
+                                font-size: 14px;
+
+                                span:first-child {
+                                    color: #404145;
+                                    font-weight: 600;
+                                }
+                            }
+
+                            .thums-icon {
+                                display: flex;
+                                align-items: center;
+                                gap: 0.5rem;
+
+                                .yes,
+                                .no {
+                                    cursor: pointer;
+                                }
+
+                                span {
+                                    color: #62646a;
+                                    margin-left: 5px;
+                                    font-weight: 600;
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            .add-comment {
+                margin-top: 30px;
+                margin-bottom: 20px;
+
+                .add-comment-title {
+                    padding-bottom: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+
+                    span {
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+                }
+
+
+
+                textarea {
+                    border-radius: 5px;
+                    padding: 10px 12px;
+                    width: 100%;
+                }
+
+                .comment-btn {
+                    margin-top: 10px;
+                    border-radius: 0.25rem;
+                    padding: 8px 12px;
+                    border: none;
+                    background-color: $color1;
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    .jobdetail-left {
+        .jobdeital-info {
+            .checkout.mobile {
+                margin: 20px 0;
+                display: none;
+                width: 100%;
+                border: 1px solid #dadbdd;
+
+                .checkout-header {
+                    justify-content: center;
+
+                    .nav-item {
+                        width: 33.33333%;
+
+                        &.center {
+                            border-left: 1px solid #dadbdd;
+                            border-right: 1px solid #dadbdd;
+                        }
+
+                        button {
+                            color: #74767e;
+                            background-color: #fafafa;
+                            border: none;
+                            font-weight: 600;
+                            border-bottom: 2px solid #dadbdd;
+                            width: 100%;
+                            transition: all 0.25s;
+                            font-size: 14px;
+                            padding: 16px;
+
+                            &.active {
+                                color: $color1;
+                                border-bottom: 2px solid $color1;
+                            }
+                        }
+                    }
+                }
+
+                .checkout-body {
+                    padding: 24px;
+
+                    .title {
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 24px;
+                        color: #333;
+                        font-weight: 500;
+
+                    }
+
+                    .description {
+                        margin: 20px 0;
+                        color: #62646a;
+                        font-size: 14px;
+                    }
+
+                    .delivery-revision {
+                        display: flex;
+                        justify-content: space-between;
+                        color: #62646a;
+                        align-items: center;
+                        font-size: 14px;
+                        margin-bottom: 16px;
+
+                        .dr-item {
+                            svg {
+                                margin-right: 5px;
+                            }
+
+                            color: #62646a;
+                            display: flex;
+                            align-items: center;
+                        }
+                    }
+
+                    .feature {
+                        padding: 0;
+                        margin-bottom: 20px;
+
+                        .feature-items {
+                            svg {
+                                margin-right: 5px;
+                            }
+
+                            font-size: 14px;
+                            color: #62646a;
+                            display: flex;
+                            align-items: center;
+                            font-weight: 500;
+                        }
+                    }
+
+                    .submit-checkout {
+                        display: block;
+                        width: 100%;
+                        border-radius: 4px;
+                        padding: 5px 16px;
+                        border: none;
+                        color: #fff;
+                        font-weight: 600;
+                        background-color: $color1;
+                    }
+
+                    .compare {
+                        color: $color1;
+                        padding: 5px;
+                        text-align: center;
+                        font-weight: 600;
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+
+    .jobdetail-right {
+
+
+        .checkout {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            border: 1px solid #dadbdd;
+
+            .checkout-header {
+                justify-content: center;
+
+                .nav-item {
+                    width: 33.33333%;
+
+                    &.center {
+                        border-left: 1px solid #dadbdd;
+                        border-right: 1px solid #dadbdd;
+                    }
+
+                    button {
+                        color: #74767e;
+                        background-color: #fafafa;
+                        border: none;
+                        font-weight: 600;
+                        border-bottom: 2px solid #dadbdd;
+                        width: 100%;
+                        transition: all 0.25s;
+                        font-size: 14px;
+                        padding: 16px;
+
+                        &.active {
+                            color: $color1;
+                            border-bottom: 2px solid $color1;
+                        }
+                    }
+                }
+            }
+
+            .checkout-body {
+                padding: 24px;
+
+                .title {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 24px;
+                    color: #333;
+                    font-weight: 500;
+
+                }
+
+                .description {
+                    margin: 20px 0;
+                    color: #62646a;
+                    font-size: 14px;
+                }
+
+                .delivery-revision {
+                    display: flex;
+                    justify-content: space-between;
+                    color: #62646a;
+                    align-items: center;
+                    font-size: 14px;
+                    margin-bottom: 16px;
+
+                    .dr-item {
+                        svg {
+                            margin-right: 5px;
+                        }
+
+                        color: #62646a;
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+
+                .feature {
+                    padding: 0;
+                    margin-bottom: 20px;
+
+                    .feature-items {
+                        svg {
+                            margin-right: 5px;
+                        }
+
+                        font-size: 14px;
+                        color: #62646a;
+                        display: flex;
+                        align-items: center;
+                        font-weight: 500;
+                    }
+                }
+
+                .submit-checkout {
+                    display: block;
+                    width: 100%;
+                    border-radius: 4px;
+                    padding: 5px 16px;
+                    border: none;
+                    color: #fff;
+                    font-weight: 600;
+                    background-color: $color1;
+                }
+
+                .compare {
+                    color: $color1;
+                    padding: 5px;
+                    text-align: center;
+                    font-weight: 600;
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+@include mobile {
+    .jobdetail {
+        padding-bottom: 0;
+
+        .jobdetail-left {
+            width: 100%;
+
+            .jobdetail-link {
+                display: none;
+            }
+
+            .jobdeital-info {
+                .checkout.mobile {
+                    display: block;
+                }
+            }
+        }
+
+        .jobdetail-right {
+            display: none;
+        }
+    }
+}
+
+@include tablet {
+    .jobdetail {
+        padding-bottom: 0;
+
+        .jobdetail-left {
+            width: 100%;
+
+
+
+            .jobdeital-info {
+                .checkout.mobile {
+                    display: block;
+                }
+            }
+        }
+
+        .jobdetail-right {
+            display: none;
+        }
+    }
+}
