@@ -1,12 +1,131 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+import { NavLink, useParams } from "react-router-dom";
 import CategoriesMenuNoSticky from "../../components/Category/CategoriesMenuNoSticky";
 import Footer from "../../components/Footer/Footer";
 import HeaderNoSticky from "../../components/Header/HearderNoSticky";
 import { Rate } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { DispatchType, RootState } from "../../redux/configStore";
+import {
+  getArrCommentApi,
+  getJobDetailApi,
+} from "../../redux/reducer/JobManagementReducer";
+import { useFormik, validateYupSchema } from "formik";
+export type Comment = {
+  noiDung: string;
+  id: string;
+  maCongViec: string;
+  maNguoiBinhLuan: string;
+  ngayBinhLuan: string;
+  saoBinhLuan: string;
+};
+export type Cart = {
+  id: string;
+  maCongViec: string;
+  maNguoiThue: string;
+  ngayThue: string;
+  hoanThanh: boolean;
+};
 type Props = {};
 
-const JobDetail: React.FC = (props: Props) => {
+const JobDetail = (props: Props) => {
+  const { detail, binhLuan } = useSelector(
+    (state: RootState) => state.JobManagementReducer
+  );
+
+  const today = new Date();
+  const date = `${today.getDate()}/${
+    today.getMonth() + 1
+  }/${today.getFullYear()} `;
+  console.log(date);
+
+  const dispatch: DispatchType = useDispatch();
+  const param: any = useParams();
+  const getDetailApi = () => {
+    dispatch(getJobDetailApi(param.id));
+  };
+  const getCommentlApi = () => {
+    dispatch(getArrCommentApi(param.id));
+  };
+  const frm = useFormik<Comment>({
+    initialValues: {
+      noiDung: "",
+      id: "",
+      maCongViec: param.id,
+      maNguoiBinhLuan: "",
+      ngayBinhLuan: date,
+      saoBinhLuan: "",
+    },
+    onSubmit: (values: Comment) => {
+      const payload = {
+        id: 0,
+        maCongViec: values.maCongViec,
+        maNguoiBinhLuan: 0,
+        ngayBinhLuan: values.ngayBinhLuan,
+        noiDung: values.noiDung,
+        saoBinhLuan: values.saoBinhLuan,
+      };
+    },
+  });
+  const handleCart = () => {
+    const payload: Cart = {
+      id: "0",
+      maCongViec: param.id,
+      maNguoiThue: "0",
+      ngayThue: date,
+      hoanThanh: true,
+    };
+  };
+  useEffect(() => {
+    getDetailApi();
+  }, [param.id]);
+  useEffect(() => {
+    getCommentlApi();
+  }, [param.id]);
+
+  const renderComment = () => {
+    return binhLuan.map((item, index) => {
+      return (
+        <li className="review-comment-item " key={index}>
+          <div className="comment-info ">
+            <img
+              src={item.avatar}
+              alt="..."
+              className="review-comment-avatar"
+            />
+            <div className="comment-name">
+              <div className="comment-name-top">
+                <span>{item.tenNguoiBinhLuan}</span>
+                <i className="fas fa-star"></i>
+                <span>{item.saoBinhLuan}</span>
+                <span>{item.ngayBinhLuan}</span>
+              </div>
+              <div className="comment-name-bot">
+                <img src="/img/JobType/1f1fa-1f1f8.png" alt="..." />
+                <span>United States</span>
+              </div>
+            </div>
+          </div>
+          <div className="comment-description">
+            <p>{item.noiDung}</p>
+            <div className="thums">
+              <span>Helpful?</span>
+              <div className="thums-icon">
+                <div className="yes">
+                  <i className="far fa-thumbs-up"></i>
+                  <span>Yes</span>
+                </div>
+                <div className="no">
+                  <i className="far fa-thumbs-down"></i>
+                  <span>No</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      );
+    });
+  };
   return (
     <section>
       <HeaderNoSticky />
@@ -16,110 +135,56 @@ const JobDetail: React.FC = (props: Props) => {
           <div className="col-7 jobdetail-left">
             <div className="jobdetail-link">
               <span>
-                <NavLink to={"#ddd"}>Digital Marketing</NavLink>
+                <NavLink
+                  to={`/jobtype/${detail[0]?.congViec.maChiTietLoaiCongViec}`}
+                >
+                  {detail[0]?.tenLoaiCongViec}
+                </NavLink>
               </span>
               <span>
                 <i className="fas fa-chevron-right"></i>
               </span>
               <span>
-                <NavLink to={"#ddd"}>Digital Marketing</NavLink>
+                <NavLink
+                  to={`/jobtype/${detail[0]?.congViec.maChiTietLoaiCongViec}`}
+                >
+                  {detail[0]?.tenNhomChiTietLoai}
+                </NavLink>
               </span>
               <span>
                 <i className="fas fa-chevron-right"></i>
               </span>
               <span>
-                <NavLink to={"#ddd"}>Digital Marketing</NavLink>
+                <NavLink
+                  to={`/jobtype/${detail[0]?.congViec.maChiTietLoaiCongViec}`}
+                >
+                  {detail[0]?.tenChiTietLoai}
+                </NavLink>
               </span>
             </div>
             <div className="jobdeital-info">
-              <h2>
-                I will write simple and interesting content for your website
-              </h2>
+              <h2>{detail[0]?.congViec.tenCongViec}</h2>
               <div className="jobdetail-seller">
                 <div className="seller-avatar">
-                  <img src="https://i.pravatar.cc" alt="..." />
+                  <img src={detail[0]?.avatar} alt="..." />
                 </div>
                 <div className="seller-name">
-                  <span>Name</span>
+                  <span>{detail[0]?.tenNguoiTao}</span>
                 </div>
                 <div className="seller-level">
-                  <span>Level 2 seller</span>
+                  <span>Level {detail[0]?.congViec.saoCongViec} seller</span>
                 </div>
                 <div className="seller-rate">
-                  <div className="star d-flex">
-                    <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 1792 1792"
-                        width="16"
-                        height="16"
-                      >
-                        <path
-                          fill="#ffbe5b"
-                          d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
-                        ></path>
-                      </svg>
-                    </span>
-                    <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 1792 1792"
-                        width="16"
-                        height="16"
-                      >
-                        <path
-                          fill="#ffbe5b"
-                          d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
-                        ></path>
-                      </svg>
-                    </span>
-                    <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 1792 1792"
-                        width="16"
-                        height="16"
-                      >
-                        <path
-                          fill="#ffbe5b"
-                          d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
-                        ></path>
-                      </svg>
-                    </span>
-                    <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 1792 1792"
-                        width="16"
-                        height="16"
-                      >
-                        <path
-                          fill="#ffbe5b"
-                          d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
-                        ></path>
-                      </svg>
-                    </span>
-                    <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 1792 1792"
-                        width="16"
-                        height="16"
-                      >
-                        <path
-                          fill="#ffbe5b"
-                          d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
-                        ></path>
-                      </svg>
-                    </span>
+                  <div className="star ">
+                    <Rate disabled defaultValue={5} />
                   </div>
-                  <div className="score">5</div>
-                  <div className="rating">(100)</div>
+                  <div className="score">{detail[0]?.congViec.saoCongViec}</div>
+                  <div className="rating">({detail[0]?.congViec.danhGia})</div>
                 </div>
                 <div className="seller-order">4 Orders in Queue</div>
               </div>
               <div className="jobdetail-img">
-                <img src="https://i.pravatar.cc" alt="..." />
+                <img src={detail[0]?.congViec.hinhAnh} alt="..." />
               </div>
               <div className="checkout mobile">
                 <ul
@@ -179,12 +244,10 @@ const JobDetail: React.FC = (props: Props) => {
                   >
                     <div className="title">
                       <span>Basic</span>
-                      <span>US$30</span>
+                      <span>US${detail[0]?.congViec.giaTien}</span>
                     </div>
                     <p className="description">
-                      500 word article US$30 This order includes a 500 word
-                      article based on your chosen topic. 2 Days Delivery 1
-                      Revision Up to 500 words
+                      {detail[0]?.congViec.moTaNgan}
                     </p>
                     <div className="delivery-revision">
                       <div className="dr-item">
@@ -260,7 +323,7 @@ const JobDetail: React.FC = (props: Props) => {
                       </li>
                     </ul>
                     <button className="submit-checkout">
-                      Continue (US$30)
+                      Continue (US${detail[0]?.congViec.giaTien})
                     </button>
                     <a href="#compare" className="compare">
                       Compare Packages
@@ -272,7 +335,92 @@ const JobDetail: React.FC = (props: Props) => {
                     role="tabpanel"
                     aria-labelledby="standard-tab"
                   >
-                    ...
+                    <div className="title">
+                      <span>Standard</span>
+                      <span>US${detail[0]?.congViec.giaTien}</span>
+                    </div>
+                    <p className="description">
+                      {detail[0]?.congViec.moTaNgan}
+                    </p>
+                    <div className="delivery-revision">
+                      <div className="dr-item">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill="#62646a"
+                            d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 14c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"
+                          ></path>
+                          <path fill="#62646a" d="M9 4H7v5h5V7H9V4z"></path>
+                        </svg>
+                        <span>14 Days Delivery</span>
+                      </div>
+                      <div className="dr-item">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill="#62646a"
+                            d="M4.50001 11.4999C6.40001 13.3999 9.60001 13.3999 11.5 11.4999C12.2 10.7999 12.7 9.7999 12.9 8.7999L14.9 9.0999C14.7 10.5999 14 11.8999 13 12.8999C10.3 15.5999 5.90001 15.5999 3.10001 12.8999L0.900012 15.0999L0.200012 8.6999L6.60001 9.3999L4.50001 11.4999Z"
+                          ></path>
+                          <path
+                            fill="#62646a"
+                            d="M15.8 7.2999L9.40001 6.5999L11.5 4.4999C9.60001 2.5999 6.40001 2.5999 4.50001 4.4999C3.80001 5.1999 3.30001 6.1999 3.10001 7.1999L1.10001 6.8999C1.30001 5.3999 2.00001 4.0999 3.00001 3.0999C4.40001 1.6999 6.10001 1.0999 7.90001 1.0999C9.70001 1.0999 11.5 1.7999 12.8 3.0999L15 0.899902L15.8 7.2999Z"
+                          ></path>
+                        </svg>
+                        <span>Unlimited Revisions</span>
+                      </div>
+                    </div>
+                    <ul className="feature">
+                      <li className="feature-items">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 11 9"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="#1dbf73"
+                        >
+                          <path d="M3.645 8.102.158 4.615a.536.536 0 0 1 0-.759l.759-.758c.21-.21.549-.21.758 0l2.35 2.349L9.054.416c.21-.21.55-.21.759 0l.758.758c.21.21.21.55 0 .759L4.403 8.102c-.209.21-.549.21-.758 0Z"></path>
+                        </svg>
+                        <span>Good fearture</span>
+                      </li>
+                      <li className="feature-items">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 11 9"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="#1dbf73"
+                        >
+                          <path d="M3.645 8.102.158 4.615a.536.536 0 0 1 0-.759l.759-.758c.21-.21.549-.21.758 0l2.35 2.349L9.054.416c.21-.21.55-.21.759 0l.758.758c.21.21.21.55 0 .759L4.403 8.102c-.209.21-.549.21-.758 0Z"></path>
+                        </svg>
+                        <span>Good fearture</span>
+                      </li>
+                      <li className="feature-items">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 11 9"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="#1dbf73"
+                        >
+                          <path d="M3.645 8.102.158 4.615a.536.536 0 0 1 0-.759l.759-.758c.21-.21.549-.21.758 0l2.35 2.349L9.054.416c.21-.21.55-.21.759 0l.758.758c.21.21.21.55 0 .759L4.403 8.102c-.209.21-.549.21-.758 0Z"></path>
+                        </svg>
+                        <span>Good fearture</span>
+                      </li>
+                    </ul>
+                    <button className="submit-checkout">
+                      Continue (US${detail[0]?.congViec.giaTien})
+                    </button>
+                    <a href="#compare" className="compare">
+                      Compare Packages
+                    </a>
                   </div>
                   <div
                     className="tab-pane"
@@ -280,28 +428,108 @@ const JobDetail: React.FC = (props: Props) => {
                     role="tabpanel"
                     aria-labelledby="premium-tab"
                   >
-                    ...
+                    <div className="title">
+                      <span>Premium</span>
+                      <span>US${detail[0]?.congViec.giaTien}</span>
+                    </div>
+                    <p className="description">
+                      {detail[0]?.congViec.moTaNgan}
+                    </p>
+                    <div className="delivery-revision">
+                      <div className="dr-item">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill="#62646a"
+                            d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 14c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"
+                          ></path>
+                          <path fill="#62646a" d="M9 4H7v5h5V7H9V4z"></path>
+                        </svg>
+                        <span>14 Days Delivery</span>
+                      </div>
+                      <div className="dr-item">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill="#62646a"
+                            d="M4.50001 11.4999C6.40001 13.3999 9.60001 13.3999 11.5 11.4999C12.2 10.7999 12.7 9.7999 12.9 8.7999L14.9 9.0999C14.7 10.5999 14 11.8999 13 12.8999C10.3 15.5999 5.90001 15.5999 3.10001 12.8999L0.900012 15.0999L0.200012 8.6999L6.60001 9.3999L4.50001 11.4999Z"
+                          ></path>
+                          <path
+                            fill="#62646a"
+                            d="M15.8 7.2999L9.40001 6.5999L11.5 4.4999C9.60001 2.5999 6.40001 2.5999 4.50001 4.4999C3.80001 5.1999 3.30001 6.1999 3.10001 7.1999L1.10001 6.8999C1.30001 5.3999 2.00001 4.0999 3.00001 3.0999C4.40001 1.6999 6.10001 1.0999 7.90001 1.0999C9.70001 1.0999 11.5 1.7999 12.8 3.0999L15 0.899902L15.8 7.2999Z"
+                          ></path>
+                        </svg>
+                        <span>Unlimited Revisions</span>
+                      </div>
+                    </div>
+                    <ul className="feature">
+                      <li className="feature-items">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 11 9"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="#1dbf73"
+                        >
+                          <path d="M3.645 8.102.158 4.615a.536.536 0 0 1 0-.759l.759-.758c.21-.21.549-.21.758 0l2.35 2.349L9.054.416c.21-.21.55-.21.759 0l.758.758c.21.21.21.55 0 .759L4.403 8.102c-.209.21-.549.21-.758 0Z"></path>
+                        </svg>
+                        <span>Good fearture</span>
+                      </li>
+                      <li className="feature-items">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 11 9"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="#1dbf73"
+                        >
+                          <path d="M3.645 8.102.158 4.615a.536.536 0 0 1 0-.759l.759-.758c.21-.21.549-.21.758 0l2.35 2.349L9.054.416c.21-.21.55-.21.759 0l.758.758c.21.21.21.55 0 .759L4.403 8.102c-.209.21-.549.21-.758 0Z"></path>
+                        </svg>
+                        <span>Good fearture</span>
+                      </li>
+                      <li className="feature-items">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 11 9"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="#1dbf73"
+                        >
+                          <path d="M3.645 8.102.158 4.615a.536.536 0 0 1 0-.759l.759-.758c.21-.21.549-.21.758 0l2.35 2.349L9.054.416c.21-.21.55-.21.759 0l.758.758c.21.21.21.55 0 .759L4.403 8.102c-.209.21-.549.21-.758 0Z"></path>
+                        </svg>
+                        <span>Good fearture</span>
+                      </li>
+                    </ul>
+                    <button className="submit-checkout">
+                      Continue (US${detail[0]?.congViec.giaTien})
+                    </button>
+                    <a href="#compare" className="compare">
+                      Compare Packages
+                    </a>
                   </div>
                 </div>
               </div>
               <div className="jobdetail-description">
                 <h2>About This Gig</h2>
-                <p className="descriptions">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Nihil tempora cupiditate sed nesciunt nisi architecto, dicta
-                  rem iusto a quis, dignissimos quaerat dolor deserunt, eius
-                  vero neque delectus eum nemo!
-                </p>
+                <p className="descriptions">{detail[0]?.congViec.moTa}</p>
               </div>
               <div className="about-seller">
                 <h2>About The Seller</h2>
                 <div className="about-profile">
                   <div className="about-avatar">
-                    <img src="https://i.pravatar.cc" alt="..." />
+                    <img src={detail[0]?.avatar} alt="..." />
                   </div>
                   <div className="about-info">
-                    <h3>Name</h3>
-                    <p>Social Media Marketing</p>
+                    <h3>{detail[0]?.tenNguoiTao}</h3>
+                    <p>{detail[0]?.tenLoaiCongViec}</p>
                     <div className="about-rate">
                       <div className="star d-flex">
                         <span>
@@ -370,8 +598,12 @@ const JobDetail: React.FC = (props: Props) => {
                           </svg>
                         </span>
                       </div>
-                      <div className="score">5</div>
-                      <div className="rating">(100)</div>
+                      <div className="score">
+                        {detail[0]?.congViec.saoCongViec}
+                      </div>
+                      <div className="rating">
+                        ({detail[0]?.congViec.danhGia})
+                      </div>
                     </div>
                     <button className="btn about-btn">Contact Me</button>
                   </div>
@@ -402,7 +634,7 @@ const JobDetail: React.FC = (props: Props) => {
               <div className="rating-review">
                 <div className="review">
                   <div className="count">
-                    <span>228 Reviews</span>
+                    <span>{detail[0]?.congViec.danhGia} Reviews</span>
                     <div className="star">
                       <span>
                         <i className="fas fa-star"></i>
@@ -420,7 +652,7 @@ const JobDetail: React.FC = (props: Props) => {
                         <i className="fas fa-star"></i>
                       </span>
                     </div>
-                    <span>5</span>
+                    <span>{detail[0]?.congViec.saoCongViec}</span>
                   </div>
                   <div className="sort">
                     <span>Sort By</span>
@@ -432,8 +664,8 @@ const JobDetail: React.FC = (props: Props) => {
                 </div>
                 <div className="review-rating row">
                   <div className="col-12  col-lg-6">
-                    <div className="star-counter">
-                      <tbody>
+                    <table>
+                      <tbody className="star-counter">
                         <tr>
                           <td className="star-btn">
                             <button>5 Stars</button>
@@ -442,7 +674,7 @@ const JobDetail: React.FC = (props: Props) => {
                             <div className="process-bar first"></div>
                           </td>
                           <td className="star-num">
-                            <span>(228)</span>
+                            <span>({detail[0]?.congViec.danhGia})</span>
                           </td>
                         </tr>
                         <tr>
@@ -490,7 +722,7 @@ const JobDetail: React.FC = (props: Props) => {
                           </td>
                         </tr>
                       </tbody>
-                    </div>
+                    </table>
                   </div>
                   <div className="col-12 col-lg-6">
                     <div className="ranking">
@@ -520,57 +752,20 @@ const JobDetail: React.FC = (props: Props) => {
                 </div>
               </div>
               <div className="review-comment">
-                <ul className="review-comment-list">
-                  <li className="review-comment-item ">
-                    <div className="comment-info ">
-                      <img
-                        src="https://i.pravatar.cc"
-                        alt="..."
-                        className="review-comment-avatar"
-                      />
-                      <div className="comment-name">
-                        <div className="comment-name-top">
-                          <span>Name</span> <i className="fas fa-star"></i>
-                          <span>5</span>
-                        </div>
-                        <div className="comment-name-bot">
-                          <img src="./img/JobType/1f1fa-1f1f8.png" alt="..." />
-                          <span>United States</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="comment-description">
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Unde perspiciatis, voluptatum quae nostrum, quis
-                        veritatis harum cupiditate fugit quaerat vel tenetur
-                        debitis recusandae suscipit facere assumenda error
-                        impedit facilis. Repellendus.
-                      </p>
-                      <div className="thums">
-                        <span>Helpful?</span>
-                        <div className="thums-icon">
-                          <div className="yes">
-                            <i className="far fa-thumbs-up"></i>
-                            <span>Yes</span>
-                          </div>
-                          <div className="no">
-                            <i className="far fa-thumbs-down"></i>
-                            <span>No</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
+                <ul className="review-comment-list">{renderComment()}</ul>
               </div>
               <div className="add-comment">
                 <div className="add-comment-title">
                   <span>Leave some comments</span>
                   <Rate allowHalf defaultValue={5} />
                 </div>
-                <form>
-                  <textarea name="noiDung" cols={100} rows={5}></textarea>
+                <form onSubmit={frm.handleSubmit}>
+                  <textarea
+                    name="noiDung"
+                    cols={100}
+                    onChange={frm.handleChange}
+                    rows={5}
+                  ></textarea>
                   <button className="comment-btn">Comment</button>
                 </form>
               </div>
@@ -586,12 +781,12 @@ const JobDetail: React.FC = (props: Props) => {
                 <li className="nav-item" role="presentation">
                   <button
                     className="nav-link active"
-                    id="basic-tab"
+                    id="basic-pc"
                     data-bs-toggle="tab"
-                    data-bs-target="#home"
+                    data-bs-target="#basic-pc1"
                     type="button"
                     role="tab"
-                    aria-controls="home"
+                    aria-controls="basic-pc1"
                     aria-selected="true"
                   >
                     Basic
@@ -600,12 +795,12 @@ const JobDetail: React.FC = (props: Props) => {
                 <li className="nav-item center" role="presentation">
                   <button
                     className="nav-link"
-                    id="standard-tab"
+                    id="standard-pc"
                     data-bs-toggle="tab"
-                    data-bs-target="#profile"
+                    data-bs-target="#standard-pc1"
                     type="button"
                     role="tab"
-                    aria-controls="profile"
+                    aria-controls="standard-pc1"
                     aria-selected="false"
                   >
                     Standard
@@ -614,12 +809,12 @@ const JobDetail: React.FC = (props: Props) => {
                 <li className="nav-item" role="presentation">
                   <button
                     className="nav-link"
-                    id="premium-tab"
+                    id="premium-pc"
                     data-bs-toggle="tab"
-                    data-bs-target="#messages"
+                    data-bs-target="#premium-pc1"
                     type="button"
                     role="tab"
-                    aria-controls="messages"
+                    aria-controls="premium-pc1"
                     aria-selected="false"
                   >
                     Premium
@@ -629,19 +824,15 @@ const JobDetail: React.FC = (props: Props) => {
               <div className="tab-content checkout-body">
                 <div
                   className="tab-pane active"
-                  id="home"
+                  id="basic-pc1"
                   role="tabpanel"
-                  aria-labelledby="basic-tab"
+                  aria-labelledby="basic-pc"
                 >
                   <div className="title">
                     <span>Basic</span>
-                    <span>US$30</span>
+                    <span>US${detail[0]?.congViec.giaTien}</span>
                   </div>
-                  <p className="description">
-                    500 word article US$30 This order includes a 500 word
-                    article based on your chosen topic. 2 Days Delivery 1
-                    Revision Up to 500 words
-                  </p>
+                  <p className="description">{detail[0]?.congViec.moTaNgan}</p>
                   <div className="delivery-revision">
                     <div className="dr-item">
                       <svg
@@ -715,26 +906,194 @@ const JobDetail: React.FC = (props: Props) => {
                       <span>Good fearture</span>
                     </li>
                   </ul>
-                  <button className="submit-checkout">Continue (US$30)</button>
+                  <button className="submit-checkout">
+                    Continue (US${detail[0]?.congViec.giaTien})
+                  </button>
                   <a href="#compare" className="compare">
                     Compare Packages
                   </a>
                 </div>
                 <div
                   className="tab-pane"
-                  id="profile"
+                  id="standard-pc1"
                   role="tabpanel"
-                  aria-labelledby="standard-tab"
+                  aria-labelledby="standard-pc"
                 >
-                  ...
+                  <div className="title">
+                    <span>Standard</span>
+                    <span>US${detail[0]?.congViec.giaTien}</span>
+                  </div>
+                  <p className="description">{detail[0]?.congViec.moTaNgan}</p>
+                  <div className="delivery-revision">
+                    <div className="dr-item">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill="#62646a"
+                          d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 14c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"
+                        ></path>
+                        <path fill="#62646a" d="M9 4H7v5h5V7H9V4z"></path>
+                      </svg>
+                      <span>14 Days Delivery</span>
+                    </div>
+                    <div className="dr-item">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill="#62646a"
+                          d="M4.50001 11.4999C6.40001 13.3999 9.60001 13.3999 11.5 11.4999C12.2 10.7999 12.7 9.7999 12.9 8.7999L14.9 9.0999C14.7 10.5999 14 11.8999 13 12.8999C10.3 15.5999 5.90001 15.5999 3.10001 12.8999L0.900012 15.0999L0.200012 8.6999L6.60001 9.3999L4.50001 11.4999Z"
+                        ></path>
+                        <path
+                          fill="#62646a"
+                          d="M15.8 7.2999L9.40001 6.5999L11.5 4.4999C9.60001 2.5999 6.40001 2.5999 4.50001 4.4999C3.80001 5.1999 3.30001 6.1999 3.10001 7.1999L1.10001 6.8999C1.30001 5.3999 2.00001 4.0999 3.00001 3.0999C4.40001 1.6999 6.10001 1.0999 7.90001 1.0999C9.70001 1.0999 11.5 1.7999 12.8 3.0999L15 0.899902L15.8 7.2999Z"
+                        ></path>
+                      </svg>
+                      <span>Unlimited Revisions</span>
+                    </div>
+                  </div>
+                  <ul className="feature">
+                    <li className="feature-items">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 11 9"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#1dbf73"
+                      >
+                        <path d="M3.645 8.102.158 4.615a.536.536 0 0 1 0-.759l.759-.758c.21-.21.549-.21.758 0l2.35 2.349L9.054.416c.21-.21.55-.21.759 0l.758.758c.21.21.21.55 0 .759L4.403 8.102c-.209.21-.549.21-.758 0Z"></path>
+                      </svg>
+                      <span>Good fearture</span>
+                    </li>
+                    <li className="feature-items">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 11 9"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#1dbf73"
+                      >
+                        <path d="M3.645 8.102.158 4.615a.536.536 0 0 1 0-.759l.759-.758c.21-.21.549-.21.758 0l2.35 2.349L9.054.416c.21-.21.55-.21.759 0l.758.758c.21.21.21.55 0 .759L4.403 8.102c-.209.21-.549.21-.758 0Z"></path>
+                      </svg>
+                      <span>Good fearture</span>
+                    </li>
+                    <li className="feature-items">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 11 9"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#1dbf73"
+                      >
+                        <path d="M3.645 8.102.158 4.615a.536.536 0 0 1 0-.759l.759-.758c.21-.21.549-.21.758 0l2.35 2.349L9.054.416c.21-.21.55-.21.759 0l.758.758c.21.21.21.55 0 .759L4.403 8.102c-.209.21-.549.21-.758 0Z"></path>
+                      </svg>
+                      <span>Good fearture</span>
+                    </li>
+                  </ul>
+                  <button className="submit-checkout">
+                    Continue (US${detail[0]?.congViec.giaTien})
+                  </button>
+                  <a href="#compare" className="compare">
+                    Compare Packages
+                  </a>
                 </div>
                 <div
                   className="tab-pane"
-                  id="messages"
                   role="tabpanel"
-                  aria-labelledby="premium-tab"
+                  id="premium-pc1"
+                  aria-labelledby="premium-pc"
                 >
-                  ...
+                  <div className="title">
+                    <span>Premium</span>
+                    <span>US${detail[0]?.congViec.giaTien}</span>
+                  </div>
+                  <p className="description">{detail[0]?.congViec.moTaNgan}</p>
+                  <div className="delivery-revision">
+                    <div className="dr-item">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill="#62646a"
+                          d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 14c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"
+                        ></path>
+                        <path fill="#62646a" d="M9 4H7v5h5V7H9V4z"></path>
+                      </svg>
+                      <span>14 Days Delivery</span>
+                    </div>
+                    <div className="dr-item">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill="#62646a"
+                          d="M4.50001 11.4999C6.40001 13.3999 9.60001 13.3999 11.5 11.4999C12.2 10.7999 12.7 9.7999 12.9 8.7999L14.9 9.0999C14.7 10.5999 14 11.8999 13 12.8999C10.3 15.5999 5.90001 15.5999 3.10001 12.8999L0.900012 15.0999L0.200012 8.6999L6.60001 9.3999L4.50001 11.4999Z"
+                        ></path>
+                        <path
+                          fill="#62646a"
+                          d="M15.8 7.2999L9.40001 6.5999L11.5 4.4999C9.60001 2.5999 6.40001 2.5999 4.50001 4.4999C3.80001 5.1999 3.30001 6.1999 3.10001 7.1999L1.10001 6.8999C1.30001 5.3999 2.00001 4.0999 3.00001 3.0999C4.40001 1.6999 6.10001 1.0999 7.90001 1.0999C9.70001 1.0999 11.5 1.7999 12.8 3.0999L15 0.899902L15.8 7.2999Z"
+                        ></path>
+                      </svg>
+                      <span>Unlimited Revisions</span>
+                    </div>
+                  </div>
+                  <ul className="feature">
+                    <li className="feature-items">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 11 9"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#1dbf73"
+                      >
+                        <path d="M3.645 8.102.158 4.615a.536.536 0 0 1 0-.759l.759-.758c.21-.21.549-.21.758 0l2.35 2.349L9.054.416c.21-.21.55-.21.759 0l.758.758c.21.21.21.55 0 .759L4.403 8.102c-.209.21-.549.21-.758 0Z"></path>
+                      </svg>
+                      <span>Good fearture</span>
+                    </li>
+                    <li className="feature-items">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 11 9"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#1dbf73"
+                      >
+                        <path d="M3.645 8.102.158 4.615a.536.536 0 0 1 0-.759l.759-.758c.21-.21.549-.21.758 0l2.35 2.349L9.054.416c.21-.21.55-.21.759 0l.758.758c.21.21.21.55 0 .759L4.403 8.102c-.209.21-.549.21-.758 0Z"></path>
+                      </svg>
+                      <span>Good fearture</span>
+                    </li>
+                    <li className="feature-items">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 11 9"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#1dbf73"
+                      >
+                        <path d="M3.645 8.102.158 4.615a.536.536 0 0 1 0-.759l.759-.758c.21-.21.549-.21.758 0l2.35 2.349L9.054.416c.21-.21.55-.21.759 0l.758.758c.21.21.21.55 0 .759L4.403 8.102c-.209.21-.549.21-.758 0Z"></path>
+                      </svg>
+                      <span>Good fearture</span>
+                    </li>
+                  </ul>
+                  <button className="submit-checkout">
+                    Continue (US${detail[0]?.congViec.giaTien})
+                  </button>
+                  <a href="#compare" className="compare">
+                    Compare Packages
+                  </a>
                 </div>
               </div>
             </div>

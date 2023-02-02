@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { http } from "../../util/config";
 import { DispatchType } from "../configStore";
-//  job Search , job categories
+//  job Search , job categories, jobdetail
 export interface JobList {
   id: number;
   congViec: CongViec;
@@ -44,7 +44,14 @@ export interface DsChiTietLoai {
   id: number;
   tenChiTiet: string;
 }
-
+// jobdetail
+export interface BinhLuan {
+  ngayBinhLuan: string;
+  noiDung: string;
+  saoBinhLuan: number;
+  tenNguoiBinhLuan: string;
+  avatar: string;
+}
 // initial state
 type JobState = {
   arrSearch: JobList[];
@@ -52,6 +59,8 @@ type JobState = {
   arrMenu: JobMenu[];
   arrCategories: JobList[];
   JobType: JobMenu[];
+  detail: JobList[];
+  binhLuan: BinhLuan[];
 };
 const initialState: JobState = {
   arrSearch: [],
@@ -59,6 +68,8 @@ const initialState: JobState = {
   arrMenu: [],
   arrCategories: [],
   JobType: [],
+  detail: [],
+  binhLuan: [],
 };
 
 const JobManagementReducer = createSlice({
@@ -67,7 +78,6 @@ const JobManagementReducer = createSlice({
   reducers: {
     JobTypeAction: (state: JobState, action: PayloadAction<JobMenu[]>) => {
       state.JobType = action.payload;
-      console.log(state.JobType);
     },
     JobCategoriesAction: (
       state: JobState,
@@ -84,6 +94,12 @@ const JobManagementReducer = createSlice({
     PaginationAction: (state: JobState, action: PayloadAction<any>) => {
       state.arrPagination = action.payload;
     },
+    JobdetailAction: (state: JobState, action: PayloadAction<JobList[]>) => {
+      state.detail = action.payload;
+    },
+    ArrCommentAction: (state: JobState, action: PayloadAction<BinhLuan[]>) => {
+      state.binhLuan = action.payload;
+    },
   },
 });
 
@@ -93,6 +109,8 @@ export const {
   PaginationAction,
   MenuArrAction,
   JobCategoriesAction,
+  JobdetailAction,
+  ArrCommentAction,
 } = JobManagementReducer.actions;
 
 export default JobManagementReducer.reducer;
@@ -125,5 +143,20 @@ export const getJobTypeApi = (id: string) => {
       `/cong-viec/lay-chi-tiet-loai-cong-viec/${id}`
     );
     dispatch(JobTypeAction(result.data.content));
+  };
+};
+export const getJobDetailApi = (id: string) => {
+  return async (dispatch: DispatchType) => {
+    const result = await http.get(`/cong-viec/lay-cong-viec-chi-tiet/${id}`);
+    dispatch(JobdetailAction(result.data.content));
+  };
+};
+
+export const getArrCommentApi = (id: string) => {
+  return async (dispatch: DispatchType) => {
+    const result = await http.get(
+      `/binh-luan/lay-binh-luan-theo-cong-viec/${id}`
+    );
+    dispatch(ArrCommentAction(result.data.content));
   };
 };

@@ -34,8 +34,7 @@ root.render(
           <Route path="/search/:id" element={<JobSearch />}></Route>
           <Route path="/categories/:id" element={<JobCategories />}></Route>
           <Route path="/jobtype/:id" element={<JobTypes />}></Route>
-          <Route path="/jobdetail" element={<JobDetail />}></Route>
-
+          <Route path="/jobdetail/:id" element={<JobDetail />}></Route>
           <Route path="*" element={<Navigate to="/home" />} />
         </Route>
       </Routes>

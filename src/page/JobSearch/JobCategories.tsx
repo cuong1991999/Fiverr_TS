@@ -38,7 +38,7 @@ const JobCategories = (props: Props) => {
   });
   const renderJob = () => {
     if (arrPagination.length > 0) {
-      return arrPagination.map((item, index) => {
+      return arrPagination.map((item) => {
         return (
           <div
             className="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 "
@@ -49,7 +49,7 @@ const JobCategories = (props: Props) => {
         );
       });
     }
-    return arrCategories.map((item, index) => {
+    return arrCategories.map((item) => {
       return (
         <div className="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 " key={item.id}>
           <CardJob Job={item} />
