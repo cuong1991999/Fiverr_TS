@@ -8,9 +8,11 @@ type Props = {
 
 const CardJob = (props: Props) => {
   const { Job } = props;
+  console.log(Job);
+
   return (
     <section className="card-job card ">
-      <NavLink to="">
+      <NavLink to={`/jobdetail/${Job.id}`}>
         <img src={Job.congViec.hinhAnh} alt="..." className="card-img" />
       </NavLink>
       <div className="card-body">
@@ -24,7 +26,7 @@ const CardJob = (props: Props) => {
           </div>
         </div>
         <div className="content-info">
-          <NavLink to="/">
+          <NavLink to={`/jobdetail/${Job.id}`}>
             {Job.congViec.tenCongViec.length > 20
               ? Job.congViec.tenCongViec.slice(0, 26) + `...`
               : Job.congViec.tenCongViec}
@@ -63,7 +65,7 @@ const CardJob = (props: Props) => {
           </svg>
         </div>
         <div className="price">
-          <NavLink to={"/"}>
+          <NavLink to={`/jobdetail/${Job.id}`}>
             <small>Starting at</small>
             <span>US${Job.congViec.giaTien}</span>
           </NavLink>

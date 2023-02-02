@@ -52,6 +52,7 @@
                 .seller-rate {
                     display: flex;
                     align-items: center;
+
                     font-size: 14px;
 
                     &::before {
@@ -61,14 +62,14 @@
                     }
 
                     .star {
-                        span {
-                            margin-right: 5px;
-                            vertical-align: middle;
-                        }
+                        margin-right: 5px;
+
+
                     }
 
                     .score {
                         color: #ffbe5b;
+                        font-size: 16px;
                     }
 
                     .rating {
@@ -96,7 +97,7 @@
 
                 img {
                     transition: all 0.25s;
-                    max-width: 100%;
+                    min-width: 100%;
                     height: auto;
                 }
             }
@@ -419,6 +420,7 @@
                         .comment-info {
                             display: flex;
                             gap: 1rem;
+                            width: 100%;
                         }
 
                         .review-comment-avatar {
@@ -434,8 +436,12 @@
                             .comment-name-top {
                                 width: 100%;
 
-
                                 span:last-child {
+                                    color: #74767e;
+                                    margin-left: 10px;
+                                }
+
+                                span:nth-child(3) {
                                     color: #ffbe5b;
                                 }
 
@@ -521,6 +527,7 @@
                     border-radius: 5px;
                     padding: 10px 12px;
                     width: 100%;
+                    outline: none;
                 }
 
                 .comment-btn {

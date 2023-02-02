@@ -85,7 +85,7 @@ http.interceptors.request.use(
 //Cấu hình kết quả trả về
 http.interceptors.response.use(
   (response) => {
-    console.log(response);
+    // console.log(response);
     return response;
   },
   (err) => {
