@@ -18,6 +18,8 @@ import JobSearch from "./page/JobSearch/JobSearch";
 import JobTypes from "./page/JobType/JobTypes";
 import JobCategories from "./page/JobSearch/JobCategories";
 import JobDetail from "./page/JobDetail/JobDetail";
+import Login from "./page/login/Login";
+import Register from "./page/register/Register";
 
 export const history: any = createBrowserHistory();
 
@@ -36,6 +38,9 @@ root.render(
           <Route path="/jobtype/:id" element={<JobTypes />}></Route>
           <Route path="/jobdetail/:id" element={<JobDetail />}></Route>
           <Route path="*" element={<Navigate to="/home" />} />
+
+          <Route path="/login" element={<Login/>} />
+          <Route path="/register" element={<Register />} />
         </Route>
       </Routes>
     </HistoryRouter>
