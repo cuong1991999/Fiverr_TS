@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Cart, Comment } from "../../page/JobDetail/JobDetail";
 
 import { http } from "../../util/config";
 import { DispatchType } from "../configStore";
+import { UserProfile } from "./userReducer";
 //  job Search , job categories, jobdetail
 export interface JobList {
   id: number;
@@ -45,13 +47,14 @@ export interface DsChiTietLoai {
   tenChiTiet: string;
 }
 // jobdetail
-export interface BinhLuan {
+export interface ArrComments {
   ngayBinhLuan: string;
   noiDung: string;
   saoBinhLuan: number;
   tenNguoiBinhLuan: string;
   avatar: string;
 }
+
 // initial state
 type JobState = {
   arrSearch: JobList[];
@@ -60,7 +63,7 @@ type JobState = {
   arrCategories: JobList[];
   JobType: JobMenu[];
   detail: JobList[];
-  binhLuan: BinhLuan[];
+  arrComment: ArrComments[];
 };
 const initialState: JobState = {
   arrSearch: [],
@@ -69,7 +72,7 @@ const initialState: JobState = {
   arrCategories: [],
   JobType: [],
   detail: [],
-  binhLuan: [],
+  arrComment: [],
 };
 
 const JobManagementReducer = createSlice({
@@ -97,8 +100,11 @@ const JobManagementReducer = createSlice({
     JobdetailAction: (state: JobState, action: PayloadAction<JobList[]>) => {
       state.detail = action.payload;
     },
-    ArrCommentAction: (state: JobState, action: PayloadAction<BinhLuan[]>) => {
-      state.binhLuan = action.payload;
+    ArrCommentAction: (
+      state: JobState,
+      action: PayloadAction<ArrComments[]>
+    ) => {
+      state.arrComment = action.payload;
     },
   },
 });
@@ -118,21 +124,21 @@ export default JobManagementReducer.reducer;
 export const getSearchApi = (params: string) => {
   return async (dispatch: DispatchType) => {
     const result = await http.get(
-      `/cong-viec/lay-danh-sach-cong-viec-theo-ten/${params}`
+      `/api/cong-viec/lay-danh-sach-cong-viec-theo-ten/${params}`
     );
     dispatch(SearchArrAction(result.data.content));
   };
 };
 export const getJobMenuApi = () => {
   return async (dispatch: DispatchType) => {
-    const result = await http.get("/cong-viec/lay-menu-loai-cong-viec");
+    const result = await http.get("/api/cong-viec/lay-menu-loai-cong-viec");
     dispatch(MenuArrAction(result.data.content));
   };
 };
 export const getCategoriesApi = (id: string) => {
   return async (dispatch: DispatchType) => {
     const result = await http.get(
-      `/cong-viec/lay-cong-viec-theo-chi-tiet-loai/${id}`
+      `/api/cong-viec/lay-cong-viec-theo-chi-tiet-loai/${id}`
     );
     dispatch(JobCategoriesAction(result.data.content));
   };
@@ -140,14 +146,16 @@ export const getCategoriesApi = (id: string) => {
 export const getJobTypeApi = (id: string) => {
   return async (dispatch: DispatchType) => {
     const result = await http.get(
-      `/cong-viec/lay-chi-tiet-loai-cong-viec/${id}`
+      `/api/cong-viec/lay-chi-tiet-loai-cong-viec/${id}`
     );
     dispatch(JobTypeAction(result.data.content));
   };
 };
 export const getJobDetailApi = (id: string) => {
   return async (dispatch: DispatchType) => {
-    const result = await http.get(`/cong-viec/lay-cong-viec-chi-tiet/${id}`);
+    const result = await http.get(
+      `/api/cong-viec/lay-cong-viec-chi-tiet/${id}`
+    );
     dispatch(JobdetailAction(result.data.content));
   };
 };
@@ -155,8 +163,26 @@ export const getJobDetailApi = (id: string) => {
 export const getArrCommentApi = (id: string) => {
   return async (dispatch: DispatchType) => {
     const result = await http.get(
-      `/binh-luan/lay-binh-luan-theo-cong-viec/${id}`
+      `/api/binh-luan/lay-binh-luan-theo-cong-viec/${id}`
     );
     dispatch(ArrCommentAction(result.data.content));
+  };
+};
+export const postCommentApi = (payload: Comment) => {
+  return async () => {
+    try {
+      await http.post(`/api/binh-luan`, payload);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const postCartApi = (payload: Cart) => {
+  return async () => {
+    try {
+      await http.post(`/api/thue-cong-viec`, payload);
+    } catch (error) {
+      console.log(error);
+    }
   };
 };

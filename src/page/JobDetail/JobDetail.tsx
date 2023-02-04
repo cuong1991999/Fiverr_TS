@@ -9,82 +9,118 @@ import { DispatchType, RootState } from "../../redux/configStore";
 import {
   getArrCommentApi,
   getJobDetailApi,
+  postCartApi,
+  postCommentApi,
 } from "../../redux/reducer/JobManagementReducer";
 import { useFormik, validateYupSchema } from "formik";
+import { history } from "../..";
 export type Comment = {
   noiDung: string;
-  id: string;
+  id: number | undefined;
   maCongViec: string;
-  maNguoiBinhLuan: string;
+  maNguoiBinhLuan: number | undefined;
   ngayBinhLuan: string;
   saoBinhLuan: string;
 };
 export type Cart = {
-  id: string;
+  id: number | undefined;
   maCongViec: string;
-  maNguoiThue: string;
+  maNguoiThue: number | undefined;
   ngayThue: string;
   hoanThanh: boolean;
 };
 type Props = {};
 
 const JobDetail = (props: Props) => {
-  const { detail, binhLuan } = useSelector(
-    (state: RootState) => state.JobManagementReducer
-  );
-
-  const today = new Date();
-  const date = `${today.getDate()}/${
-    today.getMonth() + 1
-  }/${today.getFullYear()} `;
-  console.log(date);
-
   const dispatch: DispatchType = useDispatch();
   const param: any = useParams();
+  //api jobdetail
   const getDetailApi = () => {
     dispatch(getJobDetailApi(param.id));
-  };
-  const getCommentlApi = () => {
-    dispatch(getArrCommentApi(param.id));
-  };
-  const frm = useFormik<Comment>({
-    initialValues: {
-      noiDung: "",
-      id: "",
-      maCongViec: param.id,
-      maNguoiBinhLuan: "",
-      ngayBinhLuan: date,
-      saoBinhLuan: "",
-    },
-    onSubmit: (values: Comment) => {
-      const payload = {
-        id: 0,
-        maCongViec: values.maCongViec,
-        maNguoiBinhLuan: 0,
-        ngayBinhLuan: values.ngayBinhLuan,
-        noiDung: values.noiDung,
-        saoBinhLuan: values.saoBinhLuan,
-      };
-    },
-  });
-  const handleCart = () => {
-    const payload: Cart = {
-      id: "0",
-      maCongViec: param.id,
-      maNguoiThue: "0",
-      ngayThue: date,
-      hoanThanh: true,
-    };
   };
   useEffect(() => {
     getDetailApi();
   }, [param.id]);
+  //api comment
+  const getCommentlApi = () => {
+    dispatch(getArrCommentApi(param.id));
+  };
   useEffect(() => {
     getCommentlApi();
   }, [param.id]);
+  const { userLogin } = useSelector((state: RootState) => state.userReducer);
+  const { detail, arrComment } = useSelector(
+    (state: RootState) => state.JobManagementReducer
+  );
+  // lay ngay hien tai
+  const today = new Date();
+  const date = `${today.getDate()}/${
+    today.getMonth() + 1
+  }/${today.getFullYear()} `;
 
+  // handlecart
+  const handleCart = () => {
+    if (window.confirm("Do you want to book this job?")) {
+      if (userLogin) {
+        const payload: Cart = {
+          id: 0,
+          maCongViec: param.id,
+          maNguoiThue: 0,
+          ngayThue: date,
+          hoanThanh: false,
+        };
+        dispatch(postCartApi(payload));
+      }
+    }
+
+    history.push(`/login`);
+  };
+  // comment
+  const renderAddComment = () => {
+    if (userLogin) {
+      return (
+        <div className="add-comment">
+          <div className="add-comment-title">
+            <span>Leave some comments</span>
+            <Rate allowHalf defaultValue={5} />
+          </div>
+          <form onSubmit={frm.handleSubmit}>
+            <textarea
+              name="noiDung"
+              cols={100}
+              onChange={frm.handleChange}
+              rows={5}
+            ></textarea>
+            <button className="comment-btn">Comment</button>
+          </form>
+        </div>
+      );
+    }
+    return;
+  };
+  const frm = useFormik<Comment>({
+    initialValues: {
+      noiDung: "",
+      id: 0,
+      maCongViec: param.id,
+      maNguoiBinhLuan: 0,
+      ngayBinhLuan: date,
+      saoBinhLuan: "5",
+    },
+    onSubmit: (values: Comment) => {
+      const payload = {
+        id: values.id,
+        maCongViec: values.maCongViec,
+        maNguoiBinhLuan: values.id,
+        ngayBinhLuan: values.ngayBinhLuan,
+        noiDung: values.noiDung,
+        saoBinhLuan: values.saoBinhLuan,
+      };
+      dispatch(postCommentApi(payload));
+    },
+  });
   const renderComment = () => {
-    return binhLuan.map((item, index) => {
+    return arrComment.map((item, index) => {
       return (
         <li className="review-comment-item " key={index}>
           <div className="comment-info ">
@@ -322,7 +358,7 @@ const JobDetail = (props: Props) => {
                         <span>Good fearture</span>
                       </li>
                     </ul>
-                    <button className="submit-checkout">
+                    <button className="submit-checkout" onClick={handleCart}>
                       Continue (US${detail[0]?.congViec.giaTien})
                     </button>
                     <a href="#compare" className="compare">
@@ -415,7 +451,7 @@ const JobDetail = (props: Props) => {
                         <span>Good fearture</span>
                       </li>
                     </ul>
-                    <button className="submit-checkout">
+                    <button className="submit-checkout" onClick={handleCart}>
                       Continue (US${detail[0]?.congViec.giaTien})
                     </button>
                     <a href="#compare" className="compare">
@@ -508,7 +544,7 @@ const JobDetail = (props: Props) => {
                         <span>Good fearture</span>
                       </li>
                     </ul>
-                    <button className="submit-checkout">
+                    <button className="submit-checkout" onClick={handleCart}>
                       Continue (US${detail[0]?.congViec.giaTien})
                     </button>
                     <a href="#compare" className="compare">
@@ -754,21 +790,7 @@ const JobDetail = (props: Props) => {
               <div className="review-comment">
                 <ul className="review-comment-list">{renderComment()}</ul>
               </div>
-              <div className="add-comment">
-                <div className="add-comment-title">
-                  <span>Leave some comments</span>
-                  <Rate allowHalf defaultValue={5} />
-                </div>
-                <form onSubmit={frm.handleSubmit}>
-                  <textarea
-                    name="noiDung"
-                    cols={100}
-                    onChange={frm.handleChange}
-                    rows={5}
-                  ></textarea>
-                  <button className="comment-btn">Comment</button>
-                </form>
-              </div>
+              {renderAddComment()}
             </div>
           </div>
           <div className="col-4 jobdetail-right">
@@ -906,7 +928,7 @@ const JobDetail = (props: Props) => {
                       <span>Good fearture</span>
                     </li>
                   </ul>
-                  <button className="submit-checkout">
+                  <button className="submit-checkout" onClick={handleCart}>
                     Continue (US${detail[0]?.congViec.giaTien})
                   </button>
                   <a href="#compare" className="compare">
@@ -997,7 +1019,7 @@ const JobDetail = (props: Props) => {
                       <span>Good fearture</span>
                     </li>
                   </ul>
-                  <button className="submit-checkout">
+                  <button className="submit-checkout" onClick={handleCart}>
                     Continue (US${detail[0]?.congViec.giaTien})
                   </button>
                   <a href="#compare" className="compare">
@@ -1088,7 +1110,7 @@ const JobDetail = (props: Props) => {
                       <span>Good fearture</span>
                     </li>
                   </ul>
-                  <button className="submit-checkout">
+                  <button className="submit-checkout" onClick={handleCart}>
                     Continue (US${detail[0]?.congViec.giaTien})
                   </button>
                   <a href="#compare" className="compare">
