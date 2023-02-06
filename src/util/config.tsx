@@ -40,6 +40,13 @@ export const config = {
     }
     return null;
   },
+  eraseStore: (name: string) => {
+    localStorage.removeItem(name);
+  },
+  eraseCookie: (name: string) => {
+    document.cookie =
+      name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+  },
   ACCESS_TOKEN: "accessToken",
   USER_LOGIN: "userLogin",
 };
@@ -49,8 +56,10 @@ export const {
   getCookie,
   getStore,
   setStore,
+  eraseStore,
   setStoreJson,
   getStoreJson,
+  eraseCookie,
   ACCESS_TOKEN,
   USER_LOGIN,
 } = config;
