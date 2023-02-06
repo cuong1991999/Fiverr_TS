@@ -1,6 +1,9 @@
 import axios from "axios";
 
 export const config = {
+  removeStore: (name: string) => {
+    localStorage.removeItem(name);
+  },
   setCookie: (name: string, value: string, days: number) => {
     var expires = "";
     if (days) {
@@ -40,18 +43,12 @@ export const config = {
     }
     return null;
   },
-  eraseStore: (name: string) => {
-    localStorage.removeItem(name);
-  },
-  eraseCookie: (name: string) => {
-    document.cookie =
-      name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-  },
   ACCESS_TOKEN: "accessToken",
   USER_LOGIN: "userLogin",
 };
 
 export const {
+  removeStore,
   setCookie,
   getCookie,
   getStore,
@@ -78,11 +75,11 @@ export const http = axios.create({
 //Cấu hình request header
 http.interceptors.request.use(
   (config: any) => {
-    const token = getCookie(ACCESS_TOKEN);
+    const token = getStore(ACCESS_TOKEN);
     config.headers = {
       ...config.headers,
-      ["Authorization"]: `${token}`,
-      ["tokenCybersoft"]: TOKEN_CYBERSOFT,
+      token: `${token}`,
+      tokenCybersoft: TOKEN_CYBERSOFT,
     };
     // config.headers['Content-Type'] = 'application/json';
     return config;

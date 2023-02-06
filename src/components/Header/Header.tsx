@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import { RootState } from "../../redux/configStore";
 import { history } from "../..";
 import { useSelector } from "react-redux";
+import { ACCESS_TOKEN, removeStore, USER_LOGIN } from "../../util/config";
 export type KeySearch = {
   keyword: string;
 };
@@ -12,6 +13,7 @@ type Props = {};
 const Header = (props: Props) => {
   // chi dung cho trang home
   // search
+  const { userLogin } = useSelector((state: RootState) => state.userReducer);
   const frmSearch = useFormik<KeySearch>({
     initialValues: {
       keyword: "",
@@ -54,15 +56,65 @@ const Header = (props: Props) => {
               </label>
               <div className="nav__mobile-list">
                 <div className="sidebar__menu">
-                  <NavLink
-                    to={"/register"}
-                    className="sidebar-btn sidebar-item"
-                  >
-                    Join Fiverr
-                  </NavLink>
-                  <NavLink to={"/login"} className=" sidebar-item">
-                    Sign in
-                  </NavLink>
+                  {userLogin ? (
+                    <div className="dropdown ">
+                      <span
+                        className=" sidebar-item dropdown-toggle"
+                        id="dropdownMenuButton10"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        {userLogin.name}
+                      </span>
+                      <ul
+                        className="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton10"
+                      >
+                        <li className="mb-3">
+                          <NavLink className="dropdown-item" to="/profile">
+                            Profile
+                          </NavLink>
+                        </li>
+                        {userLogin.role === "ADMIN" && (
+                          <li className="mb-3">
+                            <a
+                              style={{ color: "#212529" }}
+                              className="dropdown-item"
+                              href="/admin/managejobtype"
+                            >
+                              Admin
+                            </a>
+                          </li>
+                        )}
+                        <li>
+                          <div
+                            className="dropdown-item"
+                            onClick={() => {
+                              removeStore(USER_LOGIN);
+                              removeStore(ACCESS_TOKEN);
+                              window.location.href = "/login";
+                            }}
+                          >
+                            Sign out
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  ) : (
+                    <>
+                      {" "}
+                      <NavLink
+                        to={"/register"}
+                        className="sidebar-btn sidebar-item"
+                      >
+                        Join Fiverr
+                      </NavLink>
+                      <NavLink to={"/login"} className=" sidebar-item">
+                        Sign in
+                      </NavLink>
+                    </>
+                  )}
+
                   <div className={"sidebar-item sidebar-green"}>
                     Fiverr Business
                   </div>
@@ -140,12 +192,67 @@ const Header = (props: Props) => {
                 </li>
                 <li className="li_1">US$ USD</li>
                 <li className="li_1">Become a Seller</li>
-                <li className="li_1">
-                  <NavLink to={"/login"}>Sign in</NavLink>
-                </li>
-                <li className="join">
-                  <NavLink to={"/register"}>Join</NavLink>
-                </li>
+                {userLogin ? (
+                  <>
+                    <li className="dropdown li_1 ">
+                      <span
+                        className=" sidebar-item dropdown-toggle"
+                        id="dropdownMenuButton11"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        style={{ cursor: "pointer" }}
+                      >
+                        {userLogin.name}
+                      </span>
+                      <ul
+                        className="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton11"
+                      >
+                        <li className="mb-3">
+                          <NavLink
+                            className="dropdown-item"
+                            style={{ color: "#212529" }}
+                            to="/profile"
+                          >
+                            Profile
+                          </NavLink>
+                        </li>
+                        {userLogin.role === "ADMIN" && (
+                          <li className="mb-3">
+                            <a
+                              className="dropdown-item"
+                              style={{ color: "#212529" }}
+                              href="/admin/managejobtype"
+                            >
+                              Admin
+                            </a>
+                          </li>
+                        )}
+                        <li>
+                          <div
+                            className="dropdown-item"
+                            onClick={() => {
+                              removeStore(USER_LOGIN);
+                              removeStore(ACCESS_TOKEN);
+                              window.location.href = "/login";
+                            }}
+                          >
+                            Sign out
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li className="li_1">
+                      <NavLink to={"/login"}>Sign in</NavLink>
+                    </li>
+                    <li className="join">
+                      <NavLink to={"/register"}>Join</NavLink>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </div>

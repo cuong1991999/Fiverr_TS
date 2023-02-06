@@ -17,12 +17,11 @@ export type UserRegister = {
   password: string;
   passwordConfirm: string;
   phone: string;
-}
+};
 
 type Props = {};
 
 const Register = (props: Props) => {
-
   const [passwordType, setPasswordType] = useState({
     password: true,
     passwordConfirm: true,
@@ -58,10 +57,7 @@ const Register = (props: Props) => {
         .required("Confirm password cannot be blank!")
         .oneOf([yup.ref("password")], "Passwords must match"),
       name: yup.string().trim().required("Name cannot be blank!"),
-      phone: yup
-        .string()
-        .trim()
-        .required("Phone number cannot be blank!")
+      phone: yup.string().trim().required("Phone number cannot be blank!"),
       // .matches(
       //   /((^(\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$/,
       //   "Phone number is not valid!"
@@ -171,7 +167,10 @@ const Register = (props: Props) => {
               <div className="row">
                 <div className="col-6">
                   <div className="mb-3">
-                    <label htmlFor="exampleInputPassword1" className="form-label">
+                    <label
+                      htmlFor="exampleInputPassword1"
+                      className="form-label"
+                    >
                       Name
                     </label>
                     <input
@@ -191,7 +190,10 @@ const Register = (props: Props) => {
                 </div>
                 <div className="col-6">
                   <div className="mb-3">
-                    <label htmlFor="exampleInputPassword1" className="form-label">
+                    <label
+                      htmlFor="exampleInputPassword1"
+                      className="form-label"
+                    >
                       Phone
                     </label>
                     <input
@@ -210,10 +212,7 @@ const Register = (props: Props) => {
                   </div>
                 </div>
               </div>
-              <button
-                type="submit"
-                className="btn register_button"
-              >
+              <button type="submit" className="btn register_button">
                 Submit
               </button>
             </form>
