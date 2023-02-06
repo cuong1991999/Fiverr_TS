@@ -3,19 +3,13 @@ import { NavLink } from "react-router-dom";
 import { useFormik } from "formik";
 import { KeySearch } from "./Header";
 import { history } from "../..";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux/configStore";
 import { ACCESS_TOKEN, removeStore, USER_LOGIN } from "../../util/config";
 
 type Props = {};
 
 const HeaderNoSticky = (props: Props) => {
-  const userProfile = useSelector(
-    (state: any) => state.userReducer.userProfile
-  );
-
-  const dispatch = useDispatch();
-
   // dung duoc cac trang khac ngoai trang home
   //render menu
   const { userLogin } = useSelector((state: RootState) => state.userReducer);
