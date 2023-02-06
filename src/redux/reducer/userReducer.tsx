@@ -9,7 +9,6 @@ import {
   setStoreJson,
   ACCESS_TOKEN,
   USER_LOGIN,
-  setStore,
 } from "../../util/config";
 import { UserRegister } from "../../page/register/Register";
 import { Action } from "@remix-run/router";
@@ -36,7 +35,7 @@ export interface UserLogin {
 
 type UserState = {
   userRegister: UserProfile | null;
-  userLogin: UserLogin | null;
+  userLogin: UserProfile | null;
   userProfile: UserProfile | null;
 };
 
@@ -67,17 +66,13 @@ const userReducer = createSlice({
       state: UserState,
       action: PayloadAction<UserProfile>
     ) => {
-      state.userProfile = action.payload;
-    },
+      state.userProfile= action.payload;
+    }
   },
 });
 
-export const {
-  registerAction,
-  loginAction,
-  getProfileAction,
-  updateProfileAction,
-} = userReducer.actions;
+export const { registerAction, loginAction, getProfileAction, updateProfileAction } =
+  userReducer.actions;
 
 export default userReducer.reducer;
 
@@ -110,8 +105,9 @@ export const loginApi = (userLogin: UserLogin) => {
       if (result.status === 200) {
         console.log("login", result.data.content.user);
         dispatch(action);
-        setStoreJson(USER_LOGIN, result.data.content);
-        setCookie(ACCESS_TOKEN, result.data.content.accessToken, 3);
+
+        setStoreJson(USER_LOGIN, result.data.content.user);
+        setCookie(ACCESS_TOKEN, result.data.content.token, 3);
       }
     } catch (error) {
       console.log(error);
