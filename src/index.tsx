@@ -21,8 +21,8 @@ import JobDetail from "./page/JobDetail/JobDetail";
 import Login from "./page/login/Login";
 import Register from "./page/register/Register";
 import AdminTemplate from "./templates/AdminTemplate";
-import ManageJobType from "./page/Admin/ManageCuong/ManageJobType";
-import ManageService from "./page/Admin/ManageCuong/ManageService";
+import ManageJobType from "./page/Admin/Manage/ManageJobType";
+import ManageService from "./page/Admin/Manage/ManageService";
 
 export const history: any = createBrowserHistory();
 
