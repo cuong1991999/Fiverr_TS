@@ -5,12 +5,7 @@ import { KeySearch } from "./Header";
 import { history } from "../..";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/configStore";
-<<<<<<< HEAD
 import { eraseCookie, eraseStore, ACCESS_TOKEN, USER_LOGIN } from "../../util/config";
-=======
-import { ACCESS_TOKEN, removeStore, USER_LOGIN } from "../../util/config";
-
->>>>>>> f6befd645d399b5bbc6c878d16ad54229b92820d
 type Props = {};
 
 
@@ -57,8 +52,6 @@ const HeaderNoSticky = (props: Props) => {
   };
   // dung duoc cac trang khac ngoai trang home
   //render menu
-  const { userLogin } = useSelector((state: RootState) => state.userReducer);
-
   const { arrMenu } = useSelector(
     (state: RootState) => state.JobManagementReducer
   );
@@ -101,68 +94,15 @@ const HeaderNoSticky = (props: Props) => {
               </label>
               <div className="nav__mobile-list">
                 <div className="sidebar__menu">
-                  {userLogin ? (
-                    <div className="dropdown ">
-                      <span
-                        className=" sidebar-item dropdown-toggle"
-                        id="dropdownMenuButton10"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        {userLogin.name}
-                      </span>
-                      <ul
-                        className="dropdown-menu"
-                        aria-labelledby="dropdownMenuButton10"
-                      >
-                        <li className="mb-3">
-                          <NavLink
-                            style={{ color: "#212529" }}
-                            className="dropdown-item"
-                            to="/profile"
-                          >
-                            Profile
-                          </NavLink>
-                        </li>
-                        {userLogin.role === "ADMIN" && (
-                          <li className="mb-3">
-                            <a
-                              style={{ color: "#212529" }}
-                              className="dropdown-item"
-                              href="/admin/managejobtype"
-                            >
-                              Admin
-                            </a>
-                          </li>
-                        )}
-                        <li>
-                          <div
-                            className="dropdown-item"
-                            onClick={() => {
-                              removeStore(USER_LOGIN);
-                              removeStore(ACCESS_TOKEN);
-                              window.location.href = "/login";
-                            }}
-                          >
-                            Sign out
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  ) : (
-                    <>
-                      {" "}
-                      <NavLink
-                        to={"/register"}
-                        className="sidebar-btn sidebar-item"
-                      >
-                        Join Fiverr
-                      </NavLink>
-                      <NavLink to={"/login"} className=" sidebar-item">
-                        Sign in
-                      </NavLink>
-                    </>
-                  )}
+                  <NavLink
+                    to={"/register"}
+                    className="sidebar-btn sidebar-item"
+                  >
+                    Join Fiverr
+                  </NavLink>
+                  <NavLink to={"/login"} className=" sidebar-item">
+                    Sign in
+                  </NavLink>
                   <div className={"sidebar-item sidebar-green"}>
                     Fiverr Business
                   </div>
@@ -222,7 +162,7 @@ const HeaderNoSticky = (props: Props) => {
                 </li>
                 <li className="li_1">US$ USD</li>
                 <li className="li_1">Become a Seller</li>
-<<<<<<< HEAD
+                
                 {renderLogin()}
                 {!userProfile && (
                   <li className="li_1">
@@ -230,68 +170,6 @@ const HeaderNoSticky = (props: Props) => {
                       <button className="btn btn-outline-success">Join</button>
                     </NavLink>
                   </li>
-=======
-                {userLogin ? (
-                  <>
-                    <li className="dropdown li_1 ">
-                      <span
-                        className=" sidebar-item dropdown-toggle"
-                        id="dropdownMenuButton11"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                        style={{ cursor: "pointer" }}
-                      >
-                        {userLogin.name}
-                      </span>
-                      <ul
-                        className="dropdown-menu"
-                        aria-labelledby="dropdownMenuButton11"
-                      >
-                        <li className="mb-3">
-                          <NavLink
-                            className="dropdown-item"
-                            style={{ color: "#212529" }}
-                            to="/profile"
-                          >
-                            Profile
-                          </NavLink>
-                        </li>
-                        {userLogin.role === "ADMIN" && (
-                          <li className="mb-3">
-                            <a
-                              style={{ color: "#212529" }}
-                              className="dropdown-item"
-                              href="/admin/managejobtype"
-                            >
-                              Admin
-                            </a>
-                          </li>
-                        )}
-                        <li>
-                          <div
-                            className="dropdown-item"
-                            onClick={() => {
-                              removeStore(USER_LOGIN);
-                              removeStore(ACCESS_TOKEN);
-                              window.location.href = "/login";
-                            }}
-                          >
-                            Sign out
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-                  </>
-                ) : (
-                  <>
-                    <li className="li_1">
-                      <NavLink to={"/login"}>Sign in</NavLink>
-                    </li>
-                    <li className="join">
-                      <NavLink to={"/register"}>Join</NavLink>
-                    </li>
-                  </>
->>>>>>> f6befd645d399b5bbc6c878d16ad54229b92820d
                 )}
               </ul>
             </div>

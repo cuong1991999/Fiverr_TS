@@ -43,6 +43,13 @@ export const config = {
     }
     return null;
   },
+  eraseCookie: (name: string) => {
+    document.cookie =
+      name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+  },
+  eraseStore: (name: string) => {
+    localStorage.removeItem(name);
+  },
   ACCESS_TOKEN: "accessToken",
   USER_LOGIN: "userLogin",
 };
