@@ -1,9 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
+import { RootState } from "../redux/configStore";
+import { ACCESS_TOKEN, removeStore, USER_LOGIN } from "../util/config";
 
 type Props = {};
 
 const AdminTemplate = (props: Props) => {
+  const { userLogin } = useSelector((state: RootState) => state.userReducer);
   return (
     <section className="admin">
       <nav className="sidebar">
@@ -25,13 +29,13 @@ const AdminTemplate = (props: Props) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="#">
+            <NavLink to="/admin/managejobtype">
               <i className="fa-solid fa-user"></i>
               Manage JobType
             </NavLink>
           </li>
           <li>
-            <NavLink to="#">
+            <NavLink to="/admin/manageservice">
               <i className="fa-solid fa-user"></i>
               Manage Service
             </NavLink>
@@ -66,28 +70,32 @@ const AdminTemplate = (props: Props) => {
               <span
                 className=" dropdown-toggle"
                 id="dropdownMenuButton1"
+                style={{ cursor: "pointer" }}
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Name User
+                {userLogin?.name}
               </span>
               <ul
                 className="dropdown-menu"
                 aria-labelledby="dropdownMenuButton1"
               >
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
+                <li className="mb-3">
+                  <NavLink className="dropdown-item" to="/Profile">
+                    Profile
+                  </NavLink>
                 </li>
+
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
+                  <a
+                    className="dropdown-item"
+                    href="/login"
+                    onClick={() => {
+                      removeStore(USER_LOGIN);
+                      removeStore(ACCESS_TOKEN);
+                    }}
+                  >
+                    Sign Out
                   </a>
                 </li>
               </ul>

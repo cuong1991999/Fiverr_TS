@@ -52,6 +52,7 @@ const Pagination = (props: Props) => {
     }
     return null;
   });
+
   // thiep lap nut next and prev
   const nextPage = () => {
     setPage((prev) => prev + 1);
@@ -67,13 +68,30 @@ const Pagination = (props: Props) => {
       setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
   };
-
+  let increaseBtn = null;
+  let decreaseBtn = null;
+  if (pages.length > maxPageNumberLimit) {
+    increaseBtn = (
+      <button className="btn" onClick={nextPage}>
+        ...
+      </button>
+    );
+  }
+  if (pages.length > maxPageNumberLimit) {
+    decreaseBtn = (
+      <button className="btn" onClick={prevPage}>
+        ...
+      </button>
+    );
+  }
   return (
     <div className="pagination">
       <button className="btn" onClick={prevPage} disabled={page <= 1}>
         <i className="fas fa-arrow-left"></i>
       </button>
+      {decreaseBtn}
       {renderNumberButton}
+      {increaseBtn}
       <button
         className="btn"
         onClick={nextPage}
