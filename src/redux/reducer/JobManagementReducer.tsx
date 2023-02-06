@@ -3,7 +3,7 @@ import { Cart, Comment } from "../../page/JobDetail/JobDetail";
 
 import { http } from "../../util/config";
 import { DispatchType } from "../configStore";
-import { UserProfile } from "./userReducer";
+
 //  job Search , job categories, jobdetail
 export interface JobList {
   id: number;
@@ -180,9 +180,11 @@ export const postCommentApi = (payload: Comment) => {
 export const postCartApi = (payload: Cart) => {
   return async () => {
     try {
+      alert("Successful request");
       await http.post(`/api/thue-cong-viec`, payload);
     } catch (error) {
       console.log(error);
+      alert("Request failed");
     }
   };
 };

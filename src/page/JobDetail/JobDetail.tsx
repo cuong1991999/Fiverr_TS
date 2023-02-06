@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import CategoriesMenuNoSticky from "../../components/Category/CategoriesMenuNoSticky";
 import Footer from "../../components/Footer/Footer";
@@ -12,15 +12,11 @@ import {
   postCartApi,
   postCommentApi,
 } from "../../redux/reducer/JobManagementReducer";
-import { useFormik, validateYupSchema } from "formik";
+import { useFormik } from "formik";
 import { history } from "../..";
+
 export type Comment = {
   noiDung: string;
-  id: number | undefined;
-  maCongViec: string;
-  maNguoiBinhLuan: number | undefined;
-  ngayBinhLuan: string;
-  saoBinhLuan: string;
 };
 export type Cart = {
   id: number | undefined;
@@ -32,6 +28,11 @@ export type Cart = {
 type Props = {};
 
 const JobDetail = (props: Props) => {
+  const { userLogin } = useSelector((state: RootState) => state.userReducer);
+
+  const { detail, arrComment } = useSelector(
+    (state: RootState) => state.JobManagementReducer
+  );
   const dispatch: DispatchType = useDispatch();
   const param: any = useParams();
   //api jobdetail
@@ -47,11 +48,8 @@ const JobDetail = (props: Props) => {
   };
   useEffect(() => {
     getCommentlApi();
-  }, [param.id]);
-  const { userLogin } = useSelector((state: RootState) => state.userReducer);
-  const { detail, arrComment } = useSelector(
-    (state: RootState) => state.JobManagementReducer
-  );
+  }, [arrComment]);
+
   // lay ngay hien tai
   const today = new Date();
   const date = `${today.getDate()}/${
@@ -65,16 +63,19 @@ const JobDetail = (props: Props) => {
         const payload: Cart = {
           id: 0,
           maCongViec: param.id,
-          maNguoiThue: 0,
+          maNguoiThue: userLogin?.id,
           ngayThue: date,
           hoanThanh: false,
         };
         dispatch(postCartApi(payload));
+      } else {
+        history.push(`/login`);
       }
+    } else {
+      return;
     }
-
-    history.push(`/login`);
   };
+  const [count, setCount] = useState(5);
   // comment
   const renderAddComment = () => {
     if (userLogin) {
@@ -82,7 +83,7 @@ const JobDetail = (props: Props) => {
         <div className="add-comment">
           <div className="add-comment-title">
             <span>Leave some comments</span>
-            <Rate allowHalf defaultValue={5} />
+            <Rate value={count} onChange={setCount} />
           </div>
           <form onSubmit={frm.handleSubmit}>
             <textarea
@@ -91,7 +92,9 @@ const JobDetail = (props: Props) => {
               onChange={frm.handleChange}
               rows={5}
             ></textarea>
-            <button className="comment-btn">Comment</button>
+            <button className="comment-btn" type="submit">
+              Comment
+            </button>
           </form>
         </div>
       );
@@ -101,20 +104,15 @@ const JobDetail = (props: Props) => {
   const frm = useFormik<Comment>({
     initialValues: {
       noiDung: "",
-      id: 0,
-      maCongViec: param.id,
-      maNguoiBinhLuan: 0,
-      ngayBinhLuan: date,
-      saoBinhLuan: "5",
     },
-    onSubmit: (values: Comment) => {
+    onSubmit: (values) => {
       const payload = {
-        id: values.id,
-        maCongViec: values.maCongViec,
-        maNguoiBinhLuan: values.id,
-        ngayBinhLuan: values.ngayBinhLuan,
         noiDung: values.noiDung,
-        saoBinhLuan: values.saoBinhLuan,
+        id: 0,
+        maCongViec: param.id,
+        maNguoiBinhLuan: userLogin?.id,
+        ngayBinhLuan: date,
+        saoBinhLuan: count,
       };
       dispatch(postCommentApi(payload));
     },
@@ -136,7 +134,7 @@ const JobDetail = (props: Props) => {
                 <span>{item.saoBinhLuan}</span>
                 <span>{item.ngayBinhLuan}</span>
               </div>
-              <div className="comment-name-bot">
+              <div className="comment-name-bot d-flex align-items-center">
                 <img src="/img/JobType/1f1fa-1f1f8.png" alt="..." />
                 <span>United States</span>
               </div>

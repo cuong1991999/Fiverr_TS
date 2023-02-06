@@ -1,7 +1,6 @@
 //rxslice
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DispatchType } from "../configStore";
-import axios from "axios";
 import {
   http,
   getStoreJson,
@@ -9,9 +8,9 @@ import {
   setStoreJson,
   ACCESS_TOKEN,
   USER_LOGIN,
+  setStore,
 } from "../../util/config";
 import { UserRegister } from "../../page/register/Register";
-import { Action } from "@remix-run/router";
 
 //Register dùng chung với Profile
 export interface UserProfile {
@@ -66,13 +65,17 @@ const userReducer = createSlice({
       state: UserState,
       action: PayloadAction<UserProfile>
     ) => {
-      state.userProfile= action.payload;
-    }
+      state.userProfile = action.payload;
+    },
   },
 });
 
-export const { registerAction, loginAction, getProfileAction, updateProfileAction } =
-  userReducer.actions;
+export const {
+  registerAction,
+  loginAction,
+  getProfileAction,
+  updateProfileAction,
+} = userReducer.actions;
 
 export default userReducer.reducer;
 
@@ -105,9 +108,11 @@ export const loginApi = (userLogin: UserLogin) => {
       if (result.status === 200) {
         console.log("login", result.data.content.user);
         dispatch(action);
-
+        console.log(result);
         setStoreJson(USER_LOGIN, result.data.content.user);
         setCookie(ACCESS_TOKEN, result.data.content.token, 3);
+        setStore(ACCESS_TOKEN, result.data.content.token);
+        window.location.href = "/home";
       }
     } catch (error) {
       console.log(error);
