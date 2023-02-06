@@ -22,7 +22,10 @@ import Login from "./page/login/Login";
 import Register from "./page/register/Register";
 import AdminTemplate from "./templates/AdminTemplate";
 import ManageJobType from "./page/Admin/Manage/ManageJobType";
+<<<<<<< HEAD
 import ManageService from "./page/Admin/Manage/ManageService";
+=======
+>>>>>>> 37b5c88f6c584e63538fd99a47445b355f1ed499
 
 export const history: any = createBrowserHistory();
 
@@ -42,6 +45,7 @@ root.render(
           <Route path="/jobdetail/:id" element={<JobDetail />}></Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<Navigate to="/home" />} />
         </Route>
         <Route element={<AdminTemplate />}>

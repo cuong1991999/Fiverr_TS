@@ -43,7 +43,6 @@ export const config = {
     }
     return null;
   },
-
   ACCESS_TOKEN: "accessToken",
   USER_LOGIN: "userLogin",
 };
@@ -54,8 +53,10 @@ export const {
   getCookie,
   getStore,
   setStore,
+  eraseStore,
   setStoreJson,
   getStoreJson,
+  eraseCookie,
   ACCESS_TOKEN,
   USER_LOGIN,
 } = config;
