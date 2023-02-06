@@ -55,7 +55,7 @@ export const {
   USER_LOGIN,
 } = config;
 
-const DOMAIN = "https://fiverrnew.cybersoft.edu.vn/api";
+const DOMAIN = "https://fiverrnew.cybersoft.edu.vn";
 const TOKEN_CYBERSOFT =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzNUUiLCJIZXRIYW5TdHJpbmciOiIwNy8wNi8yMDIzIiwiSGV0SGFuVGltZSI6IjE2ODYwOTYwMDAwMDAiLCJuYmYiOjE2NTczODYwMDAsImV4cCI6MTY4NjI0MzYwMH0.XsCcIZvawxcwye8KVYB2vJK4d3Gbr1XROtNyAL8nypA";
 
@@ -69,10 +69,10 @@ export const http = axios.create({
 //Cấu hình request header
 http.interceptors.request.use(
   (config: any) => {
-    const token = getStore(ACCESS_TOKEN);
+    const token = getCookie(ACCESS_TOKEN);
     config.headers = {
       ...config.headers,
-      ["Authorization"]: `Bearer ${token}`,
+      ["Authorization"]: `${token}`,
       ["tokenCybersoft"]: TOKEN_CYBERSOFT,
     };
     // config.headers['Content-Type'] = 'application/json';

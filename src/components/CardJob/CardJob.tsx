@@ -8,7 +8,6 @@ type Props = {
 
 const CardJob = (props: Props) => {
   const { Job } = props;
-  console.log(Job);
 
   return (
     <section className="card-job card ">
