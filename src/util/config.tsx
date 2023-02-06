@@ -53,10 +53,8 @@ export const {
   getCookie,
   getStore,
   setStore,
-  eraseStore,
   setStoreJson,
   getStoreJson,
-  eraseCookie,
   ACCESS_TOKEN,
   USER_LOGIN,
 } = config;
