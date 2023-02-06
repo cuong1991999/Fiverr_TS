@@ -106,8 +106,8 @@ export const loginApi = (userLogin: UserLogin) => {
         console.log("login", result.data.content.user);
         dispatch(action);
 
-        setStoreJson(USER_LOGIN, result.data.content);
-        setCookie(ACCESS_TOKEN, result.data.content.accessToken, 3);
+        setStoreJson(USER_LOGIN, result.data.content.user);
+        setCookie(ACCESS_TOKEN, result.data.content.token, 3);
       }
     } catch (error) {
       console.log(error);
