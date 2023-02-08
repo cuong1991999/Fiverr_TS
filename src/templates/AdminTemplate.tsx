@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink, Outlet } from "react-router-dom";
+import { Navigate, NavLink, Outlet } from "react-router-dom";
 import { RootState } from "../redux/configStore";
 import { ACCESS_TOKEN, removeStore, USER_LOGIN } from "../util/config";
 
@@ -8,6 +8,10 @@ type Props = {};
 
 const AdminTemplate = (props: Props) => {
   const { userLogin } = useSelector((state: RootState) => state.userReducer);
+  // if (userLogin?.role !== "ADMIN") {
+  //   alert("You do not have permission to access this page !");
+  //   return <Navigate to={"/login"} />;
+  // }
   return (
     <section className="admin">
       <nav className="sidebar">

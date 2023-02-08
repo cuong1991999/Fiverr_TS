@@ -43,11 +43,16 @@ export const config = {
     }
     return null;
   },
+  timeout: (delay: number) => {
+    return new Promise((res) => setTimeout(res, delay));
+  },
   ACCESS_TOKEN: "accessToken",
   USER_LOGIN: "userLogin",
+  USER_ID: "userId",
 };
 
 export const {
+  timeout,
   removeStore,
   setCookie,
   getCookie,
@@ -57,6 +62,7 @@ export const {
   getStoreJson,
   ACCESS_TOKEN,
   USER_LOGIN,
+  USER_ID,
 } = config;
 
 const DOMAIN = "https://fiverrnew.cybersoft.edu.vn";
@@ -73,6 +79,7 @@ export const http = axios.create({
 //Cấu hình request header
 http.interceptors.request.use(
   (config: any) => {
+    const id = getStore(USER_ID);
     const token = getStore(ACCESS_TOKEN);
     config.headers = {
       ...config.headers,

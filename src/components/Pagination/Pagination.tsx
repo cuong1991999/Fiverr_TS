@@ -9,6 +9,7 @@ type Props = {
 
 const Pagination = (props: Props) => {
   const { length, arr } = props;
+
   const dispacth: DispatchType = useDispatch();
   // so trang
   const [page, setPage] = useState<number>(1);
@@ -27,7 +28,11 @@ const Pagination = (props: Props) => {
   const firstPostIndex = lastPostIndex - posts;
   // trang hien tai
   const currentPosts = arr.slice(firstPostIndex, lastPostIndex);
+
   // dispatch thay doi theo so trang
+  useEffect(() => {
+    dispacth(PaginationAction(currentPosts));
+  }, [arr]);
   useEffect(() => {
     dispacth(PaginationAction(currentPosts));
   }, [page]);
