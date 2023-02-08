@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Cart, Comment } from "../../page/JobDetail/JobDetail";
 
-import { http } from "../../util/config";
+import { http, timeout } from "../../util/config";
 import { DispatchType } from "../configStore";
 
 //  job Search , job categories, jobdetail
@@ -160,18 +160,24 @@ export const getJobDetailApi = (id: string) => {
   };
 };
 
-export const getArrCommentApi = (id: string) => {
+export const getArrCommentApi = (id: string | number) => {
   return async (dispatch: DispatchType) => {
-    const result = await http.get(
-      `/api/binh-luan/lay-binh-luan-theo-cong-viec/${id}`
-    );
-    dispatch(ArrCommentAction(result.data.content));
+    try {
+      const result = await http.get(
+        `/api/binh-luan/lay-binh-luan-theo-cong-viec/${id}`
+      );
+      dispatch(ArrCommentAction(result.data.content));
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 export const postCommentApi = (payload: Comment) => {
-  return async () => {
+  return async (dispatch: DispatchType) => {
     try {
       await http.post(`/api/binh-luan`, payload);
+      await timeout(1000);
+      dispatch(getArrCommentApi(payload.maCongViec));
     } catch (error) {
       console.log(error);
     }

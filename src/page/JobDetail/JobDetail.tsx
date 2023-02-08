@@ -14,13 +14,20 @@ import {
 } from "../../redux/reducer/JobManagementReducer";
 import { useFormik } from "formik";
 import { history } from "../..";
+import { UserProfile } from "../../redux/reducer/userReducer";
+import { getStore, USER_ID } from "../../util/config";
 
 export type Comment = {
   noiDung: string;
+  id: number;
+  maCongViec: number;
+  maNguoiBinhLuan: string | null;
+  ngayBinhLuan: string;
+  saoBinhLuan: number;
 };
 export type Cart = {
   id: number | undefined;
-  maCongViec: string;
+  maCongViec: number;
   maNguoiThue: number | undefined;
   ngayThue: string;
   hoanThanh: boolean;
@@ -39,16 +46,14 @@ const JobDetail = (props: Props) => {
   const getDetailApi = () => {
     dispatch(getJobDetailApi(param.id));
   };
-  useEffect(() => {
-    getDetailApi();
-  }, [param.id]);
   //api comment
   const getCommentlApi = () => {
     dispatch(getArrCommentApi(param.id));
   };
   useEffect(() => {
+    getDetailApi();
     getCommentlApi();
-  }, [arrComment]);
+  }, []);
 
   // lay ngay hien tai
   const today = new Date();
@@ -62,7 +67,7 @@ const JobDetail = (props: Props) => {
       if (userLogin) {
         const payload: Cart = {
           id: 0,
-          maCongViec: param.id,
+          maCongViec: detail[0].id,
           maNguoiThue: userLogin?.id,
           ngayThue: date,
           hoanThanh: false,
@@ -104,13 +109,18 @@ const JobDetail = (props: Props) => {
   const frm = useFormik<Comment>({
     initialValues: {
       noiDung: "",
+      id: 0,
+      maCongViec: detail[0]?.id,
+      maNguoiBinhLuan: getStore(USER_ID),
+      ngayBinhLuan: date,
+      saoBinhLuan: count,
     },
     onSubmit: (values) => {
       const payload = {
         noiDung: values.noiDung,
         id: 0,
-        maCongViec: param.id,
-        maNguoiBinhLuan: userLogin?.id,
+        maCongViec: detail[0]?.id,
+        maNguoiBinhLuan: getStore(USER_ID),
         ngayBinhLuan: date,
         saoBinhLuan: count,
       };

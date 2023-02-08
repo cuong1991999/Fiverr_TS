@@ -8,7 +8,6 @@ import CategoriesMenuNoSticky from "../../components/Category/CategoriesMenuNoSt
 import HeaderNoSticky from "../../components/Header/HearderNoSticky";
 import { DispatchType, RootState } from "../../redux/configStore";
 import { loginApi } from "../../redux/reducer/userReducer";
-import { http } from "../../util/config";
 
 export type UserLogin = {
   email: string;
@@ -25,7 +24,6 @@ const Login = (props: Props) => {
   const { userProfile } = useSelector((state: RootState) => state.userReducer);
   const navigate = useNavigate();
   const dispatch = useDispatch<DispatchType>();
-  const { userRegister } = useSelector((state: RootState) => state.userReducer);
 
   const frm = useFormik({
     initialValues: {
@@ -53,7 +51,7 @@ const Login = (props: Props) => {
       password: yup.string().trim().required("Password cannot be blank!"),
     }),
     onSubmit: (values: UserLogin) => {
-      console.log('password', values);
+      console.log("password", values);
       const actionAsync = loginApi(values);
       dispatch(actionAsync);
     },
@@ -65,7 +63,6 @@ const Login = (props: Props) => {
 
   return (
     <div>
-
       <HeaderNoSticky />
       <CategoriesMenuNoSticky />
       <div className="container login">
