@@ -17,7 +17,10 @@ export type KeyWord = {
 type Props = {};
 
 const JobSearch = (props: Props) => {
+  const check = "search"; //truyen prop cho components paginaton
   const params: any = useParams();
+  // arrSearch truyen prop cho components paginaton
+  // arrPagination render
   const { arrSearch, arrPagination } = useSelector(
     (state: RootState) => state.JobManagementReducer
   );
@@ -290,7 +293,11 @@ const JobSearch = (props: Props) => {
           <div className="result-service">
             <div className="row">{renderJob()}</div>
             <div className="d-flex justify-content-center mt-4">
-              <Pagination length={arrSearch.length} arr={arrSearch} />
+              <Pagination
+                length={arrSearch.length}
+                arr={arrSearch}
+                check={check}
+              />
             </div>
           </div>
         </div>

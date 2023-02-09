@@ -5,10 +5,11 @@ import { PaginationAction } from "../../redux/reducer/JobManagementReducer";
 type Props = {
   length: number;
   arr: any;
+  check: string;
 };
 
 const Pagination = (props: Props) => {
-  const { length, arr } = props;
+  const { length, arr, check } = props;
 
   const dispacth: DispatchType = useDispatch();
   // so trang
@@ -34,7 +35,20 @@ const Pagination = (props: Props) => {
     dispacth(PaginationAction(currentPosts));
   }, [arr]);
   useEffect(() => {
-    dispacth(PaginationAction(currentPosts));
+    switch (check) {
+      case "search":
+        dispacth(PaginationAction(currentPosts));
+        break;
+      case "category":
+        dispacth(PaginationAction(currentPosts));
+        break;
+      case "type":
+        dispacth(PaginationAction(currentPosts));
+        break;
+      case "service":
+        dispacth(PaginationAction(currentPosts));
+        break;
+    }
   }, [page]);
   // render nut button
   const pages: number[] = [];
@@ -77,14 +91,18 @@ const Pagination = (props: Props) => {
   let decreaseBtn = null;
   if (pages.length > maxPageNumberLimit) {
     increaseBtn = (
-      <button className="btn" onClick={nextPage}>
+      <button
+        className="btn"
+        onClick={nextPage}
+        disabled={page >= Math.ceil(length / posts)}
+      >
         ...
       </button>
     );
   }
   if (pages.length > maxPageNumberLimit) {
     decreaseBtn = (
-      <button className="btn" onClick={prevPage}>
+      <button className="btn" onClick={prevPage} disabled={page <= 1}>
         ...
       </button>
     );
@@ -104,6 +122,16 @@ const Pagination = (props: Props) => {
       >
         <i className="fas fa-arrow-right"></i>
       </button>
+      <div className="ms-lg-3 text-center mt-3">
+        <input
+          type="text"
+          value={page}
+          onChange={(e) => {
+            setPage(Number(e.target.value));
+          }}
+        />
+        <span className="page">Page: {Math.ceil(length / posts)}</span>
+      </div>
     </div>
   );
 };

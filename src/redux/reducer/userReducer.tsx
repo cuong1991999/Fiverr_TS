@@ -117,6 +117,7 @@ export const loginApi = (userLogin: UserLogin) => {
         window.location.href = "/home";
       }
     } catch (error) {
+      alert("Login failed, username or password is incorrect");
       console.log(error);
     }
   };
