@@ -14,7 +14,6 @@ import {
 } from "../../redux/reducer/JobManagementReducer";
 import { useFormik } from "formik";
 import { history } from "../..";
-import { UserProfile } from "../../redux/reducer/userReducer";
 import { getStore, USER_ID } from "../../util/config";
 
 export type Comment = {
@@ -52,6 +51,8 @@ const JobDetail = (props: Props) => {
   };
   useEffect(() => {
     getDetailApi();
+  }, [param.id]);
+  useEffect(() => {
     getCommentlApi();
   }, []);
 

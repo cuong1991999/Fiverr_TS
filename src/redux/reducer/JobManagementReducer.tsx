@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { Cart, Comment } from "../../page/JobDetail/JobDetail";
 
 import { http, timeout } from "../../util/config";
@@ -177,9 +178,11 @@ export const postCommentApi = (payload: Comment) => {
     try {
       await http.post(`/api/binh-luan`, payload);
       await timeout(1000);
+      alert("Success");
       dispatch(getArrCommentApi(payload.maCongViec));
     } catch (error) {
       console.log(error);
+      alert("Fail");
     }
   };
 };

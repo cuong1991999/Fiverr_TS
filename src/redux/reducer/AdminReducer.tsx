@@ -1,17 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { JobTypeAdminAdd } from "../../page/Admin/Manage/ManageJobType";
-import { getStore, http, USER_ID } from "../../util/config";
+import { http } from "../../util/config";
 import { DispatchType } from "../configStore";
 export interface JobTypeAdmin {
   id: number;
   tenLoaiCongViec: string;
 }
-
+export interface JobService {
+  id: number;
+  maCongViec: number;
+  maNguoiThue: number;
+  ngayThue: string;
+  hoanThanh: boolean;
+}
 type AdminState = {
   AdminJobType: JobTypeAdmin[];
+  AdminJobService: JobService[];
 };
 const initialState: AdminState = {
   AdminJobType: [],
+  AdminJobService: [],
 };
 
 const AdminReducer = createSlice({
@@ -24,10 +32,16 @@ const AdminReducer = createSlice({
     ) => {
       state.AdminJobType = action.payload;
     },
+    arrJobServiceAction: (
+      state: AdminState,
+      action: PayloadAction<JobService[]>
+    ) => {
+      state.AdminJobService = action.payload;
+    },
   },
 });
 
-export const { arrJobTypeAction } = AdminReducer.actions;
+export const { arrJobTypeAction, arrJobServiceAction } = AdminReducer.actions;
 // manage jobtype
 export const getAdminJobTypeApi = () => {
   return async (dispatch: DispatchType) => {
@@ -40,8 +54,9 @@ export const addAdminJobTypeApi = (values: JobTypeAdminAdd) => {
     try {
       await http.post(`/api/loai-cong-viec`, values);
       dispatch(getAdminJobTypeApi());
+      alert("Success");
     } catch (err) {
-      console.log(err);
+      alert("Fail");
     }
   };
 };
@@ -60,11 +75,56 @@ export const putAdminJobTypeApi = (payload: JobTypeAdmin) => {
   return async (dispatch: DispatchType) => {
     try {
       await http.put(`/api/loai-cong-viec/${payload.id}`, payload);
-
+      alert("Success");
       dispatch(getAdminJobTypeApi());
     } catch (err) {
-      console.log(err);
+      alert("Fail");
     }
   };
 };
+
+// manage service
+export const getAdminJobServiceApi = () => {
+  return async (dispatch: DispatchType) => {
+    const result = await http.get("/api/thue-cong-viec");
+    dispatch(arrJobServiceAction(result.data.content));
+  };
+};
+export const addAdminServiceApi = (values: JobService) => {
+  return async (dispatch: DispatchType) => {
+    try {
+      await http.post(`/api/thue-cong-viec`, values);
+      dispatch(getAdminJobServiceApi());
+      alert("Success");
+    } catch (err) {
+      alert("Fail");
+    }
+  };
+};
+
+export const deleteAdminServiceApi = (id: number) => {
+  return async (dispatch: DispatchType) => {
+    try {
+      await http.delete(`/api/thue-cong-viec/${id}`);
+      alert("Success");
+
+      dispatch(getAdminJobServiceApi());
+    } catch (err) {
+      alert("Fail");
+    }
+  };
+};
+
+export const putAdminJobServiceApi = (payload: JobService) => {
+  return async (dispatch: DispatchType) => {
+    try {
+      await http.put(`/api/thue-cong-viec/${payload.id}`, payload);
+
+      dispatch(getAdminJobServiceApi());
+    } catch (err) {
+      alert("Fail");
+    }
+  };
+};
+
 export default AdminReducer.reducer;

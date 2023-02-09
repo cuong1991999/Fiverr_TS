@@ -15,9 +15,12 @@ export type JobTypeAdminAdd = {
   tenLoaiCongViec: string;
 };
 const ManageJobType = (props: Props) => {
+  const check = "type"; // truyen prop cho components paginaton
+  // truyen prop cho components paginaton
   const { AdminJobType } = useSelector(
     (state: RootState) => state.AdminReducer
   );
+  // dung render table
   const { arrPagination } = useSelector(
     (state: RootState) => state.JobManagementReducer
   );
@@ -28,23 +31,29 @@ const ManageJobType = (props: Props) => {
   useEffect(() => {
     getAdminJobType();
   }, []);
-  const [id, setID] = useState(0);
-  const [name, setName] = useState("");
+  // useState up value cho model edit
+
+  const [item, setItem] = useState<any>(null);
+
   const dispatch: DispatchType = useDispatch();
+  // model edit
   const frme = useFormik({
     initialValues: {
-      id: id,
-      tenLoaiCongViec: name,
+      id: item?.id,
+      tenLoaiCongViec: item?.tenLoaiCongViec,
     },
     onSubmit: (value) => {
       const payload = {
-        id: id,
+        id: item?.id,
         tenLoaiCongViec: value.tenLoaiCongViec,
       };
-      console.log(value);
+      console.log(payload);
       dispatch(putAdminJobTypeApi(payload));
+      setItem(null);
+      closeEdit();
     },
   });
+  // model add
   const frm = useFormik<JobTypeAdminAdd>({
     initialValues: {
       id: 0,
@@ -52,8 +61,10 @@ const ManageJobType = (props: Props) => {
     },
     onSubmit: (value: JobTypeAdminAdd) => {
       dispatch(addAdminJobTypeApi(value));
+      closeAdd();
     },
   });
+  // handle edit va cach lenh open/close model
   const showAdd = () => {
     const showadd = window.document.querySelector(".modeltabs-add");
     showadd?.classList.toggle("show");
@@ -62,11 +73,19 @@ const ManageJobType = (props: Props) => {
     const showedit = window.document.querySelector(".modeltabs-edit");
     showedit?.classList.toggle("show");
   };
-  const handleEdit = (id: number, name: string) => {
-    showEdit();
-    setID(id);
-    setName(name);
+  const closeAdd = () => {
+    const close = window.document.querySelector(".modeltabs-add");
+    close?.classList.remove("show");
   };
+  const closeEdit = () => {
+    const close = window.document.querySelector(".modeltabs-edit");
+    close?.classList.remove("show");
+  };
+  const handleEdit = (item: JobTypeAdminAdd) => {
+    showEdit();
+    setItem(item);
+  };
+  //render
   const renderTable = () => {
     if (arrPagination.length > 0) {
       return arrPagination.map((item) => {
@@ -78,7 +97,7 @@ const ManageJobType = (props: Props) => {
               <button
                 className="btn btn-primary"
                 onClick={() => {
-                  handleEdit(item.id, item.tenLoaiCongViec);
+                  handleEdit(item);
                 }}
               >
                 Edit
@@ -96,32 +115,6 @@ const ManageJobType = (props: Props) => {
         );
       });
     }
-    return AdminJobType.slice(0, 8).map((item) => {
-      return (
-        <tr key={item.id}>
-          <td>{item.id}</td>
-          <td>{item.tenLoaiCongViec}</td>
-          <td className="action">
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                handleEdit(item.id, item.tenLoaiCongViec);
-              }}
-            >
-              Edit
-            </button>
-            <button
-              className="btn btn-danger"
-              onClick={() => {
-                dispatch(deleteAdminJobTypeApi(item.id));
-              }}
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      );
-    });
   };
   return (
     <section className="managejt">
@@ -140,7 +133,11 @@ const ManageJobType = (props: Props) => {
         </thead>
         <tbody>{renderTable()}</tbody>
       </table>
-      <Pagination length={AdminJobType.length} arr={AdminJobType} />
+      <Pagination
+        length={AdminJobType.length}
+        arr={AdminJobType}
+        check={check}
+      />
       <div className="model-tabs modeltabs-add">
         <div className="overplay-admin" onClick={showAdd}></div>
         <div className="model-body">
@@ -205,7 +202,8 @@ const ManageJobType = (props: Props) => {
                   type="text"
                   className="form-control"
                   placeholder="ID"
-                  value={id}
+                  defaultValue={item?.id}
+                  onChange={frme.handleChange}
                   disabled={true}
                   aria-label="Username"
                   aria-describedby="addon-wrapping"
@@ -220,7 +218,7 @@ const ManageJobType = (props: Props) => {
                   className="form-control"
                   placeholder="Job Type"
                   name="tenLoaiCongViec"
-                  defaultValue={name}
+                  defaultValue={item?.tenLoaiCongViec}
                   onChange={frme.handleChange}
                   aria-label="Username"
                   aria-describedby="addon-wrapping"
