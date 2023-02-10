@@ -217,7 +217,7 @@ const Register = (props: Props) => {
               </button>
             </form>
           </div>
-          <div className="col-6">
+          <div className="col-6 bg_Register">
             <Slider {...registerSlider} className="register_slider">
               <div className="register_slider_item">
                 <img src="./img/register1.png" alt="..." />

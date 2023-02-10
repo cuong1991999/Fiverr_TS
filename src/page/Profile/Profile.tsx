@@ -8,6 +8,9 @@ import {
   updateProfileApi,
   UserProfile,
 } from "../../redux/reducer/userReducer";
+import Footer from "../../components/Footer/Footer";
+import HeaderNoSticky from "../../components/Header/HearderNoSticky";
+import CategoriesMenuNoSticky from "../../components/Category/CategoriesMenuNoSticky";
 
 type Props = {};
 
@@ -58,185 +61,202 @@ const Profile = (props: Props) => {
   });
 
   return (
-    <div className="profile">
-      <div className="container">
-        <div className="col-4">
-          <div className="basic_profile">
-            <img src="https://i.pravatar.cc/300" alt="" />
-            <h3>{userProfile?.name}</h3>
-            <button
-              type="button"
-              className="btn btn-primary btn-lg"
-              data-bs-toggle="modal"
-              data-bs-target="#detail_info_modal"
-            >
-              <i className="fa-solid fa-pen-to-square"></i>
-            </button>
+    <div>
+      <HeaderNoSticky/>
+      <CategoriesMenuNoSticky/>
+      <div className="profile">
+        <div className="container">
+          <div className="col-4">
+            <div className="basic_profile">
+              <img src="https://i.pravatar.cc/300" alt="" />
+              <h3>{userProfile?.name}</h3>
+              <button
+                type="button"
+                className="btn btn-primary btn-lg"
+                data-bs-toggle="modal"
+                data-bs-target="#detail_info_modal"
+              >
+                <i className="fa-solid fa-pen-to-square"></i>
+              </button>
 
-            <hr />
-            <div className="basic_profile_country">
-              <div className="basic_profile_country_left basic_profile_left">
-                <i className="fa-solid fa-location-dot"></i> From
+              <hr />
+              <div className="basic_profile_country">
+                <div className="basic_profile_country_left basic_profile_left">
+                  <i className="fa-solid fa-location-dot"></i> From
+                </div>
+                <div className="basic_profile_country_right basic_profile_right">
+                  Vietnam
+                </div>
               </div>
-              <div className="basic_profile_country_right basic_profile_right">
-                Vietnam
+              <div className="basic_profile_member">
+                <div className="basic_profile_member_left basic_profile_left">
+                  <i className="fa-solid fa-user"></i> Member since
+                </div>
+                <div className="basic_profile_member_right basic_profile_right">
+                  Jan 2023
+                </div>
               </div>
             </div>
-            <div className="basic_profile_member">
-              <div className="basic_profile_member_left basic_profile_left">
-                <i className="fa-solid fa-user"></i> Member since
+            <div className="info_detail">
+              <div className="info_detail_description">
+                <div className="basic_profile_left">Description</div>
+                <div className="basic_profile_right">Edit</div>
+                <hr />
               </div>
-              <div className="basic_profile_member_right basic_profile_right">
-                Jan 2023
+              <div className="info_detail_languages">
+                <div className="basic_profile_left">Languages</div>
+                <div className="basic_profile_right">Add</div>
+                <hr />
+              </div>
+              <div className="info_detail_accounts">
+                <div className="basic_profile_left">Linked Accounts</div>
+                <div className="basic_profile_right">Add</div>
+                <hr />
+              </div>
+              <div className="info_detail_skills">
+                <div className="basic_profile_left">Skills</div>
+                <div className="basic_profile_right">Add</div>
+                <hr />
+              </div>
+              <div className="info_detail_education">
+                <div className="basic_profile_left">Education</div>
+                <div className="basic_profile_right">Add</div>
+                <hr />
+              </div>
+              <div className="info_detail_certification">
+                <div className="basic_profile_left">Certification</div>
+                <div className="basic_profile_right">Add</div>
+                <hr />
               </div>
             </div>
           </div>
-          <div className="info_detail">
-            <div className="info_detail_description">
-              <div className="basic_profile_left">Description</div>
-              <div className="basic_profile_right">Edit</div>
-              <hr />
-            </div>
-            <div className="info_detail_languages">
-              <div className="basic_profile_left">Languages</div>
-              <div className="basic_profile_right">Add</div>
-              <hr />
-            </div>
-            <div className="info_detail_accounts">
-              <div className="basic_profile_left">Linked Accounts</div>
-              <div className="basic_profile_right">Add</div>
-              <hr />
-            </div>
-            <div className="info_detail_skills">
-              <div className="basic_profile_left">Skills</div>
-              <div className="basic_profile_right">Add</div>
-              <hr />
-            </div>
-            <div className="info_detail_education">
-              <div className="basic_profile_left">Education</div>
-              <div className="basic_profile_right">Add</div>
-              <hr />
-            </div>
-            <div className="info_detail_certification">
-              <div className="basic_profile_left">Certification</div>
-              <div className="basic_profile_right">Add</div>
-              <hr />
+          <div className="col-8">
+            <div className="content_profile"> 
+              <p>
+                  Buying services for work?
+              </p>
+              <p>
+                Help us tallor your exterlen ce to flt your needs.
+              </p>
+              <a href="">
+                Tell us more about your business {'>'}
+              </a>
             </div>
           </div>
         </div>
-        <div className="col-8"></div>
-      </div>
 
-      {/* MODAL */}
-      <div className="detail_info_modal">
-        <div
-          className="modal fade"
-          id="detail_info_modal"
-          tabIndex={-1}
-          // data-bs-backdrop="static"
-          // data-bs-keyboard="false"
-          role="dialog"
-          aria-labelledby="modalTitleId"
-          aria-hidden="true"
-        >
+        {/* MODAL */}
+        <div className="detail_info_modal">
           <div
-            className="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg"
-            role="document"
+            className="modal fade"
+            id="detail_info_modal"
+            tabIndex={-1}
+            // data-bs-backdrop="static"
+            // data-bs-keyboard="false"
+            role="dialog"
+            aria-labelledby="modalTitleId"
+            aria-hidden="true"
           >
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="modalTitleId">
-                  User Information
-                </h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                />
-              </div>
-              <form onSubmit={frm.handleSubmit}>
-                <div className="modal-body">
-                  <label className="form-label">Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="name"
-                    name="name"
-                    value={frm.values.name}
-                    onChange={frm.handleChange}
-                    onBlur={frm.handleBlur}
-                  />
-                  {frm.touched.name && frm.errors.name && (
-                    <p className="f-error" id="namelError">
-                      {frm.errors.name}
-                    </p>
-                  )}
-                  <label className="form-label">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    // aria-describedby="emailHelp"
-                    name="email"
-                    // disabled
-                    value={frm.values.email}
-                    onChange={frm.handleChange}
-                    onBlur={frm.handleBlur}
-                  />
-                  {frm.touched.email && frm.errors.email && (
-                    <p className="f-error" id="emailError">
-                      {frm.errors.email}
-                    </p>
-                  )}
-                  <label className="form-label">Password</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="password"
-                    name="password"
-                    value={frm.values.password}
-                    onChange={frm.handleChange}
-                    onBlur={frm.handleBlur}
-                  />
-                  {frm.touched.password && frm.errors.password && (
-                    <p className="f-error" id="passwordError">
-                      {frm.errors.password}
-                    </p>
-                  )}
-                  <label className="form-label">Phone Number</label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="phone"
-                    name="phone"
-                    value={frm.values.phone}
-                    onChange={frm.handleChange}
-                    onBlur={frm.handleBlur}
-                  />
-                  {frm.touched.phone && frm.errors.phone && (
-                    <p className="f-error" id="phoneError">
-                      {frm.errors.phone}
-                    </p>
-                  )}
-                </div>
-                <div className="modal-footer">
+            <div
+              className="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg"
+              role="document"
+            >
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="modalTitleId">
+                    User Information
+                  </h5>
                   <button
                     type="button"
-                    className="btn btn-secondary"
+                    className="btn-close"
                     data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button type="submit" className="btn btn-primary">
-                    Save
-                  </button>
+                    aria-label="Close"
+                  />
                 </div>
-              </form>
+                <form onSubmit={frm.handleSubmit}>
+                  <div className="modal-body">
+                    <label className="form-label">Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="name"
+                      name="name"
+                      value={frm.values.name}
+                      onChange={frm.handleChange}
+                      onBlur={frm.handleBlur}
+                    />
+                    {frm.touched.name && frm.errors.name && (
+                      <p className="f-error" id="namelError">
+                        {frm.errors.name}
+                      </p>
+                    )}
+                    <label className="form-label">Email</label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      // aria-describedby="emailHelp"
+                      name="email"
+                      // disabled
+                      value={frm.values.email}
+                      onChange={frm.handleChange}
+                      onBlur={frm.handleBlur}
+                    />
+                    {frm.touched.email && frm.errors.email && (
+                      <p className="f-error" id="emailError">
+                        {frm.errors.email}
+                      </p>
+                    )}
+                    <label className="form-label">Password</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="password"
+                      name="password"
+                      value={frm.values.password}
+                      onChange={frm.handleChange}
+                      onBlur={frm.handleBlur}
+                    />
+                    {frm.touched.password && frm.errors.password && (
+                      <p className="f-error" id="passwordError">
+                        {frm.errors.password}
+                      </p>
+                    )}
+                    <label className="form-label">Phone Number</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="phone"
+                      name="phone"
+                      value={frm.values.phone}
+                      onChange={frm.handleChange}
+                      onBlur={frm.handleBlur}
+                    />
+                    {frm.touched.phone && frm.errors.phone && (
+                      <p className="f-error" id="phoneError">
+                        {frm.errors.phone}
+                      </p>
+                    )}
+                  </div>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="submit" className="btn btn-primary">
+                      Save
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };
