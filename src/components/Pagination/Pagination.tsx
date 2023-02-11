@@ -5,11 +5,10 @@ import { PaginationAction } from "../../redux/reducer/JobManagementReducer";
 type Props = {
   length: number;
   arr: any;
-  check: string;
 };
 
 const Pagination = (props: Props) => {
-  const { length, arr, check } = props;
+  const { length, arr } = props;
 
   const dispacth: DispatchType = useDispatch();
   // so trang
@@ -31,24 +30,12 @@ const Pagination = (props: Props) => {
   const currentPosts = arr.slice(firstPostIndex, lastPostIndex);
 
   // dispatch thay doi theo so trang
+
   useEffect(() => {
     dispacth(PaginationAction(currentPosts));
   }, [arr]);
   useEffect(() => {
-    switch (check) {
-      case "search":
-        dispacth(PaginationAction(currentPosts));
-        break;
-      case "category":
-        dispacth(PaginationAction(currentPosts));
-        break;
-      case "type":
-        dispacth(PaginationAction(currentPosts));
-        break;
-      case "service":
-        dispacth(PaginationAction(currentPosts));
-        break;
-    }
+    dispacth(PaginationAction(currentPosts));
   }, [page]);
   // render nut button
   const pages: number[] = [];

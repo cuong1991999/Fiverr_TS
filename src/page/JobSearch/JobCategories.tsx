@@ -17,8 +17,6 @@ export type KeyWord = {
 type Props = {};
 
 const JobCategories = (props: Props) => {
-  const check = "category"; //truyen prop cho components paginaton
-
   const params: any = useParams();
   // arrCategories truyen prop cho components paginaton
   // arrPagination render
@@ -287,11 +285,7 @@ const JobCategories = (props: Props) => {
           <div className="result-service">
             <div className="row">{renderJob()}</div>
             <div className="d-flex justify-content-center mt-4">
-              <Pagination
-                length={arrCategories.length}
-                arr={arrCategories}
-                check={check}
-              />
+              <Pagination length={arrCategories.length} arr={arrCategories} />
             </div>
           </div>
         </div>

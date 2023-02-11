@@ -44,6 +44,12 @@ const AdminTemplate = (props: Props) => {
               Manage Service
             </NavLink>
           </li>
+          <li>
+            <NavLink to="/admin/managecomment">
+              <i className="fa-solid fa-user"></i>
+              Manage Comment
+            </NavLink>
+          </li>
         </ul>
       </nav>
       <section className="content">

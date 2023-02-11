@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { JobTypeAdminAdd } from "../../page/Admin/Manage/ManageJobType";
 import { http } from "../../util/config";
 import { DispatchType } from "../configStore";
+import { ArrComments } from "./JobManagementReducer";
 export interface JobTypeAdmin {
   id: number;
   tenLoaiCongViec: string;
@@ -16,10 +17,12 @@ export interface JobService {
 type AdminState = {
   AdminJobType: JobTypeAdmin[];
   AdminJobService: JobService[];
+  AdminComment: ArrComments[];
 };
 const initialState: AdminState = {
   AdminJobType: [],
   AdminJobService: [],
+  AdminComment: [],
 };
 
 const AdminReducer = createSlice({
@@ -38,10 +41,17 @@ const AdminReducer = createSlice({
     ) => {
       state.AdminJobService = action.payload;
     },
+    arrCommentAction: (
+      state: AdminState,
+      action: PayloadAction<ArrComments[]>
+    ) => {
+      state.AdminComment = action.payload;
+    },
   },
 });
 
-export const { arrJobTypeAction, arrJobServiceAction } = AdminReducer.actions;
+export const { arrJobTypeAction, arrJobServiceAction, arrCommentAction } =
+  AdminReducer.actions;
 // manage jobtype
 export const getAdminJobTypeApi = () => {
   return async (dispatch: DispatchType) => {
@@ -126,5 +136,23 @@ export const putAdminJobServiceApi = (payload: JobService) => {
     }
   };
 };
+// comment
+export const getCommentAdminApi = () => {
+  return async (dispatch: DispatchType) => {
+    const result = await http.get("/api/binh-luan");
+    dispatch(arrCommentAction(result.data.content));
+  };
+};
+export const deleteCommentApi = (id: number) => {
+  return async (dispatch: DispatchType) => {
+    try {
+      await http.delete(`/api/binh-luan/${id}`);
+      alert("Success");
 
+      dispatch(getCommentAdminApi());
+    } catch (err) {
+      alert("Fail");
+    }
+  };
+};
 export default AdminReducer.reducer;

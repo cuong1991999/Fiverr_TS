@@ -19,7 +19,6 @@ type JobService = {
   hoanThanh: boolean;
 };
 const ManageService = (props: Props) => {
-  const check = "service"; // truyen prop cho components paginaton
   const getApiService = () => {
     dispatch(getAdminJobServiceApi());
   };
@@ -177,11 +176,7 @@ const ManageService = (props: Props) => {
         </thead>
         <tbody>{renderTable()}</tbody>
       </table>
-      <Pagination
-        length={AdminJobService.length}
-        arr={AdminJobService}
-        check={check}
-      />
+      <Pagination length={AdminJobService.length} arr={AdminJobService} />
 
       <div className="model-tabs modeltabs-add">
         <div className="overplay-admin" onClick={showAdd}></div>

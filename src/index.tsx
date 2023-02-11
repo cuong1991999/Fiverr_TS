@@ -24,6 +24,7 @@ import AdminTemplate from "./templates/AdminTemplate";
 import ManageJobType from "./page/Admin/Manage/ManageJobType";
 import ManageService from "./page/Admin/Manage/ManageService";
 import Profile from "./page/Profile/Profile";
+import Comment from "./page/Admin/Comment/Comment";
 
 export const history: any = createBrowserHistory();
 
@@ -55,6 +56,7 @@ root.render(
             path="/admin/manageservice"
             element={<ManageService />}
           ></Route>
+          <Route path="/admin/managecomment" element={<Comment />}></Route>
           <Route path="*" element={<Navigate to="/home" />} />
         </Route>
       </Routes>
