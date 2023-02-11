@@ -3,17 +3,21 @@
     min-height: 100vh;
     align-items: stretch;
 
+
+
     .sidebar {
         border-right: 1px solid #ccc;
         min-width: 250px;
         max-width: 250px;
-        background: #fff;
-        color: $color1;
+
+
 
 
         .sidebar-header {
             padding: 20px;
+
             display: block;
+            color: $fiverr-2;
 
             h3 {
                 font-weight: 600;

@@ -15,7 +15,6 @@ export type JobTypeAdminAdd = {
   tenLoaiCongViec: string;
 };
 const ManageJobType = (props: Props) => {
-  const check = "type"; // truyen prop cho components paginaton
   // truyen prop cho components paginaton
   const { AdminJobType } = useSelector(
     (state: RootState) => state.AdminReducer
@@ -133,11 +132,7 @@ const ManageJobType = (props: Props) => {
         </thead>
         <tbody>{renderTable()}</tbody>
       </table>
-      <Pagination
-        length={AdminJobType.length}
-        arr={AdminJobType}
-        check={check}
-      />
+      <Pagination length={AdminJobType.length} arr={AdminJobType} />
       <div className="model-tabs modeltabs-add">
         <div className="overplay-admin" onClick={showAdd}></div>
         <div className="model-body">

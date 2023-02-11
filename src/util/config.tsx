@@ -79,7 +79,6 @@ export const http = axios.create({
 //Cấu hình request header
 http.interceptors.request.use(
   (config: any) => {
-    const id = getStore(USER_ID);
     const token = getStore(ACCESS_TOKEN);
     config.headers = {
       ...config.headers,

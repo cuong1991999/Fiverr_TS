@@ -1216,7 +1216,7 @@ ul {
   display: none;
 }
 .search-result .header__jobsearch .btn__jobsearch {
-  background-color: #1dbf73;
+  background-color: #1DBF73;
   color: #fff;
 }
 .search-result .header__jobsearch .btn__jobsearch:hover {
@@ -2271,12 +2271,11 @@ ul {
   border-right: 1px solid #ccc;
   min-width: 250px;
   max-width: 250px;
-  background: #fff;
-  color: #1dbf73;
 }
 .admin .sidebar .sidebar-header {
   padding: 20px;
   display: block;
+  color: #1DBF73;
 }
 .admin .sidebar .sidebar-header h3 {
   font-weight: 600;
