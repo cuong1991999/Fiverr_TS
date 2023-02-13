@@ -77,13 +77,13 @@ const Header = (props: Props) => {
                         </li>
                         {userLogin.role === "ADMIN" && (
                           <li className="mb-3">
-                            <a
+                            <NavLink
                               style={{ color: "#212529" }}
                               className="dropdown-item"
-                              href="/admin/managejobtype"
+                              to="/admin/managejobtype"
                             >
                               Admin
-                            </a>
+                            </NavLink>
                           </li>
                         )}
                         <li>
@@ -219,13 +219,13 @@ const Header = (props: Props) => {
                         </li>
                         {userLogin.role === "ADMIN" && (
                           <li className="mb-3">
-                            <a
+                            <NavLink
                               className="dropdown-item"
                               style={{ color: "#212529" }}
-                              href="/admin/managejobtype"
+                              to="/admin/managejobtype"
                             >
                               Admin
-                            </a>
+                            </NavLink>
                           </li>
                         )}
                         <li>
