@@ -5,15 +5,14 @@ import { KeySearch } from "./Header";
 import { history } from "../..";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/configStore";
-import { ACCESS_TOKEN, removeStore, USER_LOGIN } from "../../util/config";
-
+import { removeStore,eraseCookie, eraseStore, ACCESS_TOKEN, USER_LOGIN } from "../../util/config";
 type Props = {};
 
 const HeaderNoSticky = (props: Props) => {
+
+  const {userLogin} = useSelector((state: RootState) => state.userReducer);
   // dung duoc cac trang khac ngoai trang home
   //render menu
-  const { userLogin } = useSelector((state: RootState) => state.userReducer);
-
   const { arrMenu } = useSelector(
     (state: RootState) => state.JobManagementReducer
   );
@@ -56,68 +55,15 @@ const HeaderNoSticky = (props: Props) => {
               </label>
               <div className="nav__mobile-list">
                 <div className="sidebar__menu">
-                  {userLogin ? (
-                    <div className="dropdown ">
-                      <span
-                        className=" sidebar-item dropdown-toggle"
-                        id="dropdownMenuButton10"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        {userLogin.name}
-                      </span>
-                      <ul
-                        className="dropdown-menu"
-                        aria-labelledby="dropdownMenuButton10"
-                      >
-                        <li className="mb-3">
-                          <NavLink
-                            style={{ color: "#212529" }}
-                            className="dropdown-item"
-                            to="/profile"
-                          >
-                            Profile
-                          </NavLink>
-                        </li>
-                        {userLogin.role === "ADMIN" && (
-                          <li className="mb-3">
-                            <a
-                              style={{ color: "#212529" }}
-                              className="dropdown-item"
-                              href="/admin/managejobtype"
-                            >
-                              Admin
-                            </a>
-                          </li>
-                        )}
-                        <li>
-                          <div
-                            className="dropdown-item"
-                            onClick={() => {
-                              removeStore(USER_LOGIN);
-                              removeStore(ACCESS_TOKEN);
-                              window.location.href = "/login";
-                            }}
-                          >
-                            Sign out
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  ) : (
-                    <>
-                      {" "}
-                      <NavLink
-                        to={"/register"}
-                        className="sidebar-btn sidebar-item"
-                      >
-                        Join Fiverr
-                      </NavLink>
-                      <NavLink to={"/login"} className=" sidebar-item">
-                        Sign in
-                      </NavLink>
-                    </>
-                  )}
+                  <NavLink
+                    to={"/register"}
+                    className="sidebar-btn sidebar-item"
+                  >
+                    Join Fiverr
+                  </NavLink>
+                  <NavLink to={"/login"} className=" sidebar-item">
+                    Sign in
+                  </NavLink>
                   <div className={"sidebar-item sidebar-green"}>
                     Fiverr Business
                   </div>

@@ -43,8 +43,13 @@ export const config = {
     }
     return null;
   },
-  timeout: (delay: number) => {
-    return new Promise((res) => setTimeout(res, delay));
+  eraseCookie: (name: string) => {
+    document.cookie =
+      name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+  },
+  eraseStore: (name: string) => {
+    localStorage.removeItem(name);
+
   },
   ACCESS_TOKEN: "accessToken",
   USER_LOGIN: "userLogin",
@@ -52,10 +57,11 @@ export const config = {
 };
 
 export const {
-  timeout,
   removeStore,
   setCookie,
   getCookie,
+  eraseCookie,
+  eraseStore,
   getStore,
   setStore,
   setStoreJson,
