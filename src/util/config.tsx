@@ -49,7 +49,9 @@ export const config = {
   },
   eraseStore: (name: string) => {
     localStorage.removeItem(name);
-
+  },
+  timeout: (delay: number) => {
+    return new Promise((res) => setTimeout(res, delay));
   },
   ACCESS_TOKEN: "accessToken",
   USER_LOGIN: "userLogin",
@@ -57,6 +59,7 @@ export const config = {
 };
 
 export const {
+  timeout,
   removeStore,
   setCookie,
   getCookie,

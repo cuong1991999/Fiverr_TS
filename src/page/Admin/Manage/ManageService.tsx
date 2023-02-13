@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import Pagination from "../../../components/Pagination/Pagination";
-
-type Props = {};
-
-const ManageService = (props: Props) => {
-=======
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -72,7 +64,6 @@ const ManageService = (props: Props) => {
   const [checked, setCheck] = useState("");
   const [complete, setComplete] = useState(false);
 
->>>>>>> efdbc7cd43a8a66d52494faf79313a60d6504aba
   const showAdd = () => {
     const showadd = window.document.querySelector(".modeltabs-add");
     showadd?.classList.toggle("show");
@@ -81,12 +72,6 @@ const ManageService = (props: Props) => {
     const showedit = window.document.querySelector(".modeltabs-edit");
     showedit?.classList.toggle("show");
   };
-<<<<<<< HEAD
-  return (
-    <section className="managejt">
-      <div className="btn-add">
-        <button onClick={showAdd}>ADD NEW JOBTYPE</button>
-=======
   const closeAdd = () => {
     const close = window.document.querySelector(".modeltabs-add");
     close?.classList.remove("show");
@@ -171,7 +156,6 @@ const ManageService = (props: Props) => {
     <section className="managejt">
       <div className="btn-add">
         <button onClick={showAdd}>ADD SERVICE</button>
->>>>>>> efdbc7cd43a8a66d52494faf79313a60d6504aba
       </div>
       <table className="table-admin">
         <thead>
@@ -190,38 +174,16 @@ const ManageService = (props: Props) => {
             <th style={{ borderLeft: "1px solid rgba(0,0,0,.09)" }}>Action</th>
           </tr>
         </thead>
-<<<<<<< HEAD
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>13/10/2022</td>
-            <td>Hoàn thành</td>
-            <td className="action">
-              <button className="btn btn-primary">Edit</button>
-              <button className="btn btn-danger">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      {/* <Pagination length={0} arr /> */}
-=======
         <tbody>{renderTable()}</tbody>
       </table>
       <Pagination length={AdminJobService.length} arr={AdminJobService} />
->>>>>>> efdbc7cd43a8a66d52494faf79313a60d6504aba
 
       <div className="model-tabs modeltabs-add">
         <div className="overplay-admin" onClick={showAdd}></div>
         <div className="model-body">
           <h2>ADD NEW JOBTYPE</h2>
           <div className="model-form">
-<<<<<<< HEAD
-            <form action="">
-=======
             <form action="" onSubmit={frma.handleSubmit}>
->>>>>>> efdbc7cd43a8a66d52494faf79313a60d6504aba
               <div className="input-group flex-nowrap mb-3">
                 <span className="input-group-text" id="addon-wrapping">
                   ID
@@ -232,8 +194,6 @@ const ManageService = (props: Props) => {
                   placeholder="ID"
                   aria-label="Username"
                   aria-describedby="addon-wrapping"
-<<<<<<< HEAD
-=======
                   name="id"
                   onChange={frma.handleChange}
                 />
@@ -264,23 +224,10 @@ const ManageService = (props: Props) => {
                   aria-label="Username"
                   aria-describedby="addon-wrapping"
                   onChange={frma.handleChange}
->>>>>>> efdbc7cd43a8a66d52494faf79313a60d6504aba
                 />
               </div>
               <div className="input-group flex-nowrap">
                 <span className="input-group-text" id="addon-wrapping">
-<<<<<<< HEAD
-                  Job Type
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Job Type"
-                  aria-label="Username"
-                  aria-describedby="addon-wrapping"
-                />
-              </div>
-=======
                   Hire Day
                 </span>
                 <input
@@ -327,7 +274,6 @@ const ManageService = (props: Props) => {
                   </label>
                 </div>
               </div>
->>>>>>> efdbc7cd43a8a66d52494faf79313a60d6504aba
               <div className="model-action">
                 <button className="btn btn-success" type="submit">
                   ADD
@@ -349,37 +295,22 @@ const ManageService = (props: Props) => {
         <div className="model-body">
           <h2>UPDATE JOBTYPE</h2>
           <div className="model-form">
-<<<<<<< HEAD
-            <form action="">
-=======
             <form action="" onSubmit={frme.handleSubmit}>
->>>>>>> efdbc7cd43a8a66d52494faf79313a60d6504aba
               <div className="input-group flex-nowrap mb-3">
                 <span className="input-group-text" id="addon-wrapping">
                   ID
                 </span>
                 <input
                   type="text"
-<<<<<<< HEAD
-=======
                   disabled
                   value={item?.id}
                   onChange={frme.handleChange}
->>>>>>> efdbc7cd43a8a66d52494faf79313a60d6504aba
                   className="form-control"
                   placeholder="ID"
                   aria-label="Username"
                   aria-describedby="addon-wrapping"
                 />
               </div>
-<<<<<<< HEAD
-              <div className="input-group flex-nowrap">
-                <span className="input-group-text" id="addon-wrapping">
-                  Job Type
-                </span>
-                <input
-                  type="text"
-=======
               <div className="input-group flex-nowrap mb-3">
                 <span className="input-group-text" id="addon-wrapping">
                   Job ID
@@ -388,15 +319,12 @@ const ManageService = (props: Props) => {
                   type="text"
                   defaultValue={item?.maCongViec}
                   onChange={frme.handleChange}
->>>>>>> efdbc7cd43a8a66d52494faf79313a60d6504aba
                   className="form-control"
                   placeholder="Job Type"
                   aria-label="Username"
                   aria-describedby="addon-wrapping"
                 />
               </div>
-<<<<<<< HEAD
-=======
               <div className="input-group flex-nowrap mb-3">
                 <span className="input-group-text" id="addon-wrapping">
                   Hirer ID
@@ -460,7 +388,6 @@ const ManageService = (props: Props) => {
                   </label>
                 </div>
               </div>
->>>>>>> efdbc7cd43a8a66d52494faf79313a60d6504aba
               <div className="model-action">
                 <button className="btn btn-success" type="submit">
                   SAVE

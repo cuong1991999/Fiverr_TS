@@ -9,7 +9,7 @@ import {
 
 type Props = {};
 
-function Comment({}: Props) {
+const Comment = (props: Props) => {
   const { AdminComment } = useSelector(
     (state: RootState) => state.AdminReducer
   );
@@ -79,6 +79,6 @@ function Comment({}: Props) {
       <Pagination length={AdminComment.length} arr={AdminComment} />
     </section>
   );
-}
+};
 
 export default Comment;
