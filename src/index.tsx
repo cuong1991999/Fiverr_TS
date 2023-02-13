@@ -22,8 +22,15 @@ import Login from "./page/login/Login";
 import Register from "./page/register/Register";
 import AdminTemplate from "./templates/AdminTemplate";
 import ManageJobType from "./page/Admin/Manage/ManageJobType";
+<<<<<<< HEAD
 import Profile from "./page/Profile/Profile";
 import ManageService from "./page/Admin/Manage/ManageService";
+=======
+import ManageService from "./page/Admin/Manage/ManageService";
+import Profile from "./page/Profile/Profile";
+import Comment from "./page/Admin/Comment/Comment";
+
+>>>>>>> efdbc7cd43a8a66d52494faf79313a60d6504aba
 export const history: any = createBrowserHistory();
 
 const root = ReactDOM.createRoot(
@@ -54,6 +61,7 @@ root.render(
             path="/admin/manageservice"
             element={<ManageService />}
           ></Route>
+          <Route path="/admin/managecomment" element={<Comment />}></Route>
           <Route path="*" element={<Navigate to="/home" />} />
         </Route>
       </Routes>

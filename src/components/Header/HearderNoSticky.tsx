@@ -3,53 +3,14 @@ import { NavLink } from "react-router-dom";
 import { useFormik } from "formik";
 import { KeySearch } from "./Header";
 import { history } from "../..";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux/configStore";
-import { eraseCookie, eraseStore, ACCESS_TOKEN, USER_LOGIN } from "../../util/config";
+import { removeStore,eraseCookie, eraseStore, ACCESS_TOKEN, USER_LOGIN } from "../../util/config";
 type Props = {};
-
 
 const HeaderNoSticky = (props: Props) => {
 
-  const userProfile = useSelector((state: any) => state.userReducer.userProfile);
-
-  const dispatch = useDispatch();
-
-  const renderLogin = () => {
-    if (userProfile) {
-      return (
-        <>
-          <li className="nav-item">
-            <NavLink
-              className="nav-link text-light"
-              to={`/profile/${userProfile.id}`}
-            >
-              Hello {userProfile.name}
-            </NavLink>
-          </li>
-          <span
-            className="mx-2 text-light d-flex align-items-center btn btn-danger"
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              if (localStorage.getItem("fblst_1026190204826662")) {
-                eraseStore("fblst_1026190204826662");
-              }
-              eraseStore(USER_LOGIN);
-              eraseCookie(ACCESS_TOKEN);
-              window.location.href = "/";
-            }}
-          >
-            Logout
-          </span>
-        </>
-      );
-    }
-    return (
-      <NavLink className="nav-link active" aria-current="page" to="/login">
-        Login
-      </NavLink>
-    );
-  };
+  const {userLogin} = useSelector((state: RootState) => state.userReducer);
   // dung duoc cac trang khac ngoai trang home
   //render menu
   const { arrMenu } = useSelector(
@@ -162,14 +123,66 @@ const HeaderNoSticky = (props: Props) => {
                 </li>
                 <li className="li_1">US$ USD</li>
                 <li className="li_1">Become a Seller</li>
-                
-                {renderLogin()}
-                {!userProfile && (
-                  <li className="li_1">
-                    <NavLink className="nav-link" to="register">
-                      <button className="btn btn-outline-success">Join</button>
-                    </NavLink>
-                  </li>
+                {userLogin ? (
+                  <>
+                    <li className="dropdown li_1 ">
+                      <span
+                        className=" sidebar-item dropdown-toggle"
+                        id="dropdownMenuButton11"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        style={{ cursor: "pointer" }}
+                      >
+                        {userLogin.name}
+                      </span>
+                      <ul
+                        className="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton11"
+                      >
+                        <li className="mb-3">
+                          <NavLink
+                            className="dropdown-item"
+                            style={{ color: "#212529" }}
+                            to="/profile"
+                          >
+                            Profile
+                          </NavLink>
+                        </li>
+                        {userLogin.role === "ADMIN" && (
+                          <li className="mb-3">
+                            <a
+                              style={{ color: "#212529" }}
+                              className="dropdown-item"
+                              href="/admin/managejobtype"
+                            >
+                              Admin
+                            </a>
+                          </li>
+                        )}
+                        <li>
+                          <div
+                            className="dropdown-item"
+                            onClick={() => {
+                              removeStore(USER_LOGIN);
+                              removeStore(ACCESS_TOKEN);
+                              window.location.href = "/login";
+                            }}
+                          >
+                            Sign out
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li className="li_1">
+                      <NavLink to={"/login"}>Sign in</NavLink>
+                    </li>
+                    <li className="join">
+                      <NavLink to={"/register"}>Join</NavLink>
+                    </li>
+                  </>
                 )}
               </ul>
             </div>

@@ -8,6 +8,7 @@ import {
   setStoreJson,
   ACCESS_TOKEN,
   USER_LOGIN,
+  USER_ID,
   setStore,
 } from "../../util/config";
 import { UserRegister } from "../../page/register/Register";
@@ -112,9 +113,11 @@ export const loginApi = (userLogin: UserLogin) => {
         setStoreJson(USER_LOGIN, result.data.content.user);
         setCookie(ACCESS_TOKEN, result.data.content.token, 3);
         setStore(ACCESS_TOKEN, result.data.content.token);
+        setStore(USER_ID, result.data.content.user.id);
         window.location.href = "/home";
       }
     } catch (error) {
+      alert("Login failed, username or password is incorrect");
       console.log(error);
     }
   };

@@ -1,6 +1,18 @@
 .pagination {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+
+
+    .page {
+        margin-left: 5px;
+    }
+
+    input {
+        width: 20%;
+    }
 
     button {
         i {

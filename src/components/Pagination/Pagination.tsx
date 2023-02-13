@@ -9,6 +9,7 @@ type Props = {
 
 const Pagination = (props: Props) => {
   const { length, arr } = props;
+
   const dispacth: DispatchType = useDispatch();
   // so trang
   const [page, setPage] = useState<number>(1);
@@ -27,7 +28,12 @@ const Pagination = (props: Props) => {
   const firstPostIndex = lastPostIndex - posts;
   // trang hien tai
   const currentPosts = arr.slice(firstPostIndex, lastPostIndex);
+
   // dispatch thay doi theo so trang
+
+  useEffect(() => {
+    dispacth(PaginationAction(currentPosts));
+  }, [arr]);
   useEffect(() => {
     dispacth(PaginationAction(currentPosts));
   }, [page]);
@@ -72,14 +78,18 @@ const Pagination = (props: Props) => {
   let decreaseBtn = null;
   if (pages.length > maxPageNumberLimit) {
     increaseBtn = (
-      <button className="btn" onClick={nextPage}>
+      <button
+        className="btn"
+        onClick={nextPage}
+        disabled={page >= Math.ceil(length / posts)}
+      >
         ...
       </button>
     );
   }
   if (pages.length > maxPageNumberLimit) {
     decreaseBtn = (
-      <button className="btn" onClick={prevPage}>
+      <button className="btn" onClick={prevPage} disabled={page <= 1}>
         ...
       </button>
     );
@@ -99,6 +109,16 @@ const Pagination = (props: Props) => {
       >
         <i className="fas fa-arrow-right"></i>
       </button>
+      <div className="ms-lg-3 text-center mt-3">
+        <input
+          type="text"
+          value={page}
+          onChange={(e) => {
+            setPage(Number(e.target.value));
+          }}
+        />
+        <span className="page">Page: {Math.ceil(length / posts)}</span>
+      </div>
     </div>
   );
 };

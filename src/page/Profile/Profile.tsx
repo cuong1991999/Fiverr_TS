@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DispatchType, RootState } from "../../redux/configStore";
 import {
@@ -61,6 +61,7 @@ const Profile = (props: Props) => {
   });
 
   return (
+
     <div>
       <HeaderNoSticky/>
       <CategoriesMenuNoSticky/>

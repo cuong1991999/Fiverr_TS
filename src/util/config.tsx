@@ -49,23 +49,26 @@ export const config = {
   },
   eraseStore: (name: string) => {
     localStorage.removeItem(name);
+
   },
   ACCESS_TOKEN: "accessToken",
   USER_LOGIN: "userLogin",
+  USER_ID: "userId",
 };
 
 export const {
   removeStore,
   setCookie,
   getCookie,
+  eraseCookie,
+  eraseStore,
   getStore,
   setStore,
-  eraseStore,
   setStoreJson,
   getStoreJson,
-  eraseCookie,
   ACCESS_TOKEN,
   USER_LOGIN,
+  USER_ID,
 } = config;
 
 const DOMAIN = "https://fiverrnew.cybersoft.edu.vn";

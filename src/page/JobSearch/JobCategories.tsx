@@ -18,6 +18,8 @@ type Props = {};
 
 const JobCategories = (props: Props) => {
   const params: any = useParams();
+  // arrCategories truyen prop cho components paginaton
+  // arrPagination render
   const { arrCategories, arrPagination } = useSelector(
     (state: RootState) => state.JobManagementReducer
   );

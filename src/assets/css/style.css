@@ -31,7 +31,8 @@ ul {
 }
 
 .video,
-.video2 {
+.video2,
+.model-tabs {
   z-index: 999999;
   display: none;
   position: fixed;
@@ -42,8 +43,13 @@ ul {
 }
 .video .video-overplay,
 .video .video-overplay2,
+.video .overplay-admin,
 .video2 .video-overplay,
-.video2 .video-overplay2 {
+.video2 .video-overplay2,
+.video2 .overplay-admin,
+.model-tabs .video-overplay,
+.model-tabs .video-overplay2,
+.model-tabs .overplay-admin {
   position: absolute;
   top: 0;
   left: 0;
@@ -52,11 +58,13 @@ ul {
   background-color: rgba(0, 0, 0, 0.3);
 }
 .video.show,
-.video2.show {
+.video2.show,
+.model-tabs.show {
   display: flex;
 }
 .video video,
-.video2 video {
+.video2 video,
+.model-tabs video {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -77,6 +85,71 @@ ul {
     width: 250px;
   }
 }
+.btn-add {
+  margin-bottom: 20px;
+}
+.btn-add button {
+  border: 1px solid #1976d2;
+  color: #1976d2;
+  padding: 5px 15px;
+  border-radius: 0.25rem;
+  display: inline-flex;
+  font-size: 14px;
+  background-color: #fff;
+  transition: all 0.25s;
+  box-shadow: inset 0 0 0 rgba(25, 118, 210, 0.5);
+}
+.btn-add button:active {
+  box-shadow: inset 0 0 0 100px rgba(25, 118, 210, 0.08);
+}
+
+.table-admin {
+  width: 100%;
+  font-size: 14px;
+}
+.table-admin thead {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.table-admin th {
+  padding: 16px;
+}
+.table-admin td {
+  padding: 16px;
+}
+.table-admin .action {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.model-tabs .model-body {
+  border-radius: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+  background-color: #fff;
+  margin: 32px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+.model-tabs .model-body h2 {
+  font-size: 20px;
+  text-align: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.model-tabs .model-body .model-form {
+  padding: 10px 24px 20px;
+}
+.model-tabs .model-body .model-action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 20px;
+  gap: 1rem;
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -173,7 +246,7 @@ ul {
 .header .header-wrapper .header_container .header-left .nav__mobile-list .sidebar__menu .sidebar-item {
   display: block;
   color: #74767e;
-  padding: 4px 0;
+  padding: 10px 0;
   cursor: pointer;
 }
 .header .header-wrapper .header_container .header-left .nav__mobile-list .sidebar__menu .sidebar-item .btn__sidebar {
@@ -581,6 +654,14 @@ ul {
 .pagination {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.pagination .page {
+  margin-left: 5px;
+}
+.pagination input {
+  width: 20%;
 }
 .pagination button i {
   color: #1dbf73;
@@ -1135,7 +1216,7 @@ ul {
   display: none;
 }
 .search-result .header__jobsearch .btn__jobsearch {
-  background-color: #1dbf73;
+  background-color: #1DBF73;
   color: #fff;
 }
 .search-result .header__jobsearch .btn__jobsearch:hover {
@@ -2179,4 +2260,69 @@ ul {
   height: 500px;
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 20px;
+}
+
+.admin {
+  display: flex;
+  min-height: 100vh;
+  align-items: stretch;
+}
+.admin .sidebar {
+  border-right: 1px solid #ccc;
+  min-width: 250px;
+  max-width: 250px;
+}
+.admin .sidebar .sidebar-header {
+  padding: 20px;
+  display: block;
+  color: #1DBF73;
+}
+.admin .sidebar .sidebar-header h3 {
+  font-weight: 600;
+}
+.admin .sidebar .list-unstyled {
+  padding: 20px 0;
+}
+.admin .sidebar .list-unstyled li {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.admin .sidebar .list-unstyled li a {
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #666;
+}
+.admin .sidebar .list-unstyled li a i {
+  margin-right: 5px;
+}
+.admin .sidebar .list-unstyled li a.active-color {
+  color: #1dbf73;
+}
+.admin .content {
+  width: 100%;
+}
+.admin .content table {
+  margin-bottom: 20px;
+}
+.admin .content .content-header {
+  border-bottom: 1px solid #ccc;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.admin .content .content-header .content-user {
+  display: flex;
+  align-items: center;
+}
+.admin .content .content-header .content-user .user-avatar {
+  margin-right: 10px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+.admin .content .content-body {
+  padding: 20px;
 }/*# sourceMappingURL=style.css.map */
