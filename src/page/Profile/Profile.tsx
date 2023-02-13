@@ -65,7 +65,7 @@ const Profile = (props: Props) => {
       <HeaderNoSticky/>
       <CategoriesMenuNoSticky/>
       <div className="profile">
-        <div className="container">
+        <div className="container row">
           <div className="col-4">
             <div className="basic_profile">
               <img src="https://i.pravatar.cc/300" alt="" />
@@ -130,8 +130,9 @@ const Profile = (props: Props) => {
               </div>
             </div>
           </div>
-          <div className="col-8">
+          <div className="col-4">
             <div className="content_profile"> 
+              
               <p>
                   Buying services for work?
               </p>
@@ -142,6 +143,7 @@ const Profile = (props: Props) => {
                 Tell us more about your business {'>'}
               </a>
             </div>
+
           </div>
         </div>
 
