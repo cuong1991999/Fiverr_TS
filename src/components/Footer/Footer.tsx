@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 type Props = {};
 
@@ -22,54 +23,54 @@ const Footer = (props: Props) => {
             </h6>
             <ul>
               <li>
-                <a href="#" title="Graphics & Design">
+                <NavLink to="#" title="Graphics & Design">
                   Graphics & Design
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Digital Marketing">
+                <NavLink to="#" title="Digital Marketing">
                   Digital Marketing
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Writing & Transition">
+                <NavLink to="#" title="Writing & Transition">
                   Writing & Transition
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Video & Animation">
+                <NavLink to="#" title="Video & Animation">
                   Video & Animation
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#" title="Music & Audio">
+                <NavLink to="#" title="Music & Audio">
                   Music & Audio
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Programing & Tech">
+                <NavLink to="#" title="Programing & Tech">
                   Programing & Tech
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Data">
+                <NavLink to="#" title="Data">
                   Data
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Business">
+                <NavLink to="#" title="Business">
                   Business
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#" title="Lifestyle">
+                <NavLink to="#" title="Lifestyle">
                   Lifestyle
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#" title="Sitemap">
+                <NavLink to="#" title="Sitemap">
                   Sitemap
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -79,44 +80,44 @@ const Footer = (props: Props) => {
             </h6>
             <ul>
               <li>
-                <a href="#" title="Events">
+                <NavLink to="#" title="Events">
                   Events
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Blog">
+                <NavLink to="#" title="Blog">
                   Blog
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Forum">
+                <NavLink to="#" title="Forum">
                   Forum
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Community Standards">
+                <NavLink to="#" title="Community Standards">
                   Community Standards
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Podcast">
+                <NavLink to="#" title="Podcast">
                   Podcast
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Affiliates">
+                <NavLink to="#" title="Affiliates">
                   Affiliates
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Invite a Friend">
+                <NavLink to="#" title="Invite a Friend">
                   Invite a Friend
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Become a Seller">
+                <NavLink to="#" title="Become a Seller">
                   Become a Seller
-                </a>{" "}
+                </NavLink>{" "}
               </li>
             </ul>
           </div>
@@ -126,34 +127,34 @@ const Footer = (props: Props) => {
             </h6>
             <ul>
               <li>
-                <a href="#" title="Friverr Business">
+                <NavLink to="#" title="Friverr Business">
                   Friverr Business
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Friverr Pro">
+                <NavLink to="#" title="Friverr Pro">
                   Friverr Pro
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Friverr Studios">
+                <NavLink to="#" title="Friverr Studios">
                   Friverr Studios
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Friverr Logo Maker">
+                <NavLink to="#" title="Friverr Logo Maker">
                   Friverr Logo Maker
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Friverr Guides">
+                <NavLink to="#" title="Friverr Guides">
                   Friverr Guides
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Get Inspired">
+                <NavLink to="#" title="Get Inspired">
                   Get Inspired
-                </a>{" "}
+                </NavLink>{" "}
               </li>
             </ul>
           </div>
@@ -163,39 +164,39 @@ const Footer = (props: Props) => {
             </h6>
             <ul>
               <li>
-                <a href="#" title="Careers">
+                <NavLink to="#" title="Careers">
                   Careers
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Press & News">
+                <NavLink to="#" title="Press & News">
                   Press & News
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#" title="Partnerships">
+                <NavLink to="#" title="Partnerships">
                   Partnerships
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#" title="Privacy Policy">
+                <NavLink to="#" title="Privacy Policy">
                   Privacy Policy
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#" title="Terms of Service">
+                <NavLink to="#" title="Terms of Service">
                   Terms of Service
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#" title="Intellectual Property Claims">
+                <NavLink to="#" title="Intellectual Property Claims">
                   Intellectual Property Claims
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#" title="Investor Relations">
+                <NavLink to="#" title="Investor Relations">
                   Investor Relations
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -205,24 +206,24 @@ const Footer = (props: Props) => {
             </h6>
             <ul>
               <li>
-                <a href="#" title="Help & Support">
+                <NavLink to="#" title="Help & Support">
                   Help & Support
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Trust & Safety">
+                <NavLink to="#" title="Trust & Safety">
                   Trust & Safety
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Selling on Friverr">
+                <NavLink to="#" title="Selling on Friverr">
                   Selling on Friverr
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="#" title="Buying on Friverr">
+                <NavLink to="#" title="Buying on Friverr">
                   Buying on Friverr
-                </a>{" "}
+                </NavLink>{" "}
               </li>
             </ul>
           </div>
@@ -249,41 +250,41 @@ const Footer = (props: Props) => {
           <div className="footer-bottom-right">
             <ul className="social">
               <li>
-                <a href="https://www.twitter.com/" title="Twitter">
+                <NavLink to="https://www.twitter.com/" title="Twitter">
                   <i className="fab fa-twitter"></i>
-                </a>{" "}
+                </NavLink>{" "}
               </li>
               <li>
-                <a href="https://www.facebook.com/" title="Facebook">
+                <NavLink to="https://www.facebook.com/" title="Facebook">
                   <i className="fab fa-facebook"></i>
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="https://www.linkedin.com/" title="LinkedIn">
+                <NavLink to="https://www.linkedin.com/" title="LinkedIn">
                   <i className="fab fa-linkedin"></i>
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="https://www.pinterest.com/" title="Pinterest">
+                <NavLink to="https://www.pinterest.com/" title="Pinterest">
                   <i className="fab fa-pinterest"></i>
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="https://www.instagram.com/" title="Instagram">
+                <NavLink to="https://www.instagram.com/" title="Instagram">
                   <i className="fab fa-instagram"></i>
-                </a>
+                </NavLink>
               </li>
             </ul>
             <div className="setting">
-              <a href="#">
+              <NavLink to="#">
                 <i className="fa fa-globe"></i>English
-              </a>
-              <a href="#">
+              </NavLink>
+              <NavLink to="#">
                 <i className="fa fa-dollar-sign"></i>USD
-              </a>
-              <a href="#" className="person">
+              </NavLink>
+              <NavLink to="#" className="person">
                 <i className="fa fa-male"></i>
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>

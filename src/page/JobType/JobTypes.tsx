@@ -33,20 +33,17 @@ type Props = {};
 
 const JobTypes = (props: Props) => {
   const params: any = useParams();
-
+  const dispatch: DispatchType = useDispatch();
+  const id = params.id;
   // call api
-  const getJobType = () => {
-    dispatch(getJobTypeApi(params.id));
-  };
+
   useEffect(() => {
-    getJobType();
-  }, [params.id]);
+    dispatch(getJobTypeApi(id));
+  }, [id]);
 
   const { JobType } = useSelector(
     (state: RootState) => state.JobManagementReducer
   );
-
-  const dispatch: DispatchType = useDispatch();
 
   // thay doi banner
   let imgBanner = "/img/JobType/graphics-design-desktop.webp";

@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import { useFormik } from "formik";
 import { KeySearch } from "../../components/Header/Header";
 import { history } from "../..";
+import { NavLink } from "react-router-dom";
 
 type Props = {};
 
@@ -88,16 +89,16 @@ const Carousel = (props: Props) => {
             <span>Popular: </span>
             <ul className="popular_list">
               <li className="popular_item">
-                <a href="#">Website Design</a>
+                <NavLink to="#">Website Design</NavLink>
               </li>
               <li className="popular_item">
-                <a href="#">WordPress</a>
+                <NavLink to="#">WordPress</NavLink>
               </li>
               <li className="popular_item">
-                <a href="#">Logo Design</a>
+                <NavLink to="#">Logo Design</NavLink>
               </li>
               <li className="popular_item">
-                <a href="#">Video Editing</a>
+                <NavLink to="#">Video Editing</NavLink>
               </li>
             </ul>
           </div>

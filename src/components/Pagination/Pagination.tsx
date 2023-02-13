@@ -69,7 +69,7 @@ const Pagination = (props: Props) => {
   };
   const prevPage = () => {
     setPage((prev) => prev - 1);
-    if ((page - 1) % pageNumberLimit == 0) {
+    if ((page - 1) % pageNumberLimit === 0) {
       setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
       setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
