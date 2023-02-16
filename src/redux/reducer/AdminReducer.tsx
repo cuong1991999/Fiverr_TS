@@ -14,21 +14,38 @@ export interface JobService {
   ngayThue: string;
   hoanThanh: boolean;
 }
+export interface JobAdmin {
+  id: number;
+  tenCongViec: string;
+  danhGia: number;
+  giaTien: number;
+  nguoiTao: number;
+  hinhAnh: string;
+  moTa: string;
+  maChiTietLoaiCongViec: number;
+  moTaNgan: string;
+  saoCongViec: number;
+}
 type AdminState = {
   AdminJobType: JobTypeAdmin[];
   AdminJobService: JobService[];
   AdminComment: ArrComments[];
+  AdminJob: JobAdmin[];
 };
 const initialState: AdminState = {
   AdminJobType: [],
   AdminJobService: [],
   AdminComment: [],
+  AdminJob: [],
 };
 
 const AdminReducer = createSlice({
   name: "AdminReducer",
   initialState,
   reducers: {
+    arrJobAction: (state: AdminState, action: PayloadAction<JobAdmin[]>) => {
+      state.AdminJob = action.payload;
+    },
     arrJobTypeAction: (
       state: AdminState,
       action: PayloadAction<JobTypeAdmin[]>
@@ -50,8 +67,12 @@ const AdminReducer = createSlice({
   },
 });
 
-export const { arrJobTypeAction, arrJobServiceAction, arrCommentAction } =
-  AdminReducer.actions;
+export const {
+  arrJobTypeAction,
+  arrJobServiceAction,
+  arrCommentAction,
+  arrJobAction,
+} = AdminReducer.actions;
 // manage jobtype
 export const getAdminJobTypeApi = () => {
   return async (dispatch: DispatchType) => {
@@ -136,6 +157,50 @@ export const putAdminJobServiceApi = (payload: JobService) => {
     }
   };
 };
+//manage job
+export const getAdminJobApi = () => {
+  return async (dispatch: DispatchType) => {
+    const result = await http.get("/api/cong-viec");
+    dispatch(arrJobAction(result.data.content));
+  };
+};
+export const addAdminJobApi = (values: JobAdmin) => {
+  return async (dispatch: DispatchType) => {
+    try {
+      await http.post(`/api/cong-viec`, values);
+      dispatch(getAdminJobApi());
+      alert("Success");
+    } catch (err) {
+      alert("Fail");
+    }
+  };
+};
+
+export const deleteAdminJobApi = (id: number) => {
+  return async (dispatch: DispatchType) => {
+    try {
+      await http.delete(`/api/cong-viec/${id}`);
+      alert("Success");
+
+      dispatch(getAdminJobApi());
+    } catch (err) {
+      alert("Fail");
+    }
+  };
+};
+
+export const putAdminJobApi = (payload: JobAdmin) => {
+  return async (dispatch: DispatchType) => {
+    try {
+      await http.put(`/api/cong-viec/${payload.id}`, payload);
+
+      dispatch(getAdminJobApi());
+    } catch (err) {
+      alert("Fail");
+    }
+  };
+};
+
 // comment
 export const getCommentAdminApi = () => {
   return async (dispatch: DispatchType) => {

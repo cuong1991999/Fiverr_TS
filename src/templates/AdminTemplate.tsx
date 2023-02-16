@@ -22,7 +22,7 @@ const AdminTemplate = (props: Props) => {
     return <Navigate to={"/login"} />;
   }
   return (
-    <section className="admin">
+    <section className="admin" style={{ height: "100%" }}>
       <nav className="sidebar">
         <div className="sidebar-header">
           <h3>Dashboard</h3>
@@ -36,7 +36,7 @@ const AdminTemplate = (props: Props) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="#">
+            <NavLink to="/admin/managejob">
               <i className="fa-solid fa-user"></i>
               Manage Job
             </NavLink>
