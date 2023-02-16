@@ -9,6 +9,8 @@ import {
   deleteAdminJobTypeApi,
   putAdminJobTypeApi,
 } from "../../../redux/reducer/AdminReducer";
+import * as Yup from "yup";
+
 type Props = {};
 export type JobTypeAdminAdd = {
   id: number;
@@ -35,12 +37,16 @@ const ManageJobType = (props: Props) => {
   const [item, setItem] = useState<any>(null);
 
   const dispatch: DispatchType = useDispatch();
+
   // model edit
-  const frme = useFormik({
+  const frme = useFormik<JobTypeAdminAdd>({
     initialValues: {
       id: item?.id,
       tenLoaiCongViec: item?.tenLoaiCongViec,
     },
+    validationSchema: Yup.object().shape({
+      tenLoaiCongViec: Yup.string().trim().required("JobType cannot be blank"),
+    }),
     onSubmit: (value) => {
       const payload = {
         id: item?.id,
@@ -58,6 +64,10 @@ const ManageJobType = (props: Props) => {
       id: 0,
       tenLoaiCongViec: "",
     },
+    validationSchema: Yup.object().shape({
+      id: Yup.string().trim().required("ID cannot be blank"),
+      tenLoaiCongViec: Yup.string().trim().required("JobType cannot be blank"),
+    }),
     onSubmit: (value: JobTypeAdminAdd) => {
       dispatch(addAdminJobTypeApi(value));
       closeAdd();
@@ -153,6 +163,9 @@ const ManageJobType = (props: Props) => {
                   aria-describedby="addon-wrapping"
                 />
               </div>
+              {frm.touched.id && frm.errors.id && (
+                <p className="text-danger my-1">{frm.errors.id}</p>
+              )}
               <div className="input-group flex-nowrap">
                 <span className="input-group-text" id="addon-wrapping">
                   Job Type
@@ -167,6 +180,9 @@ const ManageJobType = (props: Props) => {
                   aria-describedby="addon-wrapping"
                 />
               </div>
+              {frm.touched.tenLoaiCongViec && frm.errors.tenLoaiCongViec && (
+                <p className="text-danger my-1">{frm.errors.tenLoaiCongViec}</p>
+              )}
               <div className="model-action">
                 <button className="btn btn-success" type="submit">
                   ADD
@@ -215,10 +231,16 @@ const ManageJobType = (props: Props) => {
                   name="tenLoaiCongViec"
                   defaultValue={item?.tenLoaiCongViec}
                   onChange={frme.handleChange}
+                  onBlur={frme.handleChange}
                   aria-label="Username"
                   aria-describedby="addon-wrapping"
                 />
               </div>
+              {frme.touched.tenLoaiCongViec && frme.errors.tenLoaiCongViec && (
+                <p className="text-danger my-1">
+                  {frme.errors.tenLoaiCongViec}
+                </p>
+              )}
               <div className="model-action">
                 <button className="btn btn-success" type="submit">
                   SAVE
