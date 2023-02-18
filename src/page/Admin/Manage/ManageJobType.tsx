@@ -23,10 +23,10 @@ const ManageJobType = (props: Props) => {
   const { arrPagination } = useSelector(
     (state: RootState) => state.JobManagementReducer
   );
-  const getAdminJobType = () => {
+  const getAdminJobType = () => { 
     dispatch(getAdminJobTypeApi());
   };
-
+  
   useEffect(() => {
     getAdminJobType();
   }, []);

@@ -37,12 +37,15 @@ type UserState = {
   userRegister: UserProfile | null;
   userLogin: UserProfile | null;
   userProfile: UserProfile | null;
+  arrPagination: any[];
 };
 
 const initialState: UserState = {
   userRegister: null,
   userLogin: getStoreJson(USER_LOGIN),
   userProfile: null,
+  arrPagination: [],
+
 };
 
 const userReducer = createSlice({

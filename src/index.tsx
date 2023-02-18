@@ -25,6 +25,8 @@ import ManageJobType from "./page/Admin/Manage/ManageJobType";
 import Profile from "./page/Profile/Profile";
 import ManageService from "./page/Admin/Manage/ManageService";
 import Comment from "./page/Admin/Comment/Comment";
+import ManageUser from "./page/Admin/Manage/ManageUser";
+import ManageJob from "./page/Admin/Manage/ManageJob";
 export const history: any = createBrowserHistory();
 
 const root = ReactDOM.createRoot(
@@ -54,6 +56,14 @@ root.render(
           <Route
             path="/admin/manageservice"
             element={<ManageService />}
+          ></Route>
+          <Route
+            path="/admin/manageuser"
+            element={<ManageUser/>}
+          ></Route>
+          <Route
+            path="/admin/managerJob"
+            element={<ManageJob/>}
           ></Route>
           <Route path="/admin/managecomment" element={<Comment />}></Route>
           <Route path="*" element={<Navigate to="/home" />} />
