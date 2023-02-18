@@ -59,6 +59,7 @@ const CategoriesMenu = (props: Props) => {
   };
   useEffect(() => {
     getMenuApi();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <section className="category">

@@ -5,12 +5,11 @@ import { KeySearch } from "./Header";
 import { history } from "../..";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/configStore";
-import { removeStore,eraseCookie, eraseStore, ACCESS_TOKEN, USER_LOGIN } from "../../util/config";
+import { removeStore, ACCESS_TOKEN, USER_LOGIN } from "../../util/config";
 type Props = {};
 
 const HeaderNoSticky = (props: Props) => {
-
-  const {userLogin} = useSelector((state: RootState) => state.userReducer);
+  const { userLogin } = useSelector((state: RootState) => state.userReducer);
   // dung duoc cac trang khac ngoai trang home
   //render menu
   const { arrMenu } = useSelector(
@@ -150,13 +149,13 @@ const HeaderNoSticky = (props: Props) => {
                         </li>
                         {userLogin.role === "ADMIN" && (
                           <li className="mb-3">
-                            <a
+                            <NavLink
                               style={{ color: "#212529" }}
                               className="dropdown-item"
-                              href="/admin/managejobtype"
+                              to="/admin/managejobtype"
                             >
                               Admin
-                            </a>
+                            </NavLink>
                           </li>
                         )}
                         <li>

@@ -15,19 +15,29 @@ export interface JobService {
   ngayThue: string;
   hoanThanh: boolean;
 }
+export interface JobAdmin {
+  id: number;
+  tenCongViec: string;
+  danhGia: number;
+  giaTien: number;
+  nguoiTao: number;
+  hinhAnh: string;
+  moTa: string;
+  maChiTietLoaiCongViec: number;
+  moTaNgan: string;
+  saoCongViec: number;
+}
 type AdminState = {
   AdminJobType: JobTypeAdmin[];
   AdminJobService: JobService[];
   AdminComment: ArrComments[];
-  arrAdmin: any;
-  editUser:any;
+  AdminJob: JobAdmin[];
 };
 const initialState: AdminState = {
   AdminJobType: [],
   AdminJobService: [],
   AdminComment: [],
-  arrAdmin:[],
-  editUser:{}
+  AdminJob: [],
 };
 export interface Admin{
     
@@ -47,28 +57,31 @@ export interface EditUser{
   id:string;
   value:Admin;
 }
-const adminReducer = createSlice({
-  name: 'adminReducer',
-  initialState,
-  reducers: {
-    getAdminAction:(state,action:PayloadAction<Admin[]>)=>{
-        state.arrAdmin=action.payload;
-    },
-    getUpdateAction:(state,action:PayloadAction<Admin>)=>{
-        state.editUser=action.payload;
-    },
-    searchUserAction:(state,action:PayloadAction<Admin[]>)=>{
-        state.arrAdmin=action.payload;
-  }
-  }
-});
+// const adminReducer = createSlice({
+//   name: 'adminReducer',
+//   initialState,
+//   reducers: {
+//     getAdminAction:(state,action:PayloadAction<Admin[]>)=>{
+//         state.arrAdmin=action.payload;
+//     },
+//     getUpdateAction:(state,action:PayloadAction<Admin>)=>{
+//         state.editUser=action.payload;
+//     },
+//     searchUserAction:(state,action:PayloadAction<Admin[]>)=>{
+//         state.arrAdmin=action.payload;
+//   }
+//   }
+// });
 
-export const {getAdminAction,getUpdateAction,searchUserAction} = adminReducer.actions
+// export const {getAdminAction,getUpdateAction,searchUserAction} = adminReducer.actions
 
 const AdminReducer = createSlice({
   name: "AdminReducer",
   initialState,
   reducers: {
+    arrJobAction: (state: AdminState, action: PayloadAction<JobAdmin[]>) => {
+      state.AdminJob = action.payload;
+    },
     arrJobTypeAction: (
       state: AdminState,
       action: PayloadAction<JobTypeAdmin[]>
@@ -90,8 +103,12 @@ const AdminReducer = createSlice({
   },
 });
 
-export const { arrJobTypeAction, arrJobServiceAction, arrCommentAction } =
-  AdminReducer.actions;
+export const {
+  arrJobTypeAction,
+  arrJobServiceAction,
+  arrCommentAction,
+  arrJobAction,
+} = AdminReducer.actions;
 // manage jobtype
 export const getAdminJobTypeApi = () => {
   return async (dispatch: DispatchType) => {
@@ -176,6 +193,50 @@ export const putAdminJobServiceApi = (payload: JobService) => {
     }
   };
 };
+//manage job
+export const getAdminJobApi = () => {
+  return async (dispatch: DispatchType) => {
+    const result = await http.get("/api/cong-viec");
+    dispatch(arrJobAction(result.data.content));
+  };
+};
+export const addAdminJobApi = (values: JobAdmin) => {
+  return async (dispatch: DispatchType) => {
+    try {
+      await http.post(`/api/cong-viec`, values);
+      dispatch(getAdminJobApi());
+      alert("Success");
+    } catch (err) {
+      alert("Fail");
+    }
+  };
+};
+
+export const deleteAdminJobApi = (id: number) => {
+  return async (dispatch: DispatchType) => {
+    try {
+      await http.delete(`/api/cong-viec/${id}`);
+      alert("Success");
+
+      dispatch(getAdminJobApi());
+    } catch (err) {
+      alert("Fail");
+    }
+  };
+};
+
+export const putAdminJobApi = (payload: JobAdmin) => {
+  return async (dispatch: DispatchType) => {
+    try {
+      await http.put(`/api/cong-viec/${payload.id}`, payload);
+
+      dispatch(getAdminJobApi());
+    } catch (err) {
+      alert("Fail");
+    }
+  };
+};
+
 // comment
 export const getCommentAdminApi = () => {
   return async (dispatch: DispatchType) => {
@@ -203,9 +264,9 @@ export const getadmintApi = () => {
     try{
       const result = await http.get('/api/users');
       let arradmin:Admin[]=result.data.content;
-      const action = getAdminAction(arradmin);
+      // const action = getAdminAction(arradmin);
 
-      dispatch1(action);
+      // dispatch1(action);
     } catch(err){
       console.log({err});
     }
@@ -244,7 +305,7 @@ export const deleteUseApi=(id: string)=>{
   return async (dispatch2: DispatchType) => {
     try {
       let result = await http.get(`/api/users/${id}`);
-      dispatch2(getUpdateAction(result.data.content));
+      // dispatch2(getUpdateAction(result.data.content));
     } catch (err) {
       console.log(err);
     }

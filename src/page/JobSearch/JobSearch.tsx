@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import React, { useEffect, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import CardJob from "../../components/CardJob/CardJob";
 import CategoriesMenuNoSticky from "../../components/Category/CategoriesMenuNoSticky";
 import Footer from "../../components/Footer/Footer";
@@ -25,11 +25,9 @@ const JobSearch = (props: Props) => {
   );
   const dispacth: DispatchType = useDispatch();
   //call api
-  const getJobApi = () => {
-    dispacth(getSearchApi(params.id));
-  };
+
   useEffect(() => {
-    getJobApi();
+    dispacth(getSearchApi(params.id));
   }, [params.id]);
   //
 
@@ -92,162 +90,162 @@ const JobSearch = (props: Props) => {
           <div className="result-topbar">
             <div className="result-topbar-dropdown">
               <div className="dropdown">
-                <a
+                <NavLink
                   className="btn btn-dropdown dropdown-toggle"
-                  href="#"
+                  to="#"
                   role="button"
                   id="dropdownMenuLink"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Category
-                </a>
+                </NavLink>
                 <ul
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuLink"
                 >
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="#">
                       All Categories
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="#">
                       Web Programing<span>(20,566)</span>
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="#">
                       Data Entry<span>(12,566)</span>
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
               </div>
               <div className="dropdown">
-                <a
+                <NavLink
                   className="btn btn-dropdown dropdown-toggle"
-                  href="#"
+                  to="#"
                   role="button"
                   id="dropdownMenuLink"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Logo Option
-                </a>
+                </NavLink>
                 <ul
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuLink"
                 >
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="#">
                       All Categories
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="#">
                       Web Programing<span>(20,566)</span>
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="#">
                       Data Entry<span>(12,566)</span>
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
               </div>
               <div className="dropdown">
-                <a
+                <NavLink
                   className="btn btn-dropdown dropdown-toggle"
-                  href="#"
+                  to="#"
                   role="button"
                   id="dropdownMenuLink"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Seller Details
-                </a>
+                </NavLink>
                 <ul
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuLink"
                 >
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="#">
                       All Categories
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="#">
                       Web Programing<span>(20,566)</span>
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="#">
                       Data Entry<span>(12,566)</span>
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
               </div>
               <div className="dropdown">
-                <a
+                <NavLink
                   className="btn btn-dropdown dropdown-toggle"
-                  href="#"
+                  to="#"
                   role="button"
                   id="dropdownMenuLink"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Budget
-                </a>
+                </NavLink>
                 <ul
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuLink"
                 >
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="#">
                       All Categories
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="#">
                       Web Programing<span>(20,566)</span>
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="#">
                       Data Entry<span>(12,566)</span>
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
               </div>
               <div className="dropdown">
-                <a
+                <NavLink
                   className="btn btn-dropdown dropdown-toggle"
-                  href="#"
+                  to="#"
                   role="button"
                   id="dropdownMenuLink"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Delivery Time
-                </a>
+                </NavLink>
                 <ul
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuLink"
                 >
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="#">
                       All Categories
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="#">
                       Web Programing<span>(20,566)</span>
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="#">
                       Data Entry<span>(12,566)</span>
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
               </div>

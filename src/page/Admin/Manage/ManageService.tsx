@@ -9,7 +9,7 @@ import {
   getAdminJobServiceApi,
   putAdminJobServiceApi,
 } from "../../../redux/reducer/AdminReducer";
-
+import * as Yup from "yup";
 type Props = {};
 type JobService = {
   id: number;
@@ -118,6 +118,11 @@ const ManageService = (props: Props) => {
       ngayThue: "",
       hoanThanh: complete,
     },
+    validationSchema: Yup.object().shape({
+      maCongViec: Yup.string().trim().required(" Job ID cannot be blank"),
+      maNguoiThue: Yup.string().trim().required("Hirer ID cannot be blank"),
+      ngayThue: Yup.string().trim().required("Hire Day cannot be blank"),
+    }),
     onSubmit: (value) => {
       const payload = {
         id: item?.id,
@@ -140,6 +145,12 @@ const ManageService = (props: Props) => {
       ngayThue: "",
       hoanThanh: complete,
     },
+    validationSchema: Yup.object().shape({
+      id: Yup.string().trim().required("ID cannot be blank"),
+      maCongViec: Yup.string().trim().required("Job ID cannot be blank"),
+      maNguoiThue: Yup.string().trim().required("Hire ID cannot be blank"),
+      ngayThue: Yup.string().trim().required("Hire Day cannot be blank"),
+    }),
     onSubmit: (value) => {
       const payload = {
         id: value.id,
@@ -195,9 +206,13 @@ const ManageService = (props: Props) => {
                   aria-label="Username"
                   aria-describedby="addon-wrapping"
                   name="id"
+                  onBlur={frma.handleChange}
                   onChange={frma.handleChange}
                 />
               </div>
+              {frma.touched.id && frma.errors.id && (
+                <p className="text-danger my-1">{frma.errors.id}</p>
+              )}
               <div className="input-group flex-nowrap mb-3">
                 <span className="input-group-text" id="addon-wrapping">
                   Job ID
@@ -209,9 +224,13 @@ const ManageService = (props: Props) => {
                   placeholder="Job ID"
                   aria-label="Username"
                   aria-describedby="addon-wrapping"
+                  onBlur={frma.handleChange}
                   onChange={frma.handleChange}
                 />
               </div>
+              {frma.touched.maCongViec && frma.errors.maCongViec && (
+                <p className="text-danger my-1">{frma.errors.maCongViec}</p>
+              )}
               <div className="input-group flex-nowrap mb-3">
                 <span className="input-group-text" id="addon-wrapping">
                   Hirer ID
@@ -223,10 +242,14 @@ const ManageService = (props: Props) => {
                   placeholder="Hirer ID"
                   aria-label="Username"
                   aria-describedby="addon-wrapping"
+                  onBlur={frma.handleChange}
                   onChange={frma.handleChange}
                 />
               </div>
-              <div className="input-group flex-nowrap">
+              {frma.touched.maNguoiThue && frma.errors.maNguoiThue && (
+                <p className="text-danger my-1">{frma.errors.maNguoiThue}</p>
+              )}
+              <div className="input-group flex-wrap">
                 <span className="input-group-text" id="addon-wrapping">
                   Hire Day
                 </span>
@@ -236,9 +259,13 @@ const ManageService = (props: Props) => {
                   className="form-control"
                   aria-label="Username"
                   aria-describedby="addon-wrapping"
+                  onBlur={frma.handleChange}
                   onChange={frma.handleChange}
                 />
               </div>
+              {frma.touched.ngayThue && frma.errors.ngayThue && (
+                <p className="text-danger my-1">{frma.errors.ngayThue}</p>
+              )}
               <p className="my-3">Condition</p>
               <div className="d-flex align-items-center gap-2">
                 <div className="form-check ">
@@ -293,7 +320,7 @@ const ManageService = (props: Props) => {
       <div className="model-tabs modeltabs-edit">
         <div className="overplay-admin" onClick={showEdit}></div>
         <div className="model-body">
-          <h2>UPDATE JOBTYPE</h2>
+          <h2>UPDATE SERVICE</h2>
           <div className="model-form">
             <form action="" onSubmit={frme.handleSubmit}>
               <div className="input-group flex-nowrap mb-3">
@@ -305,6 +332,7 @@ const ManageService = (props: Props) => {
                   disabled
                   value={item?.id}
                   onChange={frme.handleChange}
+                  onBlur={frme.handleChange}
                   className="form-control"
                   placeholder="ID"
                   aria-label="Username"
@@ -319,18 +347,23 @@ const ManageService = (props: Props) => {
                   type="text"
                   defaultValue={item?.maCongViec}
                   onChange={frme.handleChange}
+                  onBlur={frme.handleChange}
                   className="form-control"
                   placeholder="Job Type"
                   aria-label="Username"
                   aria-describedby="addon-wrapping"
                 />
               </div>
+              {frme.touched.maCongViec && frme.errors.maCongViec && (
+                <p className="text-danger my-1">{frme.errors.maCongViec}</p>
+              )}
               <div className="input-group flex-nowrap mb-3">
                 <span className="input-group-text" id="addon-wrapping">
                   Hirer ID
                 </span>
                 <input
                   defaultValue={item?.maNguoiThue}
+                  onBlur={frme.handleChange}
                   type="text"
                   className="form-control"
                   placeholder="Job Type"
@@ -339,20 +372,27 @@ const ManageService = (props: Props) => {
                   aria-describedby="addon-wrapping"
                 />
               </div>
+              {frme.touched.maNguoiThue && frme.errors.maNguoiThue && (
+                <p className="text-danger my-1">{frme.errors.maNguoiThue}</p>
+              )}
               <div className="input-group flex-nowrap">
                 <span className="input-group-text" id="addon-wrapping">
                   Hire Day
                 </span>
                 <input
                   type="date"
+                  name="ngayThue"
                   className="form-control"
                   onChange={frme.handleChange}
+                  onBlur={frme.handleChange}
                   placeholder="Job Type"
                   aria-label="Username"
                   aria-describedby="addon-wrapping"
                 />
               </div>
-
+              {frme.touched.ngayThue && frme.errors.ngayThue && (
+                <p className="text-danger my-1">{frme.errors.ngayThue}</p>
+              )}
               <p className="my-3">Condition</p>
               <div className="d-flex align-items-center gap-2">
                 <div className="form-check ">
