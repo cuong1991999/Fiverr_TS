@@ -57,14 +57,8 @@ root.render(
             path="/admin/manageservice"
             element={<ManageService />}
           ></Route>
-          <Route
-            path="/admin/manageuser"
-            element={<ManageUser/>}
-          ></Route>
-          <Route
-            path="/admin/managerJob"
-            element={<ManageJob/>}
-          ></Route>
+          <Route path="/admin/manageuser" element={<ManageUser />}></Route>
+          <Route path="/admin/managejob" element={<ManageJob />}></Route>
           <Route path="/admin/managecomment" element={<Comment />}></Route>
           <Route path="*" element={<Navigate to="/home" />} />
         </Route>

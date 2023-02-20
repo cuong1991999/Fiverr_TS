@@ -58,10 +58,6 @@ const Register = (props: Props) => {
         .oneOf([yup.ref("password")], "Passwords must match"),
       name: yup.string().trim().required("Name cannot be blank!"),
       phone: yup.string().trim().required("Phone number cannot be blank!"),
-      // .matches(
-      //   /((^(\+84|84|0|0084){1})(3|5|7|8|9))+([0-9]{8})$/,
-      //   "Phone number is not valid!"
-      // ),
     }),
     onSubmit: (values: UserRegister) => {
       dispatch(registerApi(values));
