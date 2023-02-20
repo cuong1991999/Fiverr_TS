@@ -13,7 +13,9 @@ import {
 import Footer from "../../components/Footer/Footer";
 import HeaderNoSticky from "../../components/Header/HearderNoSticky";
 import CategoriesMenuNoSticky from "../../components/Category/CategoriesMenuNoSticky";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
+import { getStoreJson, USER_LOGIN } from "../../util/config";
+import { history } from "../..";
 
 type Props = {};
 
@@ -21,8 +23,14 @@ const Profile = (props: Props) => {
   const { userLogin, arrJobRent } = useSelector(
     (state: RootState) => state.userReducer
   );
-  const dispatch = useDispatch<DispatchType>();
 
+  const dispatch = useDispatch<DispatchType>();
+  useEffect(() => {
+    if (!userLogin) {
+      alert("You are not logged in !");
+      return history.push("/login");
+    }
+  }, []);
   useEffect(() => {
     dispatch(getProfileApi(userLogin?.id!));
     dispatch(getJobrentApi());

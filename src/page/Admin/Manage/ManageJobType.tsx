@@ -25,7 +25,7 @@ const ManageJobType = (props: Props) => {
   const { arrPagination } = useSelector(
     (state: RootState) => state.JobManagementReducer
   );
-  const getAdminJobType = () => { 
+  const getAdminJobType = () => {
     dispatch(getAdminJobTypeApi());
   };
   useEffect(() => {
@@ -43,15 +43,14 @@ const ManageJobType = (props: Props) => {
       id: item?.id,
       tenLoaiCongViec: item?.tenLoaiCongViec,
     },
-    validationSchema: Yup.object().shape({
-      tenLoaiCongViec: Yup.string().trim().required("JobType cannot be blank"),
-    }),
-    onSubmit: (value) => {
+
+    onSubmit: (values) => {
       const payload = {
         id: item?.id,
-        tenLoaiCongViec: value.tenLoaiCongViec,
+        tenLoaiCongViec: values.tenLoaiCongViec,
       };
       console.log(payload);
+
       dispatch(putAdminJobTypeApi(payload));
       setItem(null);
       closeEdit();

@@ -115,22 +115,20 @@ const ManageService = (props: Props) => {
       id: item?.id,
       maCongViec: item?.maCongViec,
       maNguoiThue: item?.maNguoiThue,
-      ngayThue: "",
+      ngayThue: item?.ngayThue,
       hoanThanh: complete,
     },
-    validationSchema: Yup.object().shape({
-      maCongViec: Yup.string().trim().required(" Job ID cannot be blank"),
-      maNguoiThue: Yup.string().trim().required("Hirer ID cannot be blank"),
-      ngayThue: Yup.string().trim().required("Hire Day cannot be blank"),
-    }),
-    onSubmit: (value) => {
+
+    onSubmit: (values) => {
       const payload = {
         id: item?.id,
-        maCongViec: value.maCongViec,
-        maNguoiThue: value.maNguoiThue,
-        ngayThue: value.ngayThue,
+        maCongViec: values.maCongViec,
+        maNguoiThue: values.maNguoiThue,
+        ngayThue: values.ngayThue,
         hoanThanh: complete,
       };
+      console.log(payload);
+
       dispatch(putAdminJobServiceApi(payload));
       setItem(null);
       closeEdit();
@@ -331,11 +329,12 @@ const ManageService = (props: Props) => {
                   type="text"
                   disabled
                   value={item?.id}
+                  name="id"
                   onChange={frme.handleChange}
                   onBlur={frme.handleChange}
                   className="form-control"
                   placeholder="ID"
-                  aria-label="Username"
+                  aria-label="id"
                   aria-describedby="addon-wrapping"
                 />
               </div>
@@ -345,18 +344,17 @@ const ManageService = (props: Props) => {
                 </span>
                 <input
                   type="text"
+                  name="maCongViec"
                   defaultValue={item?.maCongViec}
                   onChange={frme.handleChange}
                   onBlur={frme.handleChange}
                   className="form-control"
                   placeholder="Job Type"
-                  aria-label="Username"
+                  aria-label="maCongViec"
                   aria-describedby="addon-wrapping"
                 />
               </div>
-              {frme.touched.maCongViec && frme.errors.maCongViec && (
-                <p className="text-danger my-1">{frme.errors.maCongViec}</p>
-              )}
+
               <div className="input-group flex-nowrap mb-3">
                 <span className="input-group-text" id="addon-wrapping">
                   Hirer ID
@@ -365,16 +363,15 @@ const ManageService = (props: Props) => {
                   defaultValue={item?.maNguoiThue}
                   onBlur={frme.handleChange}
                   type="text"
+                  name="maNguoiThue"
                   className="form-control"
                   placeholder="Job Type"
                   onChange={frme.handleChange}
-                  aria-label="Username"
+                  aria-label="maNguoiThue"
                   aria-describedby="addon-wrapping"
                 />
               </div>
-              {frme.touched.maNguoiThue && frme.errors.maNguoiThue && (
-                <p className="text-danger my-1">{frme.errors.maNguoiThue}</p>
-              )}
+
               <div className="input-group flex-nowrap">
                 <span className="input-group-text" id="addon-wrapping">
                   Hire Day
@@ -382,24 +379,22 @@ const ManageService = (props: Props) => {
                 <input
                   type="date"
                   name="ngayThue"
+                  defaultValue={item?.ngayThue}
                   className="form-control"
                   onChange={frme.handleChange}
                   onBlur={frme.handleChange}
                   placeholder="Job Type"
-                  aria-label="Username"
+                  aria-label="ngayThue"
                   aria-describedby="addon-wrapping"
                 />
               </div>
-              {frme.touched.ngayThue && frme.errors.ngayThue && (
-                <p className="text-danger my-1">{frme.errors.ngayThue}</p>
-              )}
+
               <p className="my-3">Condition</p>
               <div className="d-flex align-items-center gap-2">
                 <div className="form-check ">
                   <input
                     className="form-check-input"
                     type="radio"
-                    name="hoanThanh"
                     value="true"
                     id="hoanThanh3"
                     checked={checked2 === "true"}
@@ -415,7 +410,6 @@ const ManageService = (props: Props) => {
                   <input
                     className="form-check-input"
                     type="radio"
-                    name="hoanThanh"
                     value="false"
                     id="hoanThanh4"
                     checked={checked2 === "false"}
