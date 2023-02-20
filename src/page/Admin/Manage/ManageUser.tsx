@@ -209,7 +209,7 @@ const ManageUser = (props: Props) => {
             {/* <th style={{ borderLeft: "1px solid rgba(0,0,0,.99)" }}>
               Birthday
             </th> */}
-            <th style={{ borderLeft: "1px solid rgba(0,0,0,.99)", width:"50px !importan" }}>
+            <th style={{ borderLeft: "1px solid rgba(0,0,0,.99)", width: "50px !importan" }}>
               Role
             </th>
             <th style={{ borderLeft: "1px solid rgba(0,0,0,.99)" }}>
@@ -269,6 +269,135 @@ const ManageUser = (props: Props) => {
               {frm.touched.name && frm.errors.name && (
                 <p className='text-danger my-1'>{frm.errors.name}</p>
               )}
+              <div className='input-group flex-nowrap mt-3'>
+                <span className='input-group-text' id='addon-wrapping'>
+                  EMAIL
+                </span>
+                <input type="text"
+                  name='email'
+                  className='form-control'
+                  placeholder='email'
+                  onChange={frm.handleChange}
+                  aria-label="Username"
+                  aria-describedby='addon-wrapping'
+                />
+              </div>
+              {frm.touched.name && frm.errors.name && (
+                <p className='text-danger my-1'>{frm.errors.email}</p>
+              )}
+              <div className='input-group flex-nowrap mt-3'>
+                <span className='input-group-text' id='addon-wrapping'>
+                  PHONE
+                </span>
+                <input type="text"
+                  name='phone'
+                  className='form-control'
+                  placeholder='phone'
+                  onChange={frm.handleChange}
+                  aria-label="Username"
+                  aria-describedby='addon-wrapping' />
+              </div>
+              {frm.touched.name && frm.errors.name && (
+                <p className='text-danger my-1'>{frm.errors.phone}</p>
+              )}
+
+              <div className='input-group flex-nowrap mt-3'>
+                <span className='input-group-text' id='addon-wrapping'>
+                  PASSWORD
+                </span>
+                <input type="text"
+                  name='password'
+                  className='form-control'
+                  placeholder='password'
+                  onChange={frm.handleChange}
+                  aria-label="Username"
+                  aria-describedby='addon-wrapping' />
+              </div>
+              {frm.touched.name && frm.errors.name && (
+                <p className='text-danger my-1'>{frm.errors.password}</p>
+              )}
+
+              <div className='input-group flex-nowrap mt-3'>
+                <span className='input-group-text' id='addon-wrapping'>
+                  BIRTHDAY
+                </span>
+                <input type="date"
+                  name='birthday'
+                  className='form-control'
+                  placeholder='birthday'
+                  onChange={frm.handleChange}
+                  aria-label="Username"
+                  aria-describedby='addon-wrapping'
+                />
+                {frm.touched.birthday && frm.errors.birthday && (
+                  <p className='text-danger my-1'>{frm.errors.birthday}</p>
+                )}
+              </div>
+
+              <div className='input-group flex-nowrap mt-3'>
+                <span className='input-group-text' id='addon-wrapping'>
+                  ROLE
+                </span>
+                <input type="text"
+                  name='role'
+                  className='form-control'
+                  placeholder='role'
+                  onChange={frm.handleChange}
+                  aria-label="Username"
+                  aria-describedby='addon-wrapping'
+                />
+                {frm.touched.role && frm.errors.role && (
+                  <p className='text-danger my-1'>{frm.errors.role}</p>
+                )}
+              </div>
+
+              <div className='input-group flex-nowrap mt-3'>
+                <span className='input-group-text' id='addon-wrapping'>
+                  CERFICATION
+                </span>
+                <input type="text"
+                  name='cerfication'
+                  className='form-control'
+                  placeholder='cerfication'
+                  onChange={frm.handleChange}
+                  aria-label="Username"
+                  aria-describedby='addon-wrapping' />
+                {frm.touched.certification && frm.errors.certification && (
+                  <p className='text-danger my-1'>{frm.errors.certification}</p>
+                )}
+              </div>
+
+              <div className='input-group flex-nowrap mt-3'>
+                <span className='input-group-text' id='addon-wrapping'>
+                  GENDER
+                </span>
+                <input type="text"
+                  name='gender'
+                  className='form-control'
+                  placeholder='gender'
+                  onChange={frm.handleChange}
+                  aria-label="Username"
+                  aria-describedby='addon-wrapping' />
+                {frm.touched.gender && frm.errors.gender && (
+                  <p className='text-danger my-1'>{frm.errors.gender}</p>
+                )}
+              </div>
+
+              <div className='input-group flex-nowrap mt-3'>
+                <span className='input-group-text' id='addon-wrapping'>
+                  SKILL
+                </span>
+                <input type="text"
+                  name='skill'
+                  className='form-control'
+                  placeholder='skill'
+                  onChange={frm.handleChange}
+                  aria-label="Username"
+                  aria-describedby='addon-wrapping' />
+                {frm.touched.skill && frm.errors.skill && (
+                  <p className='text-danger my-1'>{frm.errors.skill}</p>
+                )}
+              </div>
               <div className='model-action'>
                 <button className='btn btn-success' type='submit'>
                   ADD
@@ -323,6 +452,158 @@ const ManageUser = (props: Props) => {
               {frme.touched.name && frme.errors.name && (
                 <p className='text-danger my-1'>
                   {frme.errors.name}
+                </p>
+              )}
+              {/* ----- */}
+              <div className='input-group flex-nowrap mt-2'>
+                <span className='input-group-text' id='addon-wrapping'>
+                  Email
+                </span>
+                <input type="text"
+                  className='form-control'
+                  placeholder='email'
+                  name='email'
+                  defaultValue={item?.email}
+                  onChange={frme.handleChange}
+                  onBlur={frme.handleChange}
+                  aria-label="Username"
+                  aria-describedby='addon-wrapping' />
+              </div>
+              {frme.touched.email && frme.errors.email && (
+                <p className='text-danger my-1'>
+                  {frme.errors.email}
+                </p>
+              )}
+              {/* ---- */}
+              <div className='input-group flex-nowrap mt-2'>
+                <span className='input-group-text' id='addon-wrapping'>
+                  Phone
+                </span>
+                <input type="text"
+                  className='form-control'
+                  placeholder='phone'
+                  name='phone'
+                  defaultValue={item?.phone}
+                  onChange={frme.handleChange}
+                  onBlur={frme.handleChange}
+                  aria-label="Username"
+                  aria-describedby='addon-wrapping'
+                />
+              </div>
+              {frme.touched.phone && frme.errors.phone && (
+                <p className='text-danger my-1'>
+                  {frme.errors.phone}
+                </p>
+              )}
+              {/* ----- */}
+              {/* <div className='input-group flex-nowrap mt-2'>
+                <span className='input-group-text' id='addon-wrapping'>
+
+                </span>
+                <input type="text" />
+              </div>   */}
+              {/* ----- */}
+              <div className='input-group flex-nowrap mt-2'>
+                <span className='input-group-text' id='addon-wrapping'>
+                  Birthday
+                </span>
+                <input type="date"
+                  className='form-control'
+                  placeholder='birthday'
+                  name='birthday'
+                  defaultValue={item?.birthday}
+                  onChange={frme.handleChange}
+                  onBlur={frme.handleChange}
+                  aria-label="Username"
+                  aria-describedby='addon-wrapping'
+                />
+              </div>
+              {frme.touched.birthday && frme.errors.birthday && (
+                <p className='text-danger my-1'>
+                  {frme.errors.birthday}
+                </p>
+              )}
+              {/* ----- */}
+              <div className='input-group flex-nowrap mt-2'>
+                <span className='input-group-text' id='addon-wrapping'>
+                  Role
+                </span>
+                <input type="text"
+                  className='form-control'
+                  placeholder='role'
+                  name='role'
+                  defaultValue={item?.role}
+                  onChange={frme.handleChange}
+                  onBlur={frme.handleChange}
+                  aria-label="Username"
+                  aria-describedby='addon-wrapping' />
+              </div>
+              {frme.touched.role && frme.errors.role && (
+                <p className='text-danger my-1'>
+                  {frme.errors.role}
+                </p>
+              )}
+              {/*  */}
+              {/* <div className='input-group flex-nowrap mt-2'>
+                <span className='input-group-text' id='addon-wrapping'>
+                  Cerfication
+                </span>
+                <input type="text"
+                  className='form-control'
+                  placeholder='cerfication'
+                  name='cerfication'
+                  defaultValue={item?.cerfication}
+                  onChange={frme.handleChange}
+                  onBlur={frme.handleChange}
+                  aria-label="Username"
+                  aria-describedby='addon-wrapping'
+                />
+              </div> */}
+              {/* {frme.touched.certification && frme.errors.certification && (
+                <p className='text-danger my-1'>
+                  {frme.errors.certification}
+                </p>
+              )} */}
+              {/*  */}
+              <div className='input-group flex-nowrap mt-2'>
+                <span className='input-group-text' id='addon-wrapping'>
+                  Gender
+                </span>
+                <input type="text"
+                  className='form-control'
+                  placeholder='Gender'
+                  name='gender'
+                  defaultValue={item?.gender}
+                  onChange={frme.handleChange}
+                  onBlur={frme.handleChange}
+                  aria-label="Username"
+                  aria-describedby='addon-wrapping'
+                />
+              </div>
+              {frme.touched.gender && frme.errors.gender && (
+                <p className='text-danger my-1'>
+                  {frme.errors.gender}
+                </p>
+              )}
+              {/*  */}
+              <div className='input-group flex-nowrap mt-2'>
+                <span className='input-group-text' id='addon-wrapping'>
+                  Skill
+                </span>
+                <input type="text"
+                  className='form-control'
+                  placeholder='Skill'
+                  name='skill'
+                  defaultValue={item?.skill}
+                  onChange={frme.handleChange}
+                  onBlur={frme.handleChange}
+                  aria-label="Username"
+                  aria-describedby='addon-wrapping'
+                />
+              </div>
+              {frme.touched.skill && frme.errors.skill && (
+                <p className='text-danger my-1'>
+                  {frme.errors.skill}
                 </p>
               )}
               <div className='model-action'>

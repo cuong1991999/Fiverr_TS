@@ -28,7 +28,6 @@ const ManageJobType = (props: Props) => {
   const getAdminJobType = () => { 
     dispatch(getAdminJobTypeApi());
   };
-  
   useEffect(() => {
     getAdminJobType();
   }, []);
