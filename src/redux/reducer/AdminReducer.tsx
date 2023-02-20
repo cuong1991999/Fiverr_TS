@@ -4,6 +4,7 @@ import { http } from "../../util/config";
 import { DispatchType } from "../configStore";
 import { ArrComments } from "./JobManagementReducer";
 import {history} from '../../index';
+import { UserAdd } from "../../page/Admin/Manage/ManageUser";
 export interface JobTypeAdmin {
   id: number;
   tenLoaiCongViec: string;
@@ -27,20 +28,33 @@ export interface JobAdmin {
   moTaNgan: string;
   saoCongViec: number;
 }
+export interface User {
+  id: number;
+  name:             string;
+  email:            string;
+  phone:            string;
+  password:         string;
+  birthday:         string;
+  role:             string;
+  certification:    string;
+  gender:          boolean;
+  skill:            string;
+}
 type AdminState = {
   AdminJobType: JobTypeAdmin[];
   AdminJobService: JobService[];
   AdminComment: ArrComments[];
   AdminJob: JobAdmin[];
+  AdminUser: User[];
 };
 const initialState: AdminState = {
   AdminJobType: [],
   AdminJobService: [],
   AdminComment: [],
   AdminJob: [],
+  AdminUser: [],
 };
 export interface Admin{
-    
   id:               string;
   name:             string;
   email:            string;
@@ -52,10 +66,6 @@ export interface Admin{
   gender:          boolean;
   skill:            string;
 
-}
-export interface EditUser{
-  id:string;
-  value:Admin;
 }
 // const adminReducer = createSlice({
 //   name: 'adminReducer',
@@ -100,6 +110,9 @@ const AdminReducer = createSlice({
     ) => {
       state.AdminComment = action.payload;
     },
+    arrUserAction: (state:AdminState, action:PayloadAction<User[]>)=>{
+      state.AdminUser = action.payload;
+    },
   },
 });
 
@@ -108,6 +121,7 @@ export const {
   arrJobServiceAction,
   arrCommentAction,
   arrJobAction,
+  arrUserAction,
 } = AdminReducer.actions;
 // manage jobtype
 export const getAdminJobTypeApi = () => {
@@ -256,58 +270,43 @@ export const deleteCommentApi = (id: number) => {
     }
   };
 };
-export default AdminReducer.reducer;
-// user
-//--------------------- action api
-export const getadmintApi = () => {
-  return async (dispatch1: DispatchType) => {
+//manage user
+export const getAdminUserApi = () => {
+  return async (dispatch: DispatchType) => {
+    const result = await http.get("/api/users");
+    dispatch(arrUserAction(result.data.content));
+  };
+};
+export const addAdminUserApi = (value: UserAdd) =>{
+  return async (dispatch: DispatchType) => {
     try{
-      const result = await http.get('/api/users');
-      let arradmin:Admin[]=result.data.content;
-      // const action = getAdminAction(arradmin);
-
-      // dispatch1(action);
+      await http.post('/api/users', value);
+      dispatch(getAdminUserApi());
+      alert("Success");
     } catch(err){
-      console.log({err});
+      alert("Fail");
+    }
+  };
+};
+export const deleteAdminUserApi = (id:number) => {
+  return async (dispatch: DispatchType) => {
+    try{
+      await http.delete(`/api/users/${id}`);
+      dispatch(getAdminUserApi());
+    }catch(err){
+      alert("Fail");
     }
   }
 }
-export const deleteUseApi=(id: string)=>{
-  return async(dispatch:DispatchType)=>{
+export const putAdminUserApi = (payload: User) => {
+  return async (dispatch: DispatchType) => {
     try{
-      const result=await http.delete(`/api/users?id=${id}`);
-      console.log(result.data.message)
-      dispatch(getadmintApi());
-  }
-  catch(err){
-      console.log(err)
-      alert('xoa khong thanh cong')
-  }
-  
-  }
-  }
-  
-  export const addAdminApi = (values:string) => {
-  return async (dispatch1: DispatchType) => {
-    // console.log(getState())
-    try {
-      const result = await http.post('/api/users',values);
-      alert('them admin thanh cong');
-      dispatch1(getadmintApi());
-      history.push('/admin/user')
-    } catch (err) {
-      console.log({ err });
+      await http.put(`/api/users/${payload.id}`, payload);
+      dispatch(getAdminUserApi());
+    } catch(err){
+      alert("Fail");
     }
   };
-  };
-  
-  export const editUserApi=(id:any)=>{
-  return async (dispatch2: DispatchType) => {
-    try {
-      let result = await http.get(`/api/users/${id}`);
-      // dispatch2(getUpdateAction(result.data.content));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  }
+};
+export default AdminReducer.reducer;
+

@@ -45,7 +45,6 @@ const initialState: UserState = {
   userLogin: getStoreJson(USER_LOGIN),
   userProfile: null,
   arrPagination: [],
-
 };
 
 const userReducer = createSlice({
