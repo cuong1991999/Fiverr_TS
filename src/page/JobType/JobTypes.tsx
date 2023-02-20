@@ -215,7 +215,7 @@ const JobTypes = (props: Props) => {
                   {item.dsChiTietLoai.map((detail) => {
                     return (
                       <p key={detail.id}>
-                        <NavLink to={`categories/${detail.id}`}>
+                        <NavLink to={`/categories/${detail.id}`}>
                           {detail.tenChiTiet}
                         </NavLink>
                       </p>
