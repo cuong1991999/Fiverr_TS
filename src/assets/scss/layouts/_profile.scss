@@ -1,13 +1,15 @@
 .profile {
     padding-top: 50px;
     padding-bottom: 50px;
-    background-color: $gray-1;
+    background-color: #fff;
+    justify-content: space-between;
 
     .basic_profile {
         text-align: center;
         width: 100%;
         background-color: $white-1;
         padding: 20px;
+        border: 1px solid $gray-1;
 
         img {
             border-radius: 50%;
@@ -34,34 +36,40 @@
         }
     }
 
-    .info_detail{
+    .info_detail {
         width: 100%;
         background-color: #fff;
         padding: 20px;
         margin-top: 20px;
+        border: 1px solid $gray-1;
 
-        .info_detail_description{
-            width: 100%;
-            display: inline-block;
+        .info_detail_description {
+            border-bottom: 1px solid $gray-1;
+
             margin-bottom: 20px;
+
             .basic_profile_left {
-                    float: left;
-                }
-            
-                .basic_profile_right {
-                    float: right;
-                }
-            hr{
+                margin-bottom: 10px;
+                font-weight: 700;
+            }
+
+            .basic_profile_right {}
+
+            hr {
                 margin-top: 50px;
             }
         }
 
-        .info_detail_languages, .info_detail_accounts, .info_detail_skills, .info_detail_education, .info_detail_certification{
+        .info_detail_languages,
+        .info_detail_accounts,
+        .info_detail_skills,
+        .info_detail_education,
+        .info_detail_certification {
             @extend .info_detail_description
         }
 
 
     }
 
-    
+
 }

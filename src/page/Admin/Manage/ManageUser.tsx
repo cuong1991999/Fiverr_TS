@@ -1,7 +1,5 @@
-import { stat } from 'fs';
-import { type } from 'os';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/configStore';
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/configStore";
 import { useDispatch } from "react-redux";
 import { DispatchType } from "../../../redux/configStore";
 import React, { useEffect, useState } from "react";
@@ -11,13 +9,12 @@ import {
   deleteAdminUserApi,
   addAdminUserApi,
 } from "../../../redux/reducer/AdminReducer";
-import { useFormik } from 'formik';
-import Password from 'antd/es/input/Password';
-import * as Yup from "yup";
-import Pagination from '../../../components/Pagination/Pagination';
-import { table } from 'console';
+import { useFormik } from "formik";
 
-type Props = {}
+import * as Yup from "yup";
+import Pagination from "../../../components/Pagination/Pagination";
+
+type Props = {};
 export type UserAdd = {
   id: number;
   name: string;
@@ -32,23 +29,18 @@ export type UserAdd = {
 };
 const ManageUser = (props: Props) => {
   // truyen prop cho components paginaton
-  const { AdminUser } = useSelector(
-    (state: RootState) => state.AdminReducer
-  );
+  const { AdminUser } = useSelector((state: RootState) => state.AdminReducer);
   // render table
   const { arrPagination } = useSelector(
-    (state: RootState) => state.userReducer
+    (state: RootState) => state.JobManagementReducer
   );
-  const getAdminUser = () => (
-    dispatch(getAdminUserApi())
-  );
+  const getAdminUser = () => dispatch(getAdminUserApi());
   useEffect(() => {
     getAdminUser();
   }, []);
   const [item, setItem] = useState<any>(null);
 
   const dispatch: DispatchType = useDispatch();
-
 
   //model edit
   const frme = useFormik<UserAdd>({
@@ -92,7 +84,7 @@ const ManageUser = (props: Props) => {
       dispatch(putAdminUserApi(payload));
       setItem(null);
       closeEdit();
-    }
+    },
   });
 
   //model add
@@ -149,30 +141,26 @@ const ManageUser = (props: Props) => {
   };
   //render
   const renderTable = () => {
-    console.log(AdminUser.length);
-    if (AdminUser.length > 0) {
-      return AdminUser.map((item) => {
+    if (arrPagination.length > 0) {
+      return arrPagination.map((item) => {
         return (
           <tr key={item.id}>
             <td>{item.id}</td>
             <td>{item.name}</td>
             <td>{item.email}</td>
-            {/* <td>{item.phone}</td> */}
-            {/* <td>{item.password}</td> */}
-            {/* <td>{item.birthday}</td> */}
             <td>{item.role}</td>
             <td>{item.certification}</td>
-            {/* <td>{item.gender}</td> */}
-            {/* <td>{item.skill}</td> */}
-            <td className='action'>
+            <td className="action">
               <button
-                className='btn btn-primary'
+                className="btn btn-primary"
                 onClick={() => {
                   handleEdit(item);
                 }}
-              >Edit</button>
+              >
+                Edit
+              </button>
               <button
-                className='btn btn-danger'
+                className="btn btn-danger"
                 onClick={() => {
                   dispatch(deleteAdminUserApi(item.id));
                 }}
@@ -186,14 +174,15 @@ const ManageUser = (props: Props) => {
     }
   };
   return (
-    <section className='manageU'>
-      <div className='btn-add'>
+    <section className="manageU">
+      <div className="btn-add">
         <button onClick={showAdd}>ADD NEW USER</button>
       </div>
-      <table className='table-admin'>
+      <table className="table-admin">
         <thead>
           <tr>
             <th>ID</th>
+
             <th style={{ borderLeft: "1px solid rgba(0,0,0,.99)" }}>
               Name
             </th>
@@ -210,64 +199,57 @@ const ManageUser = (props: Props) => {
               Birthday
             </th> */}
             <th style={{ borderLeft: "1px solid rgba(0,0,0,.99)", width: "50px !importan" }}>
+
               Role
             </th>
             <th style={{ borderLeft: "1px solid rgba(0,0,0,.99)" }}>
               Certification
             </th>
-            {/* <th style={{ borderLeft: "1px solid rgba(0,0,0,.99)" }}>
-              Gender
-            </th> */}
-            {/* <th style={{ borderLeft: "1px solid rgba(0,0,0,.99)" }}>
-              Skill
-            </th> */}
-            <th style={{ borderLeft: "1px solid rgba(0,0,0,.99)" }}>
-              Action
-            </th>
+            <th style={{ borderLeft: "1px solid rgba(0,0,0,.99)" }}>Action</th>
           </tr>
         </thead>
-        <tbody>
-          {renderTable()}
-        </tbody>
+        <tbody>{renderTable()}</tbody>
       </table>
       <Pagination length={AdminUser.length} arr={AdminUser} />
-      <div className='model-tabs modeltabs-add'>
-        <div className='overplay-admin' onClick={showAdd}></div>
-        <div className='model-body'>
+      <div className="model-tabs modeltabs-add">
+        <div className="overplay-admin" onClick={showAdd}></div>
+        <div className="model-body">
           <h2>ADD NEW USER</h2>
-          <div className='model-form'>
+          <div className="model-form">
             <form action="" onSubmit={frm.handleSubmit}>
-              <div className='input-group flex-nowrap mb-3'>
-                <span className='input-group-text' id='addon-wrapping'>
+              <div className="input-group flex-nowrap mb-3">
+                <span className="input-group-text" id="addon-wrapping">
                   ID
                 </span>
-                <input type="text"
-                  className='form-control'
-                  placeholder='ID'
-                  name='id'
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="ID"
+                  name="id"
                   onChange={frm.handleChange}
                   aria-label="Username"
-                  aria-describedby='addon-wrapping'
+                  aria-describedby="addon-wrapping"
                 />
               </div>
               {frm.touched.id && frm.errors.id && (
-                <p className='text-danger my-1'>{frm.errors.id}</p>
+                <p className="text-danger my-1">{frm.errors.id}</p>
               )}
-              <div className='input-group flex-nowrap'>
-                <span className='input-group-text' id='addon-wrapping'>
+              <div className="input-group flex-nowrap">
+                <span className="input-group-text" id="addon-wrapping">
                   Name
                 </span>
-                <input type="text"
-                  name='name'
-                  className='form-control'
-                  placeholder='name'
+                <input
+                  type="text"
+                  name="name"
+                  className="form-control"
+                  placeholder="name"
                   onChange={frm.handleChange}
                   aria-label="Username"
-                  aria-describedby='addon-wrapping'
+                  aria-describedby="addon-wrapping"
                 />
               </div>
               {frm.touched.name && frm.errors.name && (
-                <p className='text-danger my-1'>{frm.errors.name}</p>
+                <p className="text-danger my-1">{frm.errors.name}</p>
               )}
               <div className='input-group flex-nowrap mt-3'>
                 <span className='input-group-text' id='addon-wrapping'>
@@ -400,11 +382,15 @@ const ManageUser = (props: Props) => {
               </div>
               <div className='model-action'>
                 <button className='btn btn-success' type='submit'>
+
+              <div className="model-action">
+                <button className="btn btn-success" type="submit">
+
                   ADD
                 </button>
                 <button
-                  className='btn btn-danger'
-                  type='button'
+                  className="btn btn-danger"
+                  type="button"
                   onClick={showAdd}
                 >
                   CANCEL
@@ -414,46 +400,47 @@ const ManageUser = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className='model-tabs modeltabs-edit'>
-        <div className='overplay-admin' onClick={showEdit}>
-        </div>
-        <div className='model-body'>
+      <div className="model-tabs modeltabs-edit">
+        <div className="overplay-admin" onClick={showEdit}></div>
+        <div className="model-body">
           <h2>UPDATE</h2>
-          <div className='model-form'>
+          <div className="model-form">
             <form action="" onSubmit={frme.handleSubmit}>
-              <div className='input-group flex-nowrap mb-3'>
-                <span className='input-group-text' id='addon-wrapping'>
+              <div className="input-group flex-nowrap mb-3">
+                <span className="input-group-text" id="addon-wrapping">
                   ID
                 </span>
-                <input type="text"
-                  className='form-control'
-                  placeholder='ID'
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="ID"
                   defaultValue={item?.id}
                   onChange={frme.handleChange}
                   disabled={true}
                   aria-label="Username"
-                  aria-describedby='addon-wrapping'
+                  aria-describedby="addon-wrapping"
                 />
               </div>
-              <div className='input-group flex-nowrap'>
-                <span className='input-group-text' id='addon-wrapping'>
+              <div className="input-group flex-nowrap">
+                <span className="input-group-text" id="addon-wrapping">
                   Name
                 </span>
-                <input type="text"
-                  className='form-control'
-                  placeholder='name'
-                  name='name'
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="name"
+                  name="name"
                   defaultValue={item?.name}
                   onChange={frme.handleChange}
                   onBlur={frme.handleChange}
                   aria-label="Username"
-                  aria-describedby='addon-wrapping' />
+                  aria-describedby="addon-wrapping"
+                />
               </div>
               {frme.touched.name && frme.errors.name && (
-                <p className='text-danger my-1'>
-                  {frme.errors.name}
-                </p>
+                <p className="text-danger my-1">{frme.errors.name}</p>
               )}
+
               {/* ----- */}
               <div className='input-group flex-nowrap mt-2'>
                 <span className='input-group-text' id='addon-wrapping'>
@@ -608,11 +595,13 @@ const ManageUser = (props: Props) => {
               )}
               <div className='model-action'>
                 <button className='btn btn-success' type='submit'>
+              <div className="model-action">
+                <button className="btn btn-success" type="submit">
                   SAVE
                 </button>
                 <button
-                  className='btn btn-danger'
-                  type='button'
+                  className="btn btn-danger"
+                  type="button"
                   onClick={showEdit}
                 >
                   CANCEL
@@ -623,7 +612,7 @@ const ManageUser = (props: Props) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ManageUser
+export default ManageUser;

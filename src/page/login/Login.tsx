@@ -30,18 +30,6 @@ const Login = (props: Props) => {
       email: "",
       password: "",
       accessToken: "",
-      //     user: {
-      //         id: 0,
-      // name: '',
-      // email: '',
-      // password: '',
-      // phone: '',
-      // birthday: '',
-      // gender: true,
-      // role: '',
-      // skill: [],
-      // certification: [],
-      //     }
     },
     validationSchema: yup.object().shape({
       email: yup

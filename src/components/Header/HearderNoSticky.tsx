@@ -54,15 +54,65 @@ const HeaderNoSticky = (props: Props) => {
               </label>
               <div className="nav__mobile-list">
                 <div className="sidebar__menu">
-                  <NavLink
-                    to={"/register"}
-                    className="sidebar-btn sidebar-item"
-                  >
-                    Join Fiverr
-                  </NavLink>
-                  <NavLink to={"/login"} className=" sidebar-item">
-                    Sign in
-                  </NavLink>
+                  {userLogin ? (
+                    <div className="dropdown ">
+                      <span
+                        className=" sidebar-item dropdown-toggle"
+                        id="dropdownMenuButton10"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        {userLogin.name}
+                      </span>
+                      <ul
+                        className="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton10"
+                      >
+                        <li className="mb-3">
+                          <NavLink className="dropdown-item" to="/profile">
+                            Profile
+                          </NavLink>
+                        </li>
+                        {userLogin.role === "ADMIN" && (
+                          <li className="mb-3">
+                            <NavLink
+                              style={{ color: "#212529" }}
+                              className="dropdown-item"
+                              to="/admin/managejobtype"
+                            >
+                              Admin
+                            </NavLink>
+                          </li>
+                        )}
+                        <li>
+                          <div
+                            className="dropdown-item"
+                            onClick={() => {
+                              removeStore(USER_LOGIN);
+                              removeStore(ACCESS_TOKEN);
+                              window.location.href = "/login";
+                            }}
+                          >
+                            Sign out
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  ) : (
+                    <>
+                      {" "}
+                      <NavLink
+                        to={"/register"}
+                        className="sidebar-btn sidebar-item"
+                      >
+                        Join Fiverr
+                      </NavLink>
+                      <NavLink to={"/login"} className=" sidebar-item">
+                        Sign in
+                      </NavLink>
+                    </>
+                  )}
+
                   <div className={"sidebar-item sidebar-green"}>
                     Fiverr Business
                   </div>
