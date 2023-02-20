@@ -442,7 +442,6 @@ const ManageUser = (props: Props) => {
                   aria-describedby="addon-wrapping"
                 />
               </div>
-
               <div className="model-action">
                 <button className="btn btn-success" type="submit">
                   SAVE
