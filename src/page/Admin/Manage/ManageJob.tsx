@@ -51,25 +51,7 @@ const ManageJob = (props: Props) => {
       moTaNgan: edit?.mota,
       saoCongViec: edit?.saoCongViec,
     },
-    validationSchema: Yup.object().shape({
-      tenCongViec: Yup.string().trim().required(" cannot be blank !"),
-      moTa: Yup.string().trim().required(" cannot be blank !"),
-      moTaNgan: Yup.string().trim().required(" cannot be blank !"),
-      danhGia: Yup.string()
-        .trim()
-        .matches(/^[0-9]+$/, "  inValid !"),
-      maChiTietLoaiCongViec: Yup.string()
-        .trim()
-        .matches(/^[0-9]+$/, "  inValid !"),
-      saoCongViec: Yup.string()
-        .trim()
-        .min(1)
-        .matches(/^[0-9]+$/, "  inValid !"),
-      giaTien: Yup.string()
-        .trim()
-        .matches(/^[0-9]+$/, "  inValid !")
-        .required(" cannot be blank !"),
-    }),
+
     onSubmit: (values) => {
       const payload = {
         id: edit?.id,
@@ -435,9 +417,7 @@ const ManageJob = (props: Props) => {
                   aria-describedby="addon-wrapping"
                 />
               </div>
-              {frme.touched.tenCongViec && frme.errors.tenCongViec && (
-                <p className="text-danger my-1">{frme.errors.tenCongViec}</p>
-              )}
+
               <div className="input-group flex-nowrap mb-3">
                 <span className="input-group-text" id="addon-wrapping">
                   Description
@@ -453,9 +433,7 @@ const ManageJob = (props: Props) => {
                   aria-describedby="addon-wrapping"
                 />
               </div>
-              {frme.touched.moTa && frme.errors.moTa && (
-                <p className="text-danger my-1">{frme.errors.moTa}</p>
-              )}
+
               <div className="input-group flex-nowrap mb-3">
                 <span className="input-group-text" id="addon-wrapping">
                   Short description
@@ -471,9 +449,7 @@ const ManageJob = (props: Props) => {
                   aria-describedby="addon-wrapping"
                 />
               </div>
-              {frme.touched.moTaNgan && frme.errors.moTaNgan && (
-                <p className="text-danger my-1">{frme.errors.moTaNgan}</p>
-              )}
+
               <div className="input-group flex-nowrap mb-3">
                 <span className="input-group-text" id="addon-wrapping">
                   Detail Id
@@ -489,12 +465,7 @@ const ManageJob = (props: Props) => {
                   aria-describedby="addon-wrapping"
                 />
               </div>
-              {frme.touched.maChiTietLoaiCongViec &&
-                frme.errors.maChiTietLoaiCongViec && (
-                  <p className="text-danger my-1">
-                    {frme.errors.maChiTietLoaiCongViec}
-                  </p>
-                )}
+
               <div className="input-group flex-nowrap mb-3">
                 <span className="input-group-text" id="addon-wrapping">
                   Price
@@ -510,9 +481,7 @@ const ManageJob = (props: Props) => {
                   aria-describedby="addon-wrapping"
                 />
               </div>
-              {frme.touched.giaTien && frme.errors.giaTien && (
-                <p className="text-danger my-1">{frme.errors.giaTien}</p>
-              )}
+
               <div className="input-group flex-nowrap mb-3">
                 <span className="input-group-text" id="addon-wrapping">
                   Rate
@@ -528,9 +497,7 @@ const ManageJob = (props: Props) => {
                   aria-describedby="addon-wrapping"
                 />
               </div>
-              {frme.touched.danhGia && frme.errors.danhGia && (
-                <p className="text-danger my-1">{frme.errors.danhGia}</p>
-              )}
+
               <div className="input-group flex-nowrap mb-3">
                 <span className="input-group-text" id="addon-wrapping">
                   Star
@@ -546,9 +513,7 @@ const ManageJob = (props: Props) => {
                   aria-describedby="addon-wrapping"
                 />
               </div>
-              {frme.touched.saoCongViec && frme.errors.saoCongViec && (
-                <p className="text-danger my-1">{frme.errors.saoCongViec}</p>
-              )}
+
               <div>
                 <label htmlFor="hinhAnh" className="hinhAnh">
                   UPLOAD IMAGE

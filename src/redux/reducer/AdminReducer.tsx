@@ -36,9 +36,9 @@ export interface User {
   password: string;
   birthday: string;
   role: string;
-  certification: string;
+  certification: string[];
   gender: boolean;
-  skill: string;
+  skill: string[];
 }
 type AdminState = {
   AdminJobType: JobTypeAdmin[];
@@ -66,23 +66,6 @@ export interface Admin {
   gender: boolean;
   skill: string;
 }
-// const adminReducer = createSlice({
-//   name: 'adminReducer',
-//   initialState,
-//   reducers: {
-//     getAdminAction:(state,action:PayloadAction<Admin[]>)=>{
-//         state.arrAdmin=action.payload;
-//     },
-//     getUpdateAction:(state,action:PayloadAction<Admin>)=>{
-//         state.editUser=action.payload;
-//     },
-//     searchUserAction:(state,action:PayloadAction<Admin[]>)=>{
-//         state.arrAdmin=action.payload;
-//   }
-//   }
-// });
-
-// export const {getAdminAction,getUpdateAction,searchUserAction} = adminReducer.actions
 
 const AdminReducer = createSlice({
   name: "AdminReducer",
@@ -290,9 +273,13 @@ export const addAdminUserApi = (value: UserAdd) => {
 export const deleteAdminUserApi = (id: number) => {
   return async (dispatch: DispatchType) => {
     try {
-      await http.delete(`/api/users/${id}`);
+      console.log(id);
+
+      await http.delete(`/api/users?id=${id}`);
       dispatch(getAdminUserApi());
     } catch (err) {
+      console.log(id);
+
       alert("Fail");
     }
   };
@@ -302,6 +289,7 @@ export const putAdminUserApi = (payload: User) => {
     try {
       await http.put(`/api/users/${payload.id}`, payload);
       dispatch(getAdminUserApi());
+      alert("Success");
     } catch (err) {
       alert("Fail");
     }
