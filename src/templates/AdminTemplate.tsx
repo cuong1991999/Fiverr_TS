@@ -30,7 +30,7 @@ const AdminTemplate = (props: Props) => {
 
         <ul className="list-unstyled">
           <li>
-            <NavLink to="#">
+            <NavLink to="/admin/manageuser">
               <i className="fa-solid fa-user"></i>
               Manage User
             </NavLink>

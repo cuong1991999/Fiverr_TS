@@ -39,3 +39,20 @@
         }
     }
 }
+@include mobile{
+    .login{
+        .login_form_wrapper{
+            padding-left: 0;
+            .login_form{
+                width: 100%;
+            }
+        }
+    }
+}
+@include mobiletablet{
+    .login{
+        .login_form_wrapper{
+            padding-left: 20px;
+        }
+    }
+}
