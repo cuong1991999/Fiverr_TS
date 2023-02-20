@@ -4,6 +4,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DispatchType, RootState } from "../../redux/configStore";
 import {
+  delJobrentApi,
+  getJobrentApi,
   getProfileApi,
   updateProfileApi,
   UserProfile,
@@ -11,29 +13,33 @@ import {
 import Footer from "../../components/Footer/Footer";
 import HeaderNoSticky from "../../components/Header/HearderNoSticky";
 import CategoriesMenuNoSticky from "../../components/Category/CategoriesMenuNoSticky";
+import { NavLink } from "react-router-dom";
 
 type Props = {};
 
 const Profile = (props: Props) => {
-  const { userProfile } = useSelector((state: RootState) => state.userReducer);
+  const { userLogin, arrJobRent } = useSelector(
+    (state: RootState) => state.userReducer
+  );
   const dispatch = useDispatch<DispatchType>();
 
   useEffect(() => {
-    dispatch(getProfileApi(userProfile?.id!));
+    dispatch(getProfileApi(userLogin?.id!));
+    dispatch(getJobrentApi());
   }, []);
 
   const frm = useFormik<UserProfile>({
     initialValues: {
-      email: userProfile?.email!,
-      name: userProfile?.name!,
-      id: userProfile?.id!,
-      password: userProfile?.password!,
-      phone: userProfile?.phone!,
-      birthday: userProfile?.birthday!,
-      gender: userProfile?.gender!,
-      role: userProfile?.role!,
-      skill: userProfile?.skill!,
-      certification: userProfile?.certification!,
+      email: userLogin?.email!,
+      name: userLogin?.name!,
+      id: userLogin?.id!,
+      password: userLogin?.password!,
+      phone: userLogin?.phone!,
+      birthday: userLogin?.birthday!,
+      gender: userLogin?.gender!,
+      role: userLogin?.role!,
+      skill: userLogin?.skill!,
+      certification: userLogin?.certification!,
     },
     enableReinitialize: true,
     validationSchema: yup.object().shape({
@@ -55,22 +61,88 @@ const Profile = (props: Props) => {
     }),
     onSubmit: (values: UserProfile) => {
       console.log("update:", values);
-      dispatch(updateProfileApi(userProfile?.id!, values));
-      dispatch(getProfileApi(userProfile?.id!));
+      dispatch(updateProfileApi(userLogin?.id!, values));
+      dispatch(getProfileApi(userLogin?.id!));
     },
   });
-
+  const renderJobRent = () => {
+    if (arrJobRent.length > 0) {
+      return arrJobRent.map((item) => {
+        return (
+          <div
+            className="gigs_card mb-3 w-100"
+            style={{ border: "1px solid #dedddc" }}
+            key={item.congViec.id}
+          >
+            <div style={{ padding: 15 }}>
+              <div className="row">
+                <div className="gigs_card_img" style={{ width: "40%" }}>
+                  <img
+                    className="w-100"
+                    src={item?.congViec.hinhAnh}
+                    alt="..."
+                  />
+                </div>
+                <div className="gigs_card_content" style={{ width: "60%" }}>
+                  <h3>{item?.congViec.tenCongViec}</h3>
+                  <p>{item?.congViec.moTaNgan}</p>
+                  <div className="d-flex justify-content-between danhgia">
+                    <div className="left">
+                      <i
+                        className="fas fa-star"
+                        style={{ color: "#f8b653" }}
+                      ></i>
+                      <span className="saoCV" style={{ color: "#f8b653" }}>
+                        {item?.congViec.saoCongViec}
+                      </span>{" "}
+                      <span className="danhGia">
+                        ({item?.congViec.danhGia})
+                      </span>
+                    </div>
+                    <div className="right">
+                      <p className="giaTien">${item?.congViec.giaTien}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="btn_edit mt-3 d-flex justify-content-end">
+                <button
+                  className="btn btn-danger"
+                  onClick={() => {
+                    dispatch(delJobrentApi(item?.id));
+                  }}
+                >
+                  DEL
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      });
+    }
+    return (
+      <>
+        <p>Buying services for work?</p>
+        <p>Help us tallor your exterlen ce to flt your needs.</p>
+        <NavLink to="/">Tell us more about your business</NavLink>;
+      </>
+    );
+  };
   return (
-
     <div>
-      <HeaderNoSticky/>
-      <CategoriesMenuNoSticky/>
-      <div className="profile">
-        <div className="container row">
-          <div className="col-4">
+      <HeaderNoSticky />
+      <CategoriesMenuNoSticky />
+      <div className="profile container">
+        <div className=" row ">
+          <div className="col-12 col-lg-4 mb-lg-0 mb-3">
             <div className="basic_profile">
-              <img src="https://i.pravatar.cc/300" alt="" />
-              <h3>{userProfile?.name}</h3>
+              <img
+                src="https://i.pravatar.cc"
+                width={150}
+                height={150}
+                alt="..."
+              />
+              <h3>{userLogin?.email}</h3>
               <button
                 type="button"
                 className="btn btn-primary btn-lg"
@@ -101,50 +173,54 @@ const Profile = (props: Props) => {
             <div className="info_detail">
               <div className="info_detail_description">
                 <div className="basic_profile_left">Description</div>
-                <div className="basic_profile_right">Edit</div>
-                <hr />
+                <div>
+                  <span className="d-block mb-2">Name: {userLogin?.name}</span>
+                  <span className="d-block mb-2">
+                    Phone: {userLogin?.phone}
+                  </span>
+                  <span>Birthday: {userLogin?.birthday}</span>
+                </div>
               </div>
               <div className="info_detail_languages">
                 <div className="basic_profile_left">Languages</div>
-                <div className="basic_profile_right">Add</div>
-                <hr />
+                <div>English: Basic</div>
               </div>
               <div className="info_detail_accounts">
                 <div className="basic_profile_left">Linked Accounts</div>
-                <div className="basic_profile_right">Add</div>
-                <hr />
+                <div></div>
               </div>
               <div className="info_detail_skills">
                 <div className="basic_profile_left">Skills</div>
-                <div className="basic_profile_right">Add</div>
-                <hr />
+                <div>
+                  {userLogin?.skill.map((item) => {
+                    return (
+                      <span className="d-block mb-2" key={item}>
+                        {item}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
               <div className="info_detail_education">
                 <div className="basic_profile_left">Education</div>
-                <div className="basic_profile_right">Add</div>
-                <hr />
+                <div>CYBERSOFT</div>
               </div>
               <div className="info_detail_certification">
                 <div className="basic_profile_left">Certification</div>
-                <div className="basic_profile_right">Add</div>
-                <hr />
+                <div>
+                  {userLogin?.certification.map((item) => {
+                    return (
+                      <span className="d-block mb-2" key={item}>
+                        {item}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
-          <div className="col-4">
-            <div className="content_profile"> 
-              
-              <p>
-                  Buying services for work?
-              </p>
-              <p>
-                Help us tallor your exterlen ce to flt your needs.
-              </p>
-              <a href="">
-                Tell us more about your business {'>'}
-              </a>
-            </div>
-
+          <div className="col-12 col-lg-8">
+            <div className="content_profile">{renderJobRent()}</div>
           </div>
         </div>
 
@@ -259,7 +335,7 @@ const Profile = (props: Props) => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

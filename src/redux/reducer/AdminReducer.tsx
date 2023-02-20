@@ -3,7 +3,7 @@ import { JobTypeAdminAdd } from "../../page/Admin/Manage/ManageJobType";
 import { http } from "../../util/config";
 import { DispatchType } from "../configStore";
 import { ArrComments } from "./JobManagementReducer";
-import {history} from '../../index';
+import { history } from "../../index";
 import { UserAdd } from "../../page/Admin/Manage/ManageUser";
 export interface JobTypeAdmin {
   id: number;
@@ -30,15 +30,15 @@ export interface JobAdmin {
 }
 export interface User {
   id: number;
-  name:             string;
-  email:            string;
-  phone:            string;
-  password:         string;
-  birthday:         string;
-  role:             string;
-  certification:    string;
-  gender:          boolean;
-  skill:            string;
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  birthday: string;
+  role: string;
+  certification: string;
+  gender: boolean;
+  skill: string;
 }
 type AdminState = {
   AdminJobType: JobTypeAdmin[];
@@ -54,18 +54,17 @@ const initialState: AdminState = {
   AdminJob: [],
   AdminUser: [],
 };
-export interface Admin{
-  id:               string;
-  name:             string;
-  email:            string;
-  phone:            string;
-  password:         string;
-  birthday:         string;
-  role:             string;
-  certification:    string;
-  gender:          boolean;
-  skill:            string;
-
+export interface Admin {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  birthday: string;
+  role: string;
+  certification: string;
+  gender: boolean;
+  skill: string;
 }
 // const adminReducer = createSlice({
 //   name: 'adminReducer',
@@ -110,7 +109,7 @@ const AdminReducer = createSlice({
     ) => {
       state.AdminComment = action.payload;
     },
-    arrUserAction: (state:AdminState, action:PayloadAction<User[]>)=>{
+    arrUserAction: (state: AdminState, action: PayloadAction<User[]>) => {
       state.AdminUser = action.payload;
     },
   },
@@ -277,36 +276,35 @@ export const getAdminUserApi = () => {
     dispatch(arrUserAction(result.data.content));
   };
 };
-export const addAdminUserApi = (value: UserAdd) =>{
+export const addAdminUserApi = (value: UserAdd) => {
   return async (dispatch: DispatchType) => {
-    try{
-      await http.post('/api/users', value);
+    try {
+      await http.post("/api/users", value);
       dispatch(getAdminUserApi());
       alert("Success");
-    } catch(err){
+    } catch (err) {
       alert("Fail");
     }
   };
 };
-export const deleteAdminUserApi = (id:number) => {
+export const deleteAdminUserApi = (id: number) => {
   return async (dispatch: DispatchType) => {
-    try{
+    try {
       await http.delete(`/api/users/${id}`);
       dispatch(getAdminUserApi());
-    }catch(err){
+    } catch (err) {
       alert("Fail");
     }
-  }
-}
+  };
+};
 export const putAdminUserApi = (payload: User) => {
   return async (dispatch: DispatchType) => {
-    try{
+    try {
       await http.put(`/api/users/${payload.id}`, payload);
       dispatch(getAdminUserApi());
-    } catch(err){
+    } catch (err) {
       alert("Fail");
     }
   };
 };
 export default AdminReducer.reducer;
-

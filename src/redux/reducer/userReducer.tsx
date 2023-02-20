@@ -32,19 +32,38 @@ export interface UserLogin {
   accessToken: string;
   password: string;
 }
+export interface JobRent {
+  id: number;
+  ngayThue: string;
+  hoanThanh: boolean;
+  congViec: CongViec;
+}
 
+export interface CongViec {
+  id: number;
+  tenCongViec: string;
+  danhGia: number;
+  giaTien: number;
+  nguoiTao: number;
+  hinhAnh: string;
+  moTa: string;
+  maChiTietLoaiCongViec: number;
+  moTaNgan: string;
+  saoCongViec: number;
+}
 type UserState = {
   userRegister: UserProfile | null;
   userLogin: UserProfile | null;
   userProfile: UserProfile | null;
-  arrPagination: any[];
+
+  arrJobRent: JobRent[];
 };
 
 const initialState: UserState = {
   userRegister: null,
   userLogin: getStoreJson(USER_LOGIN),
   userProfile: null,
-  arrPagination: [],
+  arrJobRent: [],
 };
 
 const userReducer = createSlice({
@@ -56,7 +75,6 @@ const userReducer = createSlice({
     },
     loginAction: (state: UserState, action: PayloadAction<UserProfile>) => {
       state.userProfile = action.payload;
-      // window.location.href = "/";
     },
     getProfileAction: (
       state: UserState,
@@ -70,6 +88,9 @@ const userReducer = createSlice({
     ) => {
       state.userProfile = action.payload;
     },
+    arrJobRentAction: (state: UserState, action: PayloadAction<JobRent[]>) => {
+      state.arrJobRent = action.payload;
+    },
   },
 });
 
@@ -78,6 +99,7 @@ export const {
   loginAction,
   getProfileAction,
   updateProfileAction,
+  arrJobRentAction,
 } = userReducer.actions;
 
 export default userReducer.reducer;
@@ -147,6 +169,22 @@ export const updateProfileApi = (id: number, updatedData: UserProfile) => {
       console.log("update: ", result);
 
       dispatch(action);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const getJobrentApi = () => {
+  return async (dispatch: DispatchType) => {
+    const result = await http.get("/api/thue-cong-viec/lay-danh-sach-da-thue");
+    dispatch(arrJobRentAction(result.data.content));
+  };
+};
+export const delJobrentApi = (id: number) => {
+  return async (dispatch: DispatchType) => {
+    try {
+      const result = await http.delete(`/api/thue-cong-viec/${id}`);
+      dispatch(getJobrentApi());
     } catch (error) {
       console.log(error);
     }
