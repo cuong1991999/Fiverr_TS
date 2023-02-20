@@ -380,9 +380,6 @@ const ManageUser = (props: Props) => {
                   <p className='text-danger my-1'>{frm.errors.skill}</p>
                 )}
               </div>
-              <div className='model-action'>
-                <button className='btn btn-success' type='submit'>
-
               <div className="model-action">
                 <button className="btn btn-success" type="submit">
 
@@ -530,28 +527,8 @@ const ManageUser = (props: Props) => {
                   {frme.errors.role}
                 </p>
               )}
-              {/*  */}
-              {/* <div className='input-group flex-nowrap mt-2'>
-                <span className='input-group-text' id='addon-wrapping'>
-                  Cerfication
-                </span>
-                <input type="text"
-                  className='form-control'
-                  placeholder='cerfication'
-                  name='cerfication'
-                  defaultValue={item?.cerfication}
-                  onChange={frme.handleChange}
-                  onBlur={frme.handleChange}
-                  aria-label="Username"
-                  aria-describedby='addon-wrapping'
-                />
-              </div> */}
-              {/* {frme.touched.certification && frme.errors.certification && (
-                <p className='text-danger my-1'>
-                  {frme.errors.certification}
-                </p>
-              )} */}
-              {/*  */}
+
+      
               <div className='input-group flex-nowrap mt-2'>
                 <span className='input-group-text' id='addon-wrapping'>
                   Gender
@@ -572,7 +549,7 @@ const ManageUser = (props: Props) => {
                   {frme.errors.gender}
                 </p>
               )}
-              {/*  */}
+
               <div className='input-group flex-nowrap mt-2'>
                 <span className='input-group-text' id='addon-wrapping'>
                   Skill
@@ -593,8 +570,6 @@ const ManageUser = (props: Props) => {
                   {frme.errors.skill}
                 </p>
               )}
-              <div className='model-action'>
-                <button className='btn btn-success' type='submit'>
               <div className="model-action">
                 <button className="btn btn-success" type="submit">
                   SAVE
