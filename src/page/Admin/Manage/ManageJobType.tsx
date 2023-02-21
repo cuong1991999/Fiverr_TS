@@ -39,6 +39,7 @@ const ManageJobType = (props: Props) => {
 
   // model edit
   const frme = useFormik<JobTypeAdminAdd>({
+    enableReinitialize: true,
     initialValues: {
       id: item?.id,
       tenLoaiCongViec: item?.tenLoaiCongViec,
@@ -211,8 +212,9 @@ const ManageJobType = (props: Props) => {
                   type="text"
                   className="form-control"
                   placeholder="ID"
-                  defaultValue={item?.id}
+                  defaultValue={frme.values.id}
                   onChange={frme.handleChange}
+                  onBlur={frme.handleChange}
                   disabled={true}
                   aria-label="Username"
                   aria-describedby="addon-wrapping"
@@ -227,7 +229,7 @@ const ManageJobType = (props: Props) => {
                   className="form-control"
                   placeholder="Job Type"
                   name="tenLoaiCongViec"
-                  defaultValue={item?.tenLoaiCongViec}
+                  defaultValue={frme.values.tenLoaiCongViec}
                   onChange={frme.handleChange}
                   onBlur={frme.handleChange}
                   aria-label="Username"

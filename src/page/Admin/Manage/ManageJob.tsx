@@ -39,6 +39,7 @@ const ManageJob = (props: Props) => {
   }, []);
   // model edit
   const frme = useFormik<Job>({
+    enableReinitialize: true,
     initialValues: {
       id: edit?.id,
       tenCongViec: edit?.tenCongViec,
@@ -48,7 +49,7 @@ const ManageJob = (props: Props) => {
       hinhAnh: edit?.hinhAnh,
       moTa: edit?.moTa,
       maChiTietLoaiCongViec: edit?.maChiTietLoaiCongViec,
-      moTaNgan: edit?.mota,
+      moTaNgan: edit?.moTaNgan,
       saoCongViec: edit?.saoCongViec,
     },
 
@@ -141,6 +142,8 @@ const ManageJob = (props: Props) => {
     close?.classList.remove("show");
   };
   const handleEdit = (item: Job) => {
+    console.log(item);
+
     showEdit();
     setEdit(item);
   };
@@ -395,7 +398,7 @@ const ManageJob = (props: Props) => {
                   className="form-control"
                   placeholder="ID"
                   name="id"
-                  value={edit?.id}
+                  defaultValue={frme.values.id}
                   disabled
                   onChange={frme.handleChange}
                   aria-label="Username"
@@ -408,7 +411,7 @@ const ManageJob = (props: Props) => {
                 </span>
                 <input
                   type="text"
-                  defaultValue={edit?.tenCongViec}
+                  defaultValue={frme.values.tenCongViec}
                   name="tenCongViec"
                   className="form-control"
                   placeholder="Name Job"
@@ -425,7 +428,7 @@ const ManageJob = (props: Props) => {
                 <input
                   type="text"
                   name="moTa"
-                  defaultValue={edit?.moTa}
+                  defaultValue={frme.values.moTa}
                   className="form-control"
                   placeholder="Description"
                   onChange={frme.handleChange}
@@ -441,7 +444,7 @@ const ManageJob = (props: Props) => {
                 <input
                   type="text"
                   name="moTaNgan"
-                  defaultValue={edit?.moTaNgan}
+                  defaultValue={frme.values.moTaNgan}
                   className="form-control"
                   placeholder="Short description"
                   onChange={frme.handleChange}
@@ -456,7 +459,7 @@ const ManageJob = (props: Props) => {
                 </span>
                 <input
                   type="text"
-                  defaultValue={edit?.maChiTietLoaiCongViec}
+                  defaultValue={frme.values.maChiTietLoaiCongViec}
                   name="maChiTietLoaiCongViec"
                   className="form-control"
                   placeholder="Detail Id"
@@ -473,7 +476,7 @@ const ManageJob = (props: Props) => {
                 <input
                   type="text"
                   name="giaTien"
-                  defaultValue={edit?.giaTien}
+                  defaultValue={frme.values.giaTien}
                   className="form-control"
                   placeholder="Price"
                   onChange={frme.handleChange}
@@ -488,7 +491,7 @@ const ManageJob = (props: Props) => {
                 </span>
                 <input
                   type="text"
-                  defaultValue={edit?.danhGia}
+                  defaultValue={frme.values.danhGia}
                   name="danhGia"
                   className="form-control"
                   placeholder=" Rate"
@@ -503,7 +506,7 @@ const ManageJob = (props: Props) => {
                   Star
                 </span>
                 <input
-                  defaultValue={edit?.saoCongViec}
+                  defaultValue={frme.values.saoCongViec}
                   type="text"
                   name="saoCongViec"
                   className="form-control"

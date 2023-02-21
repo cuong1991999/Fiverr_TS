@@ -111,6 +111,8 @@ const ManageService = (props: Props) => {
   };
   //model Edit
   const frme = useFormik<JobService>({
+    enableReinitialize: true,
+
     initialValues: {
       id: item?.id,
       maCongViec: item?.maCongViec,
@@ -118,7 +120,6 @@ const ManageService = (props: Props) => {
       ngayThue: item?.ngayThue,
       hoanThanh: complete,
     },
-
     onSubmit: (values) => {
       const payload = {
         id: item?.id,
@@ -328,7 +329,7 @@ const ManageService = (props: Props) => {
                 <input
                   type="text"
                   disabled
-                  value={item?.id}
+                  defaultValue={frme.values.id}
                   name="id"
                   onChange={frme.handleChange}
                   onBlur={frme.handleChange}
@@ -345,7 +346,7 @@ const ManageService = (props: Props) => {
                 <input
                   type="text"
                   name="maCongViec"
-                  defaultValue={item?.maCongViec}
+                  defaultValue={frme.values.maCongViec}
                   onChange={frme.handleChange}
                   onBlur={frme.handleChange}
                   className="form-control"
@@ -360,7 +361,7 @@ const ManageService = (props: Props) => {
                   Hirer ID
                 </span>
                 <input
-                  defaultValue={item?.maNguoiThue}
+                  defaultValue={frme.values.maNguoiThue}
                   onBlur={frme.handleChange}
                   type="text"
                   name="maNguoiThue"
@@ -379,7 +380,7 @@ const ManageService = (props: Props) => {
                 <input
                   type="date"
                   name="ngayThue"
-                  defaultValue={item?.ngayThue}
+                  defaultValue={frme.values.ngayThue}
                   className="form-control"
                   onChange={frme.handleChange}
                   onBlur={frme.handleChange}

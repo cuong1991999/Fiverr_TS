@@ -44,6 +44,7 @@ const ManageUser = (props: Props) => {
 
   //model edit
   const frme = useFormik<UserAdd>({
+    enableReinitialize: true,
     initialValues: {
       id: item?.id,
       name: item?.name,
@@ -53,7 +54,7 @@ const ManageUser = (props: Props) => {
       birthday: item?.birthday,
       role: item?.role,
       certification: item?.certification,
-      gender: item?.gender,
+      gender: true,
       skill: item?.skill,
     },
 
@@ -333,7 +334,7 @@ const ManageUser = (props: Props) => {
                   type="text"
                   className="form-control"
                   placeholder="ID"
-                  defaultValue={item?.id}
+                  defaultValue={frme.values.id}
                   onChange={frme.handleChange}
                   disabled={true}
                   aria-label="Username"
@@ -349,7 +350,7 @@ const ManageUser = (props: Props) => {
                   className="form-control"
                   placeholder="name"
                   name="name"
-                  defaultValue={item?.name}
+                  defaultValue={frme.values.name}
                   onChange={frme.handleChange}
                   onBlur={frme.handleChange}
                   aria-label="Username"
@@ -367,7 +368,7 @@ const ManageUser = (props: Props) => {
                   className="form-control"
                   placeholder="email"
                   name="email"
-                  defaultValue={item?.email}
+                  defaultValue={frme.values.email}
                   onChange={frme.handleChange}
                   onBlur={frme.handleChange}
                   aria-label="Username"
@@ -384,7 +385,7 @@ const ManageUser = (props: Props) => {
                   className="form-control"
                   placeholder="phone"
                   name="phone"
-                  defaultValue={item?.phone}
+                  defaultValue={frme.values.phone}
                   onChange={frme.handleChange}
                   onBlur={frme.handleChange}
                   aria-label="Username"
@@ -401,7 +402,7 @@ const ManageUser = (props: Props) => {
                   className="form-control"
                   placeholder="birthday"
                   name="birthday"
-                  defaultValue={item?.birthday}
+                  defaultValue={frme.values.birthday}
                   onChange={frme.handleChange}
                   onBlur={frme.handleChange}
                   aria-label="Username"
@@ -418,7 +419,7 @@ const ManageUser = (props: Props) => {
                   className="form-control"
                   placeholder="role"
                   name="role"
-                  defaultValue={item?.role}
+                  defaultValue={frme.values.role}
                   onChange={frme.handleChange}
                   onBlur={frme.handleChange}
                   aria-label="Username"
@@ -435,7 +436,6 @@ const ManageUser = (props: Props) => {
                   className="form-control"
                   placeholder="Gender"
                   name="gender"
-                  defaultValue={item?.gender}
                   onChange={frme.handleChange}
                   onBlur={frme.handleChange}
                   aria-label="Username"
